@@ -1,0 +1,616 @@
+/* === ATTENDANCE MODAL СТИЛДЕРИ === */
+
+.attendance-modal-content {
+  width: 100% !important;
+  max-width: 100% !important;
+  max-height: 100vh !important;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  transform: translate(-50%, -50%) scale(1) !important;
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  z-index: 9999 !important;
+  padding: 10%;
+}
+
+.students-list {
+  flex: 1;
+  min-height: 300px;
+  max-height: 50vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 10px;
+  border: 1px solid #e2e8f0;
+  background: #fafafa;
+  margin: 0;
+}
+
+.student-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 12px 15px;
+  background: white;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+  flex-direction: column;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.student-item:hover {
+  background: #edf2f7;
+  border-color: #cbd5e0;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.student-name {
+  font-weight: 600;
+  color: #2d3748;
+  font-size: 0.95rem;
+  width: 100%;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.marked-info {
+  color: #38a169;
+  font-size: 0.8rem;
+  margin-bottom: 8px;
+  background: #f0fff4;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #9ae6b4;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.attendance-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.attendance-buttons.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.status-btn {
+  padding: 10px 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  text-align: center;
+  white-space: nowrap;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.status-btn.present {
+  background: #48bb78;
+  color: white;
+}
+
+.status-btn.present.active {
+  background: #38a169;
+  border-color: #2f855a;
+  box-shadow: 0 0 0 2px rgba(72, 187, 120, 0.2);
+}
+
+.status-btn.late {
+  background: #ed8936;
+  color: white;
+}
+
+.status-btn.late.active {
+  background: #dd6b20;
+  border-color: #c05621;
+  box-shadow: 0 0 0 2px rgba(237, 137, 54, 0.2);
+}
+
+.status-btn.absent {
+  background: #f56565;
+  color: white;
+}
+
+.status-btn.absent.active {
+  background: #e53e3e;
+  border-color: #c53030;
+  box-shadow: 0 0 0 2px rgba(245, 101, 101, 0.2);
+}
+
+.attendance-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin: 20px 0;
+  padding: 15px;
+  background: #f7fafc;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.summary-item {
+  text-align: center;
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.summary-number {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.summary-label {
+  font-size: 0.8rem;
+  color: #4a5568;
+  font-weight: 600;
+}
+
+.summary-present .summary-number { 
+  color: #48bb78; 
+}
+
+.summary-late .summary-number { 
+  color: #ed8936; 
+}
+
+.summary-absent .summary-number { 
+  color: #f56565; 
+}
+
+.action-btn.attendance-btn {
+  bottom: 4px;
+  left: 4px;
+  background: #667eea;
+}
+
+.action-btn.attendance-btn:hover { 
+  background: #5a67d8; 
+}
+
+/* === МОБИЛДИК АДАПТАЦИЯ === */
+@media (max-width: 768px) {
+  .attendance-modal-content {
+    max-width: 95%;
+    max-height: 85vh;
+    margin: 5% auto;
+    padding: 15px;
+    z-index: 1000;
+  }
+  
+  .students-list {
+    max-height: 40vh;
+    min-height: 200px;
+  }
+  
+  .student-item {
+    padding: 10px;
+    margin: 6px 0;
+  }
+  
+  .student-name {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+  
+  .attendance-buttons {
+    gap: 6px;
+  }
+  
+  .status-btn {
+    font-size: 0.75rem;
+    padding: 8px 4px;
+    min-height: 40px;
+  }
+  
+  .attendance-summary {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .attendance-modal-content {
+    max-width: 98%;
+    max-height: 92vh;
+    margin: 2% auto;
+    padding: 10px;
+  }
+  
+  .students-list {
+    max-height: 35vh;
+    min-height: 150px;
+  }
+  
+  .student-item {
+    padding: 8px;
+    margin: 4px 0;
+  }
+  
+  .student-name {
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+  }
+  
+  .attendance-buttons {
+    gap: 4px;
+  }
+  
+  .status-btn {
+    font-size: 0.7rem;
+    padding: 6px 2px;
+    min-height: 36px;
+  }
+  
+  .summary-number {
+    font-size: 1.5rem;
+  }
+  
+  .summary-label {
+    font-size: 0.75rem;
+  }
+}
+
+/* === LESSON MODAL СТИЛДЕРИ === */
+
+.lesson-modal-content {
+  width: 80% !important;
+  max-width: 600px !important;
+  max-height: 90vh !important;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  transform: translate(-50%, -50%) scale(1) !important;
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  z-index: 9999 !important;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: 0;
+}
+
+.modal-header {
+  color: white;
+  padding: 24px 30px;
+  border-radius: 16px 16px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgb(0, 8, 255);
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.close-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 28px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg) scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.modal-body {
+  padding: 30px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #2d3748;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-select,
+.form-control {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  background: white;
+  color: #2d3748;
+}
+
+.form-select:focus,
+.form-control:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  background: #f7fafc;
+}
+
+.form-select:hover,
+.form-control:hover {
+  border-color: #cbd5e0;
+}
+
+.form-text {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.8rem;
+  color: #718096;
+  font-style: italic;
+}
+
+.modal-footer {
+  padding: 20px 30px;
+  border-top: 2px solid #e2e8f0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  background: #f7fafc;
+  border-radius: 0 0 16px 16px;
+}
+
+.btn {
+  padding: 12px 28px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-secondary {
+  background: #e2e8f0;
+  color: #4a5568;
+}
+
+.btn-secondary:hover {
+  background: #cbd5e0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+  background : rgb(0, 8, 255);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 47, 255, 0.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Modal overlay */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9998;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .lesson-modal-content {
+    width: 95% !important;
+    max-width: 95% !important;
+    padding: 0;
+  }
+  
+  .modal-header {
+    padding: 20px;
+  }
+  
+  .modal-title {
+    font-size: 1.2rem;
+  }
+  
+  .modal-body {
+    padding: 20px;
+  }
+  
+  .modal-footer {
+    padding: 16px 20px;
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-title {
+    font-size: 1.1rem;
+  }
+  
+  .form-select,
+  .form-control {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+/* === ATTENDANCE STATUS СТИЛДЕРИ === */
+.lesson-attendance {
+  margin-top: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: center;
+  border: 2px solid;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.lesson-attendance:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.attendance-present {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  color: #155724;
+  border-color: #28a745;
+}
+
+.attendance-absent {
+  background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+  color: #721c24;
+  border-color: #dc3545;
+}
+
+.attendance-late {
+  background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+  color: #856404;
+  border-color: #ffc107;
+}
+
+.attendance-unknown {
+  background: linear-gradient(135deg, #e2e3e5 0%, #d6d8db 100%);
+  color: #383d41;
+  border-color: #6c757d;
+}
+
+/* Студент жана ата-эне маалымат карточкасы */
+.student-schedule-info {
+  margin: 15px 0;
+}
+
+.info-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 16px 20px;
+  border-radius: 12px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.info-card.teacher-info {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.info-card i {
+  font-size: 1.8rem;
+  opacity: 0.9;
+}
+
+.info-card p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Ата-эне үчүн балдардын расписаниеси */
+.child-schedule-header {
+  animation: slideInFromTop 0.5s ease-out;
+}
+
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ар бир баланын расписаниеси үчүн бөлүнүүчү сызык */
+.schedule-grid-container {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.schedule-grid-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+}

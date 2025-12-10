@@ -1,0 +1,1718 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-09 16:05+0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Parent linked successfully!"
+msgstr ""
+
+msgid "Student registered successfully!"
+msgstr ""
+
+msgid "Login error!"
+msgstr ""
+
+msgid "You have been logged out!"
+msgstr ""
+
+msgid "Language updated successfully!"
+msgstr ""
+
+msgid "Theme preference saved!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Notifications"
+msgid "Notification settings updated!"
+msgstr "Notifications"
+
+msgid "Your profile has been automatically created (STUDENT role)."
+msgstr ""
+
+msgid "Teacher profile not found. Please contact administrator."
+msgstr ""
+
+msgid "Your child profile is not linked. Please contact administrator."
+msgstr ""
+
+msgid "This function is for teachers only."
+msgstr ""
+
+#, fuzzy
+#| msgid "Notifications"
+msgid "Notification sent!"
+msgstr "Notifications"
+
+msgid "This function is for parents only."
+msgstr ""
+
+#, fuzzy
+#| msgid "Notifications"
+msgid "Notification marked as read."
+msgstr "Notifications"
+
+msgid "This function is for managers and administrators only."
+msgstr ""
+
+msgid "This function is for students and parents only."
+msgstr "This function is for students and parents only."
+
+msgid "You are not registered as a teacher."
+msgstr ""
+
+#, python-brace-format
+msgid "Attendance marked for {} students."
+msgstr ""
+
+msgid "This function is for teachers or administrators only."
+msgstr ""
+
+msgid "Student profile not found."
+msgstr "Student profile not found."
+
+msgid "No student is linked to you."
+msgstr "No student is linked to you."
+
+msgid "Student not found."
+msgstr "Student not found."
+
+msgid ""
+"Your leave request has been successfully submitted. A notification has been "
+"sent to the administration."
+msgstr ""
+
+#, python-brace-format
+msgid ""
+"Leave request for {student_name} has been approved. Notifications have been "
+"sent to the student and parents."
+msgstr ""
+
+#, python-brace-format
+msgid ""
+"Leave request for {student_name} has been rejected. Notifications have been "
+"sent to the student and parents."
+msgstr ""
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Schedule"
+msgstr "Schedule"
+
+msgid "Notifications"
+msgstr "Notifications"
+
+msgid "Leave Requests"
+msgstr "Leave Requests"
+
+#, fuzzy
+#| msgid "Manage Subjects"
+msgid "Leave Management"
+msgstr "Manage Subjects"
+
+#, fuzzy
+#| msgid "Manage Subjects"
+msgid "Management"
+msgstr "Manage Subjects"
+
+msgid "Reports"
+msgstr "Reports"
+
+#, fuzzy
+#| msgid "My Profile"
+msgid "Profile"
+msgstr "My Profile"
+
+msgid "Settings"
+msgstr ""
+
+msgid "Search..."
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "System Administrator"
+msgstr ""
+
+msgid "Manager"
+msgstr ""
+
+msgid "Teacher"
+msgstr ""
+
+msgid "Student"
+msgstr "Student"
+
+msgid "Parent"
+msgstr ""
+
+#, fuzzy
+#| msgid "My Profile"
+msgid "Edit Profile"
+msgstr "My Profile"
+
+msgid "Profile Complete"
+msgstr ""
+
+msgid "Complete Your Profile"
+msgstr ""
+
+msgid "Students"
+msgstr ""
+
+msgid "Teachers"
+msgstr ""
+
+msgid "Groups"
+msgstr ""
+
+#, fuzzy
+#| msgid "Manage Subjects"
+msgid "Subjects"
+msgstr "Manage Subjects"
+
+#, fuzzy
+#| msgid "Attendance"
+msgid "Weekly Attendance Trend"
+msgstr "Attendance"
+
+msgid "Last 7 Days"
+msgstr ""
+
+msgid "Today's Statistics"
+msgstr ""
+
+msgid "Total Records"
+msgstr ""
+
+msgid "Present"
+msgstr ""
+
+msgid "Absent"
+msgstr ""
+
+msgid "Late"
+msgstr ""
+
+msgid "Excused"
+msgstr ""
+
+msgid "Detailed Groups Statistics"
+msgstr ""
+
+msgid "Group"
+msgstr ""
+
+msgid "Percentage"
+msgstr ""
+
+msgid "Progress"
+msgstr ""
+
+msgid "Total"
+msgstr ""
+
+msgid "No statistics data available"
+msgstr ""
+
+msgid "Today's Classes"
+msgstr ""
+
+#, fuzzy
+#| msgid "Attendance"
+msgid "Attendance Rate"
+msgstr "Attendance"
+
+msgid "Days Present"
+msgstr ""
+
+msgid "Days Absent"
+msgstr ""
+
+msgid "Days"
+msgstr "Days"
+
+msgid "Manage Leave Requests"
+msgstr "Manage Leave Requests"
+
+#, fuzzy
+#| msgid "New Request"
+msgid "Pending Requests"
+msgstr "New Request"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Period"
+msgstr "Period"
+
+msgid "Reason"
+msgstr "Reason"
+
+msgid "Submitted"
+msgstr "Submitted"
+
+#, fuzzy
+#| msgid "Notifications"
+msgid "Actions"
+msgstr "Notifications"
+
+msgid "days"
+msgstr "days"
+
+msgid "Approve this request?"
+msgstr "Approve this request?"
+
+msgid "Approve"
+msgstr "Approve"
+
+msgid "Reject this request?"
+msgstr "Reject this request?"
+
+#, fuzzy
+#| msgid "Manage Subjects"
+msgid "Reject"
+msgstr "Manage Subjects"
+
+msgid "No pending requests"
+msgstr "No pending requests"
+
+msgid "All Requests History"
+msgstr "All Requests History"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Decision By"
+msgstr "Decision By"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Pending"
+msgstr "Pending"
+
+msgid "Approved"
+msgstr "Approved"
+
+msgid "Rejected"
+msgstr "Rejected"
+
+#, fuzzy
+#| msgid "My Requests"
+msgid "No requests yet"
+msgstr "My Requests"
+
+#, fuzzy
+#| msgid "Leave Requests"
+msgid "My Leave Requests"
+msgstr "Leave Requests"
+
+#, fuzzy
+#| msgid "New Request"
+msgid "Submit New Request"
+msgstr "New Request"
+
+msgid "Number of Days"
+msgstr "Number of Days"
+
+msgid "Submitted Date"
+msgstr "Submitted Date"
+
+msgid "from"
+msgstr "from"
+
+msgid "to"
+msgstr "to"
+
+msgid "You have no leave requests yet"
+msgstr "You have no leave requests yet"
+
+msgid "Click the button above to submit your first request"
+msgstr "Click the button above to submit your first request"
+
+#, fuzzy
+#| msgid "New Request"
+msgid "Submit First Request"
+msgstr "New Request"
+
+#, fuzzy
+#| msgid "New Request"
+msgid "Submit Leave Request"
+msgstr "New Request"
+
+msgid "Leave Type"
+msgstr "Leave Type"
+
+msgid "Start Date"
+msgstr "Start Date"
+
+msgid "End Date"
+msgstr "End Date"
+
+msgid "Reason (provide full details)"
+msgstr "Reason (provide full details)"
+
+msgid "Back"
+msgstr "Back"
+
+#, fuzzy
+#| msgid "New Request"
+msgid "Submit Request"
+msgstr "New Request"
+
+msgid "Total Users"
+msgstr ""
+
+msgid "Days present"
+msgstr ""
+
+#, fuzzy
+#| msgid "New Request"
+msgid "New users today"
+msgstr "New Request"
+
+msgid "Active Users"
+msgstr ""
+
+msgid "Days absent"
+msgstr ""
+
+#, fuzzy
+#| msgid "My Schedule"
+msgid "Today's classes"
+msgstr "My Schedule"
+
+msgid "Active rate"
+msgstr ""
+
+#, fuzzy
+#| msgid "Manage Subjects"
+msgid "Total Subjects"
+msgstr "Manage Subjects"
+
+msgid "Monthly target"
+msgstr ""
+
+msgid "Completion Rate"
+msgstr ""
+
+msgid "Previous month"
+msgstr ""
+
+#, fuzzy
+#| msgid "Attendance"
+msgid "Attendance Overview"
+msgstr "Attendance"
+
+msgid "Attendance trend for the last week"
+msgstr ""
+
+msgid "User Activity"
+msgstr ""
+
+msgid "Active and new users for the last week"
+msgstr ""
+
+#, fuzzy
+#| msgid "New Request"
+msgid "New Users"
+msgstr "New Request"
+
+msgid "Recent Users"
+msgstr ""
+
+msgid "Latest user registrations and activities"
+msgstr ""
+
+msgid "User"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Deposit"
+msgstr ""
+
+msgid "Time"
+msgstr ""
+
+msgid "active"
+msgstr ""
+
+msgid "pending"
+msgstr ""
+
+msgid "blocked"
+msgstr ""
+
+#, fuzzy
+#| msgid "Schedule"
+msgid "Scheduled"
+msgstr "Schedule"
+
+msgid "Not Marked"
+msgstr ""
+
+msgid "No data available"
+msgstr ""
+
+#, fuzzy
+#| msgid "Notifications"
+msgid "My Notifications"
+msgstr "Notifications"
+
+msgid "new"
+msgstr "new"
+
+msgid "Mark all as read"
+msgstr "Mark all as read"
+
+#, fuzzy
+#| msgid "Notifications"
+msgid "Send new notification"
+msgstr "Notifications"
+
+msgid "Absence"
+msgstr "Absence"
+
+#, fuzzy
+#| msgid "Leave Requests"
+msgid "Leave Request"
+msgstr "Leave Requests"
+
+msgid "General"
+msgstr "General"
+
+msgid "New"
+msgstr "New"
+
+msgid "Mark as read"
+msgstr "Mark as read"
+
+#, fuzzy
+#| msgid "Notifications"
+msgid "You have no notifications"
+msgstr "Notifications"
+
+#, fuzzy
+#| msgid "Notifications"
+msgid "New notifications will appear here"
+msgstr "Notifications"
+
+#, fuzzy
+#| msgid "My Profile"
+msgid "My Profile"
+msgstr "My Profile"
+
+msgid "Profile Completion"
+msgstr "Profile Completion"
+
+msgid "Personal Information"
+msgstr "Personal Information"
+
+msgid "Username"
+msgstr ""
+
+msgid "Phone"
+msgstr ""
+
+msgid "Date of Birth"
+msgstr ""
+
+msgid "years old"
+msgstr ""
+
+msgid "Not specified"
+msgstr ""
+
+msgid "Gender"
+msgstr ""
+
+msgid "Contact Information"
+msgstr "Contact Information"
+
+msgid "Address"
+msgstr ""
+
+msgid "Emergency Contact Name"
+msgstr "Emergency Contact Name"
+
+msgid "Emergency Phone"
+msgstr ""
+
+msgid "Date Joined"
+msgstr "Date Joined"
+
+msgid "Last Updated"
+msgstr "Last Updated"
+
+msgid "About Me"
+msgstr "About Me"
+
+msgid "Change Password"
+msgstr "Change Password"
+
+#, fuzzy
+#| msgid "Register"
+msgid "Registration"
+msgstr "Register"
+
+msgid "Register"
+msgstr "Register"
+
+#, fuzzy
+#| msgid "Reports"
+msgid "Detailed Report"
+msgstr "Reports"
+
+msgid "Filter and Settings"
+msgstr ""
+
+#, fuzzy
+#| msgid "Reports"
+msgid "Report type:"
+msgstr "Reports"
+
+msgid "All"
+msgstr ""
+
+msgid "Today"
+msgstr ""
+
+msgid "Weekly"
+msgstr ""
+
+msgid "Monthly"
+msgstr ""
+
+msgid "Start date:"
+msgstr ""
+
+msgid "End date:"
+msgstr ""
+
+msgid "Student:"
+msgstr ""
+
+msgid "All students"
+msgstr ""
+
+msgid "Action:"
+msgstr ""
+
+msgid "Filter"
+msgstr ""
+
+msgid "Total records"
+msgstr ""
+
+#, fuzzy
+#| msgid "Notifications"
+msgid "Send Notification"
+msgstr "Notifications"
+
+#, fuzzy
+#| msgid "Notifications"
+msgid "Notification"
+msgstr "Notifications"
+
+#, fuzzy
+#| msgid "Manage Subjects"
+msgid "Language Settings"
+msgstr "Manage Subjects"
+
+msgid "Choose your preferred language"
+msgstr ""
+
+msgid "Select Language"
+msgstr ""
+
+msgid "Current language"
+msgstr ""
+
+msgid "Profile Settings"
+msgstr ""
+
+msgid "Joined"
+msgstr ""
+
+#, fuzzy
+#| msgid "Login"
+msgid "Last login"
+msgstr "Login"
+
+msgid "System Information"
+msgstr ""
+
+msgid "System Version"
+msgstr ""
+
+msgid "Build Date"
+msgstr ""
+
+msgid "Academic Year"
+msgstr ""
+
+msgid "Contact Support"
+msgstr ""
+
+msgid "Your data is secure and protected"
+msgstr ""
+
+msgid "Changing language..."
+msgstr ""
+
+#, fuzzy
+#| msgid "Dashboard"
+msgid "Student Dashboard"
+msgstr "Dashboard"
+
+msgid "Welcome"
+msgstr ""
+
+msgid "Quick Actions"
+msgstr "Quick Actions"
+
+#, fuzzy
+#| msgid "Schedule"
+msgid "View Full Schedule"
+msgstr "Schedule"
+
+msgid "My Requests"
+msgstr "My Requests"
+
+#, fuzzy
+#| msgid "Attendance"
+msgid "Attendance Report"
+msgstr "Attendance"
+
+#, fuzzy
+#| msgid "Dashboard"
+msgid "Teacher Dashboard"
+msgstr "Dashboard"
+
+msgid "Total Students"
+msgstr ""
+
+#, fuzzy
+#| msgid "Manage Subjects"
+msgid "My Subjects"
+msgstr "Manage Subjects"
+
+msgid "Manage Schedule"
+msgstr "Manage Schedule"
+
+#, fuzzy
+#| msgid "Attendance"
+msgid "Attendance History"
+msgstr "Attendance"
+
+#, fuzzy
+#| msgid "Attendance"
+msgid "Mark Attendance"
+msgstr "Attendance"
+
+msgid "My Subjects & Groups"
+msgstr ""
+
+msgid "No groups assigned"
+msgstr ""
+
+#, fuzzy
+#| msgid "Schedule"
+msgid "View Schedule"
+msgstr "Schedule"
+
+msgid "No subjects assigned yet"
+msgstr ""
+
+msgid "Please contact the administrator"
+msgstr ""
+
+#, fuzzy
+#| msgid "Reports"
+msgid "View Reports"
+msgstr "Reports"
+
+msgid "close"
+msgstr ""
+
+msgid "Error"
+msgstr "Error"
+
+msgid "Messages"
+msgstr ""
+
+msgid "Site Maps"
+msgstr ""
+
+msgid "Static Files"
+msgstr ""
+
+msgid "Syndication"
+msgstr ""
+
+#. Translators: String used to replace omitted page numbers in elided page
+#. range generated by paginators, e.g. [1, 2, '…', 5, 6, 7, '…', 9, 10].
+msgid "…"
+msgstr ""
+
+msgid "That page number is not an integer"
+msgstr ""
+
+msgid "That page number is less than 1"
+msgstr ""
+
+msgid "That page contains no results"
+msgstr ""
+
+msgid "Enter a valid value."
+msgstr ""
+
+msgid "Enter a valid URL."
+msgstr ""
+
+msgid "Enter a valid integer."
+msgstr ""
+
+msgid "Enter a valid email address."
+msgstr ""
+
+#. Translators: "letters" means latin letters: a-z and A-Z.
+msgid ""
+"Enter a valid “slug” consisting of letters, numbers, underscores or hyphens."
+msgstr ""
+
+msgid ""
+"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or "
+"hyphens."
+msgstr ""
+
+msgid "Enter a valid IPv4 address."
+msgstr ""
+
+msgid "Enter a valid IPv6 address."
+msgstr ""
+
+msgid "Enter a valid IPv4 or IPv6 address."
+msgstr ""
+
+msgid "Enter only digits separated by commas."
+msgstr ""
+
+#, python-format
+msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
+msgstr ""
+
+#, python-format
+msgid "Ensure this value is less than or equal to %(limit_value)s."
+msgstr ""
+
+#, python-format
+msgid "Ensure this value is greater than or equal to %(limit_value)s."
+msgstr ""
+
+#, python-format
+msgid "Ensure this value is a multiple of step size %(limit_value)s."
+msgstr ""
+
+#, python-format
+msgid ""
+"Ensure this value has at least %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at least %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"Ensure this value has at most %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at most %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Enter a number."
+msgstr ""
+
+#, python-format
+msgid "Ensure that there are no more than %(max)s digit in total."
+msgid_plural "Ensure that there are no more than %(max)s digits in total."
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "Ensure that there are no more than %(max)s decimal place."
+msgid_plural "Ensure that there are no more than %(max)s decimal places."
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"Ensure that there are no more than %(max)s digit before the decimal point."
+msgid_plural ""
+"Ensure that there are no more than %(max)s digits before the decimal point."
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"File extension “%(extension)s” is not allowed. Allowed extensions are: "
+"%(allowed_extensions)s."
+msgstr ""
+
+msgid "Null characters are not allowed."
+msgstr ""
+
+msgid "and"
+msgstr ""
+
+#, python-format
+msgid "%(model_name)s with this %(field_labels)s already exists."
+msgstr ""
+
+#, python-format
+msgid "Constraint “%(name)s” is violated."
+msgstr ""
+
+#, python-format
+msgid "Value %(value)r is not a valid choice."
+msgstr ""
+
+msgid "This field cannot be null."
+msgstr ""
+
+msgid "This field cannot be blank."
+msgstr ""
+
+#, python-format
+msgid "%(model_name)s with this %(field_label)s already exists."
+msgstr ""
+
+#. Translators: The 'lookup_type' is one of 'date', 'year' or
+#. 'month'. Eg: "Title must be unique for pub_date year"
+#, python-format
+msgid ""
+"%(field_label)s must be unique for %(date_field_label)s %(lookup_type)s."
+msgstr ""
+
+#, python-format
+msgid "Field of type: %(field_type)s"
+msgstr ""
+
+#, python-format
+msgid "“%(value)s” value must be either True or False."
+msgstr ""
+
+#, python-format
+msgid "“%(value)s” value must be either True, False, or None."
+msgstr ""
+
+msgid "Boolean (Either True or False)"
+msgstr ""
+
+#, python-format
+msgid "String (up to %(max_length)s)"
+msgstr ""
+
+msgid "String (unlimited)"
+msgstr ""
+
+msgid "Comma-separated integers"
+msgstr ""
+
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid date format. It must be in YYYY-MM-DD "
+"format."
+msgstr ""
+
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD) but it is an invalid "
+"date."
+msgstr ""
+
+msgid "Date (without time)"
+msgstr ""
+
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD "
+"HH:MM[:ss[.uuuuuu]][TZ] format."
+msgstr ""
+
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD HH:MM[:ss[.uuuuuu]]"
+"[TZ]) but it is an invalid date/time."
+msgstr ""
+
+msgid "Date (with time)"
+msgstr ""
+
+#, python-format
+msgid "“%(value)s” value must be a decimal number."
+msgstr ""
+
+msgid "Decimal number"
+msgstr ""
+
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in [DD] "
+"[[HH:]MM:]ss[.uuuuuu] format."
+msgstr ""
+
+#, fuzzy
+#| msgid "Register"
+msgid "Duration"
+msgstr "Register"
+
+msgid "Email address"
+msgstr ""
+
+msgid "File path"
+msgstr ""
+
+#, python-format
+msgid "“%(value)s” value must be a float."
+msgstr ""
+
+msgid "Floating point number"
+msgstr ""
+
+#, python-format
+msgid "“%(value)s” value must be an integer."
+msgstr ""
+
+msgid "Integer"
+msgstr ""
+
+msgid "Big (8 byte) integer"
+msgstr ""
+
+msgid "Small integer"
+msgstr ""
+
+msgid "IPv4 address"
+msgstr ""
+
+msgid "IP address"
+msgstr ""
+
+#, python-format
+msgid "“%(value)s” value must be either None, True or False."
+msgstr ""
+
+msgid "Boolean (Either True, False or None)"
+msgstr ""
+
+msgid "Positive big integer"
+msgstr ""
+
+msgid "Positive integer"
+msgstr ""
+
+msgid "Positive small integer"
+msgstr ""
+
+#, python-format
+msgid "Slug (up to %(max_length)s)"
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
+"format."
+msgstr ""
+
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
+"invalid time."
+msgstr ""
+
+msgid "URL"
+msgstr ""
+
+msgid "Raw binary data"
+msgstr ""
+
+#, python-format
+msgid "“%(value)s” is not a valid UUID."
+msgstr ""
+
+msgid "Universally unique identifier"
+msgstr ""
+
+msgid "File"
+msgstr ""
+
+msgid "Image"
+msgstr ""
+
+#, fuzzy
+#| msgid "Manage Subjects"
+msgid "A JSON object"
+msgstr "Manage Subjects"
+
+msgid "Value must be valid JSON."
+msgstr ""
+
+#, python-format
+msgid "%(model)s instance with %(field)s %(value)r does not exist."
+msgstr ""
+
+msgid "Foreign Key (type determined by related field)"
+msgstr ""
+
+msgid "One-to-one relationship"
+msgstr ""
+
+#, python-format
+msgid "%(from)s-%(to)s relationship"
+msgstr ""
+
+#, python-format
+msgid "%(from)s-%(to)s relationships"
+msgstr ""
+
+msgid "Many-to-many relationship"
+msgstr ""
+
+#. Translators: If found as last label character, these punctuation
+#. characters will prevent the default label_suffix to be appended to the label
+msgid ":?.!"
+msgstr ""
+
+msgid "This field is required."
+msgstr ""
+
+msgid "Enter a whole number."
+msgstr ""
+
+msgid "Enter a valid date."
+msgstr ""
+
+msgid "Enter a valid time."
+msgstr ""
+
+msgid "Enter a valid date/time."
+msgstr ""
+
+msgid "Enter a valid duration."
+msgstr ""
+
+#, python-brace-format
+msgid "The number of days must be between {min_days} and {max_days}."
+msgstr ""
+
+msgid "No file was submitted. Check the encoding type on the form."
+msgstr ""
+
+msgid "No file was submitted."
+msgstr ""
+
+msgid "The submitted file is empty."
+msgstr ""
+
+#, python-format
+msgid "Ensure this filename has at most %(max)d character (it has %(length)d)."
+msgid_plural ""
+"Ensure this filename has at most %(max)d characters (it has %(length)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Please either submit a file or check the clear checkbox, not both."
+msgstr ""
+
+msgid ""
+"Upload a valid image. The file you uploaded was either not an image or a "
+"corrupted image."
+msgstr ""
+
+#, python-format
+msgid "Select a valid choice. %(value)s is not one of the available choices."
+msgstr ""
+
+msgid "Enter a list of values."
+msgstr ""
+
+msgid "Enter a complete value."
+msgstr ""
+
+msgid "Enter a valid UUID."
+msgstr ""
+
+msgid "Enter a valid JSON."
+msgstr ""
+
+#. Translators: This is the default suffix added to form field labels
+msgid ":"
+msgstr ""
+
+#, python-format
+msgid "(Hidden field %(name)s) %(error)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"ManagementForm data is missing or has been tampered with. Missing fields: "
+"%(field_names)s. You may need to file a bug report if the issue persists."
+msgstr ""
+
+#, python-format
+msgid "Please submit at most %(num)d form."
+msgid_plural "Please submit at most %(num)d forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "Please submit at least %(num)d form."
+msgid_plural "Please submit at least %(num)d forms."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Order"
+msgstr ""
+
+msgid "Delete"
+msgstr "Delete"
+
+#, python-format
+msgid "Please correct the duplicate data for %(field)s."
+msgstr ""
+
+#, python-format
+msgid "Please correct the duplicate data for %(field)s, which must be unique."
+msgstr ""
+
+#, python-format
+msgid ""
+"Please correct the duplicate data for %(field_name)s which must be unique "
+"for the %(lookup)s in %(date_field)s."
+msgstr ""
+
+msgid "Please correct the duplicate values below."
+msgstr ""
+
+msgid "The inline value did not match the parent instance."
+msgstr ""
+
+msgid "Select a valid choice. That choice is not one of the available choices."
+msgstr ""
+
+#, python-format
+msgid "“%(pk)s” is not a valid value."
+msgstr ""
+
+#, python-format
+msgid ""
+"%(datetime)s couldn’t be interpreted in time zone %(current_timezone)s; it "
+"may be ambiguous or it may not exist."
+msgstr ""
+
+msgid "Clear"
+msgstr ""
+
+msgid "Currently"
+msgstr ""
+
+msgid "Change"
+msgstr ""
+
+msgid "Unknown"
+msgstr ""
+
+msgid "Yes"
+msgstr "Yes"
+
+msgid "No"
+msgstr "No"
+
+#. Translators: Please do not add spaces around commas.
+msgid "yes,no,maybe"
+msgstr ""
+
+#, python-format
+msgid "%(size)d byte"
+msgid_plural "%(size)d bytes"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%s KB"
+msgstr ""
+
+#, python-format
+msgid "%s MB"
+msgstr ""
+
+#, python-format
+msgid "%s GB"
+msgstr ""
+
+#, python-format
+msgid "%s TB"
+msgstr ""
+
+#, python-format
+msgid "%s PB"
+msgstr ""
+
+msgid "p.m."
+msgstr ""
+
+msgid "a.m."
+msgstr ""
+
+msgid "PM"
+msgstr ""
+
+msgid "AM"
+msgstr ""
+
+msgid "midnight"
+msgstr ""
+
+msgid "noon"
+msgstr ""
+
+msgid "Monday"
+msgstr "Monday"
+
+msgid "Tuesday"
+msgstr "Tuesday"
+
+msgid "Wednesday"
+msgstr "Wednesday"
+
+msgid "Thursday"
+msgstr "Thursday"
+
+msgid "Friday"
+msgstr "Friday"
+
+msgid "Saturday"
+msgstr "Saturday"
+
+msgid "Sunday"
+msgstr "Sunday"
+
+msgid "Mon"
+msgstr ""
+
+msgid "Tue"
+msgstr ""
+
+msgid "Wed"
+msgstr ""
+
+msgid "Thu"
+msgstr ""
+
+msgid "Fri"
+msgstr ""
+
+msgid "Sat"
+msgstr ""
+
+msgid "Sun"
+msgstr ""
+
+msgid "January"
+msgstr ""
+
+msgid "February"
+msgstr ""
+
+msgid "March"
+msgstr ""
+
+msgid "April"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
+msgid "June"
+msgstr ""
+
+msgid "July"
+msgstr ""
+
+msgid "August"
+msgstr ""
+
+msgid "September"
+msgstr ""
+
+msgid "October"
+msgstr ""
+
+msgid "November"
+msgstr ""
+
+msgid "December"
+msgstr ""
+
+msgid "jan"
+msgstr ""
+
+msgid "feb"
+msgstr ""
+
+msgid "mar"
+msgstr ""
+
+msgid "apr"
+msgstr ""
+
+msgid "may"
+msgstr ""
+
+msgid "jun"
+msgstr ""
+
+msgid "jul"
+msgstr ""
+
+msgid "aug"
+msgstr ""
+
+msgid "sep"
+msgstr ""
+
+msgid "oct"
+msgstr ""
+
+msgid "nov"
+msgstr ""
+
+msgid "dec"
+msgstr ""
+
+msgctxt "abbrev. month"
+msgid "Jan."
+msgstr ""
+
+msgctxt "abbrev. month"
+msgid "Feb."
+msgstr ""
+
+msgctxt "abbrev. month"
+msgid "March"
+msgstr ""
+
+msgctxt "abbrev. month"
+msgid "April"
+msgstr ""
+
+msgctxt "abbrev. month"
+msgid "May"
+msgstr ""
+
+msgctxt "abbrev. month"
+msgid "June"
+msgstr ""
+
+msgctxt "abbrev. month"
+msgid "July"
+msgstr ""
+
+msgctxt "abbrev. month"
+msgid "Aug."
+msgstr ""
+
+msgctxt "abbrev. month"
+msgid "Sept."
+msgstr ""
+
+msgctxt "abbrev. month"
+msgid "Oct."
+msgstr ""
+
+msgctxt "abbrev. month"
+msgid "Nov."
+msgstr ""
+
+msgctxt "abbrev. month"
+msgid "Dec."
+msgstr ""
+
+msgctxt "alt. month"
+msgid "January"
+msgstr ""
+
+msgctxt "alt. month"
+msgid "February"
+msgstr ""
+
+msgctxt "alt. month"
+msgid "March"
+msgstr ""
+
+msgctxt "alt. month"
+msgid "April"
+msgstr ""
+
+msgctxt "alt. month"
+msgid "May"
+msgstr ""
+
+msgctxt "alt. month"
+msgid "June"
+msgstr ""
+
+msgctxt "alt. month"
+msgid "July"
+msgstr ""
+
+msgctxt "alt. month"
+msgid "August"
+msgstr ""
+
+msgctxt "alt. month"
+msgid "September"
+msgstr ""
+
+msgctxt "alt. month"
+msgid "October"
+msgstr ""
+
+msgctxt "alt. month"
+msgid "November"
+msgstr ""
+
+msgctxt "alt. month"
+msgid "December"
+msgstr ""
+
+msgid "This is not a valid IPv6 address."
+msgstr ""
+
+#, python-format
+msgctxt "String to return when truncating text"
+msgid "%(truncated_text)s…"
+msgstr ""
+
+msgid "or"
+msgstr ""
+
+#. Translators: This string is used as a separator between list elements
+msgid ", "
+msgstr ""
+
+#, python-format
+msgid "%(num)d year"
+msgid_plural "%(num)d years"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(num)d month"
+msgid_plural "%(num)d months"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(num)d week"
+msgid_plural "%(num)d weeks"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(num)d day"
+msgid_plural "%(num)d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(num)d hour"
+msgid_plural "%(num)d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid "%(num)d minute"
+msgid_plural "%(num)d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Forbidden"
+msgstr ""
+
+msgid "CSRF verification failed. Request aborted."
+msgstr ""
+
+msgid ""
+"You are seeing this message because this HTTPS site requires a “Referer "
+"header” to be sent by your web browser, but none was sent. This header is "
+"required for security reasons, to ensure that your browser is not being "
+"hijacked by third parties."
+msgstr ""
+
+msgid ""
+"If you have configured your browser to disable “Referer” headers, please re-"
+"enable them, at least for this site, or for HTTPS connections, or for “same-"
+"origin” requests."
+msgstr ""
+
+msgid ""
+"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or "
+"including the “Referrer-Policy: no-referrer” header, please remove them. The "
+"CSRF protection requires the “Referer” header to do strict referer checking. "
+"If you’re concerned about privacy, use alternatives like <a "
+"rel=\"noreferrer\" …> for links to third-party sites."
+msgstr ""
+
+msgid ""
+"You are seeing this message because this site requires a CSRF cookie when "
+"submitting forms. This cookie is required for security reasons, to ensure "
+"that your browser is not being hijacked by third parties."
+msgstr ""
+
+msgid ""
+"If you have configured your browser to disable cookies, please re-enable "
+"them, at least for this site, or for “same-origin” requests."
+msgstr ""
+
+msgid "More information is available with DEBUG=True."
+msgstr ""
+
+msgid "No year specified"
+msgstr ""
+
+msgid "Date out of range"
+msgstr ""
+
+msgid "No month specified"
+msgstr ""
+
+msgid "No day specified"
+msgstr ""
+
+msgid "No week specified"
+msgstr ""
+
+#, python-format
+msgid "No %(verbose_name_plural)s available"
+msgstr ""
+
+#, python-format
+msgid ""
+"Future %(verbose_name_plural)s not available because "
+"%(class_name)s.allow_future is False."
+msgstr ""
+
+#, python-format
+msgid "Invalid date string “%(datestr)s” given format “%(format)s”"
+msgstr ""
+
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr ""
+
+msgid "Page is not “last”, nor can it be converted to an int."
+msgstr ""
+
+#, python-format
+msgid "Invalid page (%(page_number)s): %(message)s"
+msgstr ""
+
+#, python-format
+msgid "Empty list and “%(class_name)s.allow_empty” is False."
+msgstr ""
+
+msgid "Directory indexes are not allowed here."
+msgstr ""
+
+#, python-format
+msgid "“%(path)s” does not exist"
+msgstr ""
+
+#, python-format
+msgid "Index of %(directory)s"
+msgstr ""
+
+msgid "The install worked successfully! Congratulations!"
+msgstr ""
+
+#, python-format
+msgid ""
+"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
+"%(version)s/ref/settings/#debug\" target=\"_blank\" "
+"rel=\"noopener\">DEBUG=True</a> is in your settings file and you have not "
+"configured any URLs."
+msgstr ""
+
+msgid "Django Documentation"
+msgstr ""
+
+msgid "Topics, references, &amp; how-to’s"
+msgstr ""
+
+msgid "Tutorial: A Polling App"
+msgstr ""
+
+msgid "Get started with Django"
+msgstr ""
+
+msgid "Django Community"
+msgstr ""
+
+msgid "Connect, get help, or contribute"
+msgstr ""
+
+#, fuzzy
+#~| msgid "My Schedule"
+#~ msgid "Today's Schedule"
+#~ msgstr "My Schedule"
+
+#~ msgid "Attendance"
+#~ msgstr "Attendance"
+
+#, fuzzy
+#~| msgid "Reports"
+#~ msgid "Advanced Reports"
+#~ msgstr "Reports"
+
+#~ msgid "My Schedule"
+#~ msgstr "My Schedule"
+
+#~ msgid "Admin Panel"
+#~ msgstr "Admin Panel"
+
+#~ msgid "Logout"
+#~ msgstr "Logout"

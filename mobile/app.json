@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "Attendance System",
+    "slug": "attendance-system-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.attendancesystem.app"
+    },
+    "android": {
+      "package": "com.attendancesystem.app"
+    },
+    "extra": {
+      "apiUrl": "http://127.0.0.1:8000/api"
+    }
+  }
+}

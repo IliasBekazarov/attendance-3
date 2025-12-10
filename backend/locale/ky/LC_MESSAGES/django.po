@@ -1,0 +1,1762 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-09 16:05+0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Parent linked successfully!"
+msgstr "Ата-эне ийгиликтүү байланыштырылды!"
+
+msgid "Student registered successfully!"
+msgstr "Студент ийгиликтүү катталды!"
+
+msgid "Login error!"
+msgstr "Кирүү катасы!"
+
+msgid "You have been logged out!"
+msgstr "Системадан чыгып кеттиңиз!"
+
+#, fuzzy
+#| msgid "Parent linked successfully!"
+msgid "Language updated successfully!"
+msgstr "Ата-эне ийгиликтүү байланыштырылды!"
+
+msgid "Theme preference saved!"
+msgstr "Тема сакталды!"
+
+#, fuzzy
+#| msgid "Notifications"
+msgid "Notification settings updated!"
+msgstr "Билдирмелер"
+
+msgid "Your profile has been automatically created (STUDENT role)."
+msgstr "Сиздин профилиңиз автоматтык түрдө түзүлдү (СТУДЕНТ ролу)."
+
+msgid "Teacher profile not found. Please contact administrator."
+msgstr "Мугалим профили табылган жок. Администраторго кайрылыңыз."
+
+msgid "Your child profile is not linked. Please contact administrator."
+msgstr "Балаңыздын профили байланыштырылган эмес. Администраторго кайрылыңыз."
+
+msgid "This function is for teachers only."
+msgstr "Бул функция мугалимдер үчүн гана."
+
+#, fuzzy
+#| msgid "Notifications"
+msgid "Notification sent!"
+msgstr "Билдирмелер"
+
+msgid "This function is for parents only."
+msgstr "Бул функция ата-энелер үчүн гана."
+
+#, fuzzy
+#| msgid "Notifications"
+msgid "Notification marked as read."
+msgstr "Билдирмелер"
+
+msgid "This function is for managers and administrators only."
+msgstr "Бул функция менеджерлер жана администраторлор үчүн гана."
+
+#, fuzzy
+#| msgid "This function is for teachers or administrators only."
+msgid "This function is for students and parents only."
+msgstr "Бул функция мугалимдер же администраторлор үчүн гана."
+
+msgid "You are not registered as a teacher."
+msgstr "Сиз мугалим катары катталган эмессиз."
+
+#, python-brace-format
+msgid "Attendance marked for {} students."
+msgstr ""
+
+msgid "This function is for teachers or administrators only."
+msgstr "Бул функция мугалимдер же администраторлор үчүн гана."
+
+msgid "Student profile not found."
+msgstr "Студент профили табылган жок."
+
+msgid "No student is linked to you."
+msgstr "Сизге эч кандай студент байланышкан эмес."
+
+msgid "Student not found."
+msgstr "Студент табылган жок."
+
+msgid ""
+"Your leave request has been successfully submitted. A notification has been "
+"sent to the administration."
+msgstr ""
+
+#, python-brace-format
+msgid ""
+"Leave request for {student_name} has been approved. Notifications have been "
+"sent to the student and parents."
+msgstr ""
+
+#, python-brace-format
+msgid ""
+"Leave request for {student_name} has been rejected. Notifications have been "
+"sent to the student and parents."
+msgstr ""
+
+msgid "Dashboard"
+msgstr "Башкаруу Панели"
+
+msgid "Schedule"
+msgstr "Расписание"
+
+msgid "Notifications"
+msgstr "Билдирмелер"
+
+msgid "Leave Requests"
+msgstr "Бошотуу сурамдары"
+
+#, fuzzy
+#| msgid "Manage Subjects"
+msgid "Leave Management"
+msgstr "Сабактарды башкаруу"
+
+#, fuzzy
+#| msgid "Manage Subjects"
+msgid "Management"
+msgstr "Сабактарды башкаруу"
+
+msgid "Reports"
+msgstr "Отчеттор"
+
+#, fuzzy
+#| msgid "My Profile"
+msgid "Profile"
+msgstr "Менин профилим"
+
+msgid "Settings"
+msgstr "Тууралоолор"
+
+msgid "Search..."
+msgstr "Издөө..."
+
+msgid "Home"
+msgstr "Башкы бет"
+
+msgid "System Administrator"
+msgstr "Системалык администратор"
+
+msgid "Manager"
+msgstr "Менеджер"
+
+msgid "Teacher"
+msgstr "Мугалим"
+
+msgid "Student"
+msgstr "Студент"
+
+msgid "Parent"
+msgstr "Ата-эне"
+
+#, fuzzy
+#| msgid "My Profile"
+msgid "Edit Profile"
+msgstr "Менин профилим"
+
+msgid "Profile Complete"
+msgstr "Профиль толук"
+
+msgid "Complete Your Profile"
+msgstr "Профилди толуктаңыз"
+
+msgid "Students"
+msgstr "Студенттер"
+
+msgid "Teachers"
+msgstr "Мугалимдер"
+
+msgid "Groups"
+msgstr "Группалар"
+
+#, fuzzy
+#| msgid "Manage Subjects"
+msgid "Subjects"
+msgstr "Сабактарды башкаруу"
+
+#, fuzzy
+#| msgid "Attendance"
+msgid "Weekly Attendance Trend"
+msgstr "Катышуу"
+
+msgid "Last 7 Days"
+msgstr ""
+
+msgid "Today's Statistics"
+msgstr ""
+
+msgid "Total Records"
+msgstr ""
+
+msgid "Present"
+msgstr "Бар"
+
+msgid "Absent"
+msgstr "Жок"
+
+msgid "Late"
+msgstr "Кечикти"
+
+msgid "Excused"
+msgstr "Себеп менен"
+
+msgid "Detailed Groups Statistics"
+msgstr ""
+
+msgid "Group"
+msgstr "Группа"
+
+msgid "Percentage"
+msgstr ""
+
+msgid "Progress"
+msgstr ""
+
+msgid "Total"
+msgstr ""
+
+msgid "No statistics data available"
+msgstr ""
+
+msgid "Today's Classes"
+msgstr "Бүгүнкү сабактар"
+
+#, fuzzy
+#| msgid "Attendance"
+msgid "Attendance Rate"
+msgstr "Катышуу"
+
+msgid "Days Present"
+msgstr "Келген күндөр"
+
+msgid "Days Absent"
+msgstr "Келбеген күндөр"
+
+msgid "Days"
+msgstr "Күндөр"
+
+msgid "Manage Leave Requests"
+msgstr "Бошотуу сурамдарын башкаруу"
+
+#, fuzzy
+#| msgid "New Request"
+msgid "Pending Requests"
+msgstr "Жаңы сурам"
+
+msgid "Type"
+msgstr "Түрү"
+
+msgid "Period"
+msgstr "Мөөнөтү"
+
+msgid "Reason"
+msgstr "Себеби"
+
+msgid "Submitted"
+msgstr "Жөнөтүлгөн"
+
+#, fuzzy
+#| msgid "Action"
+msgid "Actions"
+msgstr "Аракет"
+
+msgid "days"
+msgstr "күн"
+
+msgid "Approve this request?"
+msgstr "Бул сурамды бекитесизби?"
+
+msgid "Approve"
+msgstr "Бекитүү"
+
+msgid "Reject this request?"
+msgstr "Бул сурамды четке кагасызбы?"
+
+#, fuzzy
+#| msgid "Manage Subjects"
+msgid "Reject"
+msgstr "Сабактарды башкаруу"
+
+msgid "No pending requests"
+msgstr "Күтүүдөгү сурамдар жок"
+
+msgid "All Requests History"
+msgstr "Бардык сурамдардын тарыхы"
+
+msgid "Status"
+msgstr "Статус"
+
+msgid "Decision By"
+msgstr "Чечким кабыл алган"
+
+msgid "Date"
+msgstr "Дата"
+
+msgid "Pending"
+msgstr "Күтүүдө"
+
+msgid "Approved"
+msgstr "Бекитилди"
+
+msgid "Rejected"
+msgstr "Четке кагылды"
+
+#, fuzzy
+#| msgid "My Requests"
+msgid "No requests yet"
+msgstr "Менин сурамдарым"
+
+#, fuzzy
+#| msgid "Leave Requests"
+msgid "My Leave Requests"
+msgstr "Бошотуу сурамдары"
+
+#, fuzzy
+#| msgid "New Request"
+msgid "Submit New Request"
+msgstr "Жаңы сурам"
+
+msgid "Number of Days"
+msgstr "Күндөрдүн саны"
+
+#, fuzzy
+#| msgid "Build Date"
+msgid "Submitted Date"
+msgstr "Түзүлгөн датасы"
+
+msgid "from"
+msgstr "дөн"
+
+msgid "to"
+msgstr "га чейин"
+
+msgid "You have no leave requests yet"
+msgstr "Сизде азырынча бошотуу сурамдары жок"
+
+msgid "Click the button above to submit your first request"
+msgstr "Жаңы сурам жөнөтүү үчүн жогорудагы баскычты басыңыз"
+
+#, fuzzy
+#| msgid "New Request"
+msgid "Submit First Request"
+msgstr "Жаңы сурам"
+
+#, fuzzy
+#| msgid "New Request"
+msgid "Submit Leave Request"
+msgstr "Жаңы сурам"
+
+msgid "Leave Type"
+msgstr "Бошотуунун түрү"
+
+#, fuzzy
+#| msgid "Start date:"
+msgid "Start Date"
+msgstr "Баштоо датасы:"
+
+#, fuzzy
+#| msgid "End date:"
+msgid "End Date"
+msgstr "Аяктоо датасы:"
+
+msgid "Reason (provide full details)"
+msgstr "Себеби (толук маалымат берңиз)"
+
+msgid "Back"
+msgstr "Артка кайтуу"
+
+#, fuzzy
+#| msgid "New Request"
+msgid "Submit Request"
+msgstr "Жаңы сурам"
+
+msgid "Total Users"
+msgstr ""
+
+msgid "Days present"
+msgstr ""
+
+#, fuzzy
+#| msgid "New Request"
+msgid "New users today"
+msgstr "Жаңы сурам"
+
+msgid "Active Users"
+msgstr ""
+
+msgid "Days absent"
+msgstr ""
+
+#, fuzzy
+#| msgid "My Schedule"
+msgid "Today's classes"
+msgstr "Менин расписанием"
+
+msgid "Active rate"
+msgstr ""
+
+#, fuzzy
+#| msgid "Manage Subjects"
+msgid "Total Subjects"
+msgstr "Сабактарды башкаруу"
+
+msgid "Monthly target"
+msgstr ""
+
+msgid "Completion Rate"
+msgstr ""
+
+msgid "Previous month"
+msgstr ""
+
+#, fuzzy
+#| msgid "Attendance"
+msgid "Attendance Overview"
+msgstr "Катышуу"
+
+msgid "Attendance trend for the last week"
+msgstr ""
+
+msgid "User Activity"
+msgstr ""
+
+msgid "Active and new users for the last week"
+msgstr ""
+
+#, fuzzy
+#| msgid "New Request"
+msgid "New Users"
+msgstr "Жаңы сурам"
+
+msgid "Recent Users"
+msgstr ""
+
+msgid "Latest user registrations and activities"
+msgstr ""
+
+msgid "User"
+msgstr "Колдонуучу"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Deposit"
+msgstr ""
+
+msgid "Time"
+msgstr "Убакыт"
+
+msgid "active"
+msgstr ""
+
+msgid "pending"
+msgstr ""
+
+msgid "blocked"
+msgstr ""
+
+#, fuzzy
+#| msgid "Schedule"
+msgid "Scheduled"
+msgstr "Расписание"
+
+msgid "Not Marked"
+msgstr "Белгиленген жок"
+
+msgid "No data available"
+msgstr ""
+
+#, fuzzy
+#| msgid "Notifications"
+msgid "My Notifications"
+msgstr "Билдирмелер"
+
+msgid "new"
+msgstr "жаңы"
+
+msgid "Mark all as read"
+msgstr "Баарын окулган деп белгилөө"
+
+#, fuzzy
+#| msgid "Notifications"
+msgid "Send new notification"
+msgstr "Билдирмелер"
+
+#, fuzzy
+#| msgid "Absent"
+msgid "Absence"
+msgstr "Жок"
+
+#, fuzzy
+#| msgid "Leave Requests"
+msgid "Leave Request"
+msgstr "Бошотуу сурамдары"
+
+msgid "General"
+msgstr "Жалпы"
+
+msgid "New"
+msgstr "Жаңы"
+
+msgid "Mark as read"
+msgstr "Окулган деп белгилөө"
+
+#, fuzzy
+#| msgid "Notifications"
+msgid "You have no notifications"
+msgstr "Билдирмелер"
+
+#, fuzzy
+#| msgid "Notifications"
+msgid "New notifications will appear here"
+msgstr "Билдирмелер"
+
+#, fuzzy
+#| msgid "My Profile"
+msgid "My Profile"
+msgstr "Менин профилим"
+
+#, fuzzy
+#| msgid "Profile Complete"
+msgid "Profile Completion"
+msgstr "Профиль толук"
+
+#, fuzzy
+#| msgid "System Information"
+msgid "Personal Information"
+msgstr "Системалык маалымат"
+
+#, fuzzy
+#| msgid "User"
+msgid "Username"
+msgstr "Колдонуучу"
+
+msgid "Phone"
+msgstr "Телефон"
+
+msgid "Date of Birth"
+msgstr "Туулган күнү"
+
+msgid "years old"
+msgstr "жаш"
+
+msgid "Not specified"
+msgstr "Көрсөтүлгөн эмес"
+
+msgid "Gender"
+msgstr "Жынысы"
+
+#, fuzzy
+#| msgid "System Information"
+msgid "Contact Information"
+msgstr "Системалык маалымат"
+
+msgid "Address"
+msgstr "Дареги"
+
+msgid "Emergency Contact Name"
+msgstr "Тез кырдаал байланышуучусу"
+
+msgid "Emergency Phone"
+msgstr "Тез кырдаал телефону"
+
+#, fuzzy
+#| msgid "Joined"
+msgid "Date Joined"
+msgstr "Кошулду"
+
+#, fuzzy
+#| msgid "Start date:"
+msgid "Last Updated"
+msgstr "Баштоо датасы:"
+
+msgid "About Me"
+msgstr "Өзү жөнүндө"
+
+msgid "Change Password"
+msgstr "Сыр сөздү өзгөртүү"
+
+#, fuzzy
+#| msgid "Register"
+msgid "Registration"
+msgstr "Катталуу"
+
+msgid "Register"
+msgstr "Катталуу"
+
+#, fuzzy
+#| msgid "Reports"
+msgid "Detailed Report"
+msgstr "Отчеттор"
+
+msgid "Filter and Settings"
+msgstr "Фильтр жана тууралоо"
+
+#, fuzzy
+#| msgid "Reports"
+msgid "Report type:"
+msgstr "Отчеттор"
+
+msgid "All"
+msgstr "Бардыгы"
+
+msgid "Today"
+msgstr "Бүгүн"
+
+msgid "Weekly"
+msgstr "Жумалык"
+
+msgid "Monthly"
+msgstr "Айлык"
+
+msgid "Start date:"
+msgstr "Баштоо датасы:"
+
+msgid "End date:"
+msgstr "Аяктоо датасы:"
+
+msgid "Student:"
+msgstr "Студент:"
+
+msgid "All students"
+msgstr "Бардык студенттер"
+
+msgid "Action:"
+msgstr "Аракет:"
+
+msgid "Filter"
+msgstr "Фильтрлөө"
+
+msgid "Total records"
+msgstr "Жалпы жазуулар"
+
+#, fuzzy
+#| msgid "Notifications"
+msgid "Send Notification"
+msgstr "Билдирмелер"
+
+#, fuzzy
+#| msgid "Notifications"
+msgid "Notification"
+msgstr "Билдирмелер"
+
+#, fuzzy
+#| msgid "Manage Subjects"
+msgid "Language Settings"
+msgstr "Сабактарды башкаруу"
+
+msgid "Choose your preferred language"
+msgstr "Тилди тандаңыз"
+
+msgid "Select Language"
+msgstr "Тилди тандаңыз"
+
+msgid "Current language"
+msgstr "Учурдагы тил"
+
+msgid "Profile Settings"
+msgstr "Профиль тууралоолору"
+
+msgid "Joined"
+msgstr "Кошулду"
+
+#, fuzzy
+#| msgid "Login"
+msgid "Last login"
+msgstr "Кирүү"
+
+msgid "System Information"
+msgstr "Системалык маалымат"
+
+msgid "System Version"
+msgstr "Система версиясы"
+
+msgid "Build Date"
+msgstr "Түзүлгөн датасы"
+
+msgid "Academic Year"
+msgstr "Окуу жылы"
+
+msgid "Contact Support"
+msgstr "Колдоо кызматы"
+
+msgid "Your data is secure and protected"
+msgstr "Сиздин маалыматтарыңыз коопсуз жана корголгон"
+
+msgid "Changing language..."
+msgstr "Тил өзгөртүлүүдө..."
+
+#, fuzzy
+#| msgid "Dashboard"
+msgid "Student Dashboard"
+msgstr "Башкаруу Панели"
+
+msgid "Welcome"
+msgstr "Кош келиңиз"
+
+msgid "Quick Actions"
+msgstr "Тез аракеттер"
+
+#, fuzzy
+#| msgid "Schedule"
+msgid "View Full Schedule"
+msgstr "Расписание"
+
+msgid "My Requests"
+msgstr "Менин сурамдарым"
+
+#, fuzzy
+#| msgid "Attendance"
+msgid "Attendance Report"
+msgstr "Катышуу"
+
+#, fuzzy
+#| msgid "Dashboard"
+msgid "Teacher Dashboard"
+msgstr "Башкаруу Панели"
+
+msgid "Total Students"
+msgstr "Жалпы студенттер"
+
+#, fuzzy
+#| msgid "Manage Subjects"
+msgid "My Subjects"
+msgstr "Сабактарды башкаруу"
+
+msgid "Manage Schedule"
+msgstr "Расписание башкаруу"
+
+#, fuzzy
+#| msgid "Attendance"
+msgid "Attendance History"
+msgstr "Катышуу"
+
+#, fuzzy
+#| msgid "Attendance"
+msgid "Mark Attendance"
+msgstr "Катышуу"
+
+msgid "My Subjects & Groups"
+msgstr "Менин сабактарым жана группаларым"
+
+msgid "No groups assigned"
+msgstr "Группалар дагы ылгалган жок"
+
+#, fuzzy
+#| msgid "Schedule"
+msgid "View Schedule"
+msgstr "Расписание"
+
+msgid "No subjects assigned yet"
+msgstr "Сабактар дагы ылгалган жок"
+
+#, fuzzy
+#| msgid "Teacher profile not found. Please contact administrator."
+msgid "Please contact the administrator"
+msgstr "Мугалим профили табылган жок. Администраторго кайрылыңыз."
+
+#, fuzzy
+#| msgid "Reports"
+msgid "View Reports"
+msgstr "Отчеттор"
+
+msgid "close"
+msgstr ""
+
+msgid "Error"
+msgstr "Ката"
+
+msgid "Messages"
+msgstr ""
+
+msgid "Site Maps"
+msgstr ""
+
+msgid "Static Files"
+msgstr ""
+
+msgid "Syndication"
+msgstr ""
+
+#. Translators: String used to replace omitted page numbers in elided page
+#. range generated by paginators, e.g. [1, 2, '…', 5, 6, 7, '…', 9, 10].
+msgid "…"
+msgstr ""
+
+msgid "That page number is not an integer"
+msgstr ""
+
+msgid "That page number is less than 1"
+msgstr ""
+
+msgid "That page contains no results"
+msgstr ""
+
+msgid "Enter a valid value."
+msgstr ""
+
+msgid "Enter a valid URL."
+msgstr ""
+
+msgid "Enter a valid integer."
+msgstr ""
+
+msgid "Enter a valid email address."
+msgstr ""
+
+#. Translators: "letters" means latin letters: a-z and A-Z.
+msgid ""
+"Enter a valid “slug” consisting of letters, numbers, underscores or hyphens."
+msgstr ""
+
+msgid ""
+"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or "
+"hyphens."
+msgstr ""
+
+msgid "Enter a valid IPv4 address."
+msgstr ""
+
+msgid "Enter a valid IPv6 address."
+msgstr ""
+
+msgid "Enter a valid IPv4 or IPv6 address."
+msgstr ""
+
+msgid "Enter only digits separated by commas."
+msgstr ""
+
+#, python-format
+msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
+msgstr ""
+
+#, python-format
+msgid "Ensure this value is less than or equal to %(limit_value)s."
+msgstr ""
+
+#, python-format
+msgid "Ensure this value is greater than or equal to %(limit_value)s."
+msgstr ""
+
+#, python-format
+msgid "Ensure this value is a multiple of step size %(limit_value)s."
+msgstr ""
+
+#, python-format
+msgid ""
+"Ensure this value has at least %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at least %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+
+#, python-format
+msgid ""
+"Ensure this value has at most %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at most %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+
+msgid "Enter a number."
+msgstr ""
+
+#, python-format
+msgid "Ensure that there are no more than %(max)s digit in total."
+msgid_plural "Ensure that there are no more than %(max)s digits in total."
+msgstr[0] ""
+
+#, python-format
+msgid "Ensure that there are no more than %(max)s decimal place."
+msgid_plural "Ensure that there are no more than %(max)s decimal places."
+msgstr[0] ""
+
+#, python-format
+msgid ""
+"Ensure that there are no more than %(max)s digit before the decimal point."
+msgid_plural ""
+"Ensure that there are no more than %(max)s digits before the decimal point."
+msgstr[0] ""
+
+#, python-format
+msgid ""
+"File extension “%(extension)s” is not allowed. Allowed extensions are: "
+"%(allowed_extensions)s."
+msgstr ""
+
+msgid "Null characters are not allowed."
+msgstr ""
+
+msgid "and"
+msgstr ""
+
+#, python-format
+msgid "%(model_name)s with this %(field_labels)s already exists."
+msgstr ""
+
+#, python-format
+msgid "Constraint “%(name)s” is violated."
+msgstr ""
+
+#, python-format
+msgid "Value %(value)r is not a valid choice."
+msgstr ""
+
+msgid "This field cannot be null."
+msgstr ""
+
+msgid "This field cannot be blank."
+msgstr ""
+
+#, python-format
+msgid "%(model_name)s with this %(field_label)s already exists."
+msgstr ""
+
+#. Translators: The 'lookup_type' is one of 'date', 'year' or
+#. 'month'. Eg: "Title must be unique for pub_date year"
+#, python-format
+msgid ""
+"%(field_label)s must be unique for %(date_field_label)s %(lookup_type)s."
+msgstr ""
+
+#, python-format
+msgid "Field of type: %(field_type)s"
+msgstr ""
+
+#, python-format
+msgid "“%(value)s” value must be either True or False."
+msgstr ""
+
+#, python-format
+msgid "“%(value)s” value must be either True, False, or None."
+msgstr ""
+
+msgid "Boolean (Either True or False)"
+msgstr ""
+
+#, python-format
+msgid "String (up to %(max_length)s)"
+msgstr ""
+
+msgid "String (unlimited)"
+msgstr ""
+
+msgid "Comma-separated integers"
+msgstr ""
+
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid date format. It must be in YYYY-MM-DD "
+"format."
+msgstr ""
+
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD) but it is an invalid "
+"date."
+msgstr ""
+
+msgid "Date (without time)"
+msgstr ""
+
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD "
+"HH:MM[:ss[.uuuuuu]][TZ] format."
+msgstr ""
+
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD HH:MM[:ss[.uuuuuu]]"
+"[TZ]) but it is an invalid date/time."
+msgstr ""
+
+msgid "Date (with time)"
+msgstr ""
+
+#, python-format
+msgid "“%(value)s” value must be a decimal number."
+msgstr ""
+
+msgid "Decimal number"
+msgstr ""
+
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in [DD] "
+"[[HH:]MM:]ss[.uuuuuu] format."
+msgstr ""
+
+#, fuzzy
+#| msgid "Register"
+msgid "Duration"
+msgstr "Катталуу"
+
+#, fuzzy
+#| msgid "Address"
+msgid "Email address"
+msgstr "Дареги"
+
+msgid "File path"
+msgstr ""
+
+#, python-format
+msgid "“%(value)s” value must be a float."
+msgstr ""
+
+msgid "Floating point number"
+msgstr ""
+
+#, python-format
+msgid "“%(value)s” value must be an integer."
+msgstr ""
+
+msgid "Integer"
+msgstr ""
+
+msgid "Big (8 byte) integer"
+msgstr ""
+
+msgid "Small integer"
+msgstr ""
+
+#, fuzzy
+#| msgid "Address"
+msgid "IPv4 address"
+msgstr "Дареги"
+
+#, fuzzy
+#| msgid "Address"
+msgid "IP address"
+msgstr "Дареги"
+
+#, python-format
+msgid "“%(value)s” value must be either None, True or False."
+msgstr ""
+
+msgid "Boolean (Either True, False or None)"
+msgstr ""
+
+msgid "Positive big integer"
+msgstr ""
+
+msgid "Positive integer"
+msgstr ""
+
+msgid "Positive small integer"
+msgstr ""
+
+#, python-format
+msgid "Slug (up to %(max_length)s)"
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
+"format."
+msgstr ""
+
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
+"invalid time."
+msgstr ""
+
+msgid "URL"
+msgstr ""
+
+msgid "Raw binary data"
+msgstr ""
+
+#, python-format
+msgid "“%(value)s” is not a valid UUID."
+msgstr ""
+
+msgid "Universally unique identifier"
+msgstr ""
+
+msgid "File"
+msgstr ""
+
+msgid "Image"
+msgstr ""
+
+#, fuzzy
+#| msgid "Manage Subjects"
+msgid "A JSON object"
+msgstr "Сабактарды башкаруу"
+
+msgid "Value must be valid JSON."
+msgstr ""
+
+#, python-format
+msgid "%(model)s instance with %(field)s %(value)r does not exist."
+msgstr ""
+
+msgid "Foreign Key (type determined by related field)"
+msgstr ""
+
+msgid "One-to-one relationship"
+msgstr ""
+
+#, python-format
+msgid "%(from)s-%(to)s relationship"
+msgstr ""
+
+#, python-format
+msgid "%(from)s-%(to)s relationships"
+msgstr ""
+
+msgid "Many-to-many relationship"
+msgstr ""
+
+#. Translators: If found as last label character, these punctuation
+#. characters will prevent the default label_suffix to be appended to the label
+msgid ":?.!"
+msgstr ""
+
+msgid "This field is required."
+msgstr ""
+
+msgid "Enter a whole number."
+msgstr ""
+
+msgid "Enter a valid date."
+msgstr ""
+
+msgid "Enter a valid time."
+msgstr ""
+
+msgid "Enter a valid date/time."
+msgstr ""
+
+msgid "Enter a valid duration."
+msgstr ""
+
+#, python-brace-format
+msgid "The number of days must be between {min_days} and {max_days}."
+msgstr ""
+
+msgid "No file was submitted. Check the encoding type on the form."
+msgstr ""
+
+msgid "No file was submitted."
+msgstr ""
+
+msgid "The submitted file is empty."
+msgstr ""
+
+#, python-format
+msgid "Ensure this filename has at most %(max)d character (it has %(length)d)."
+msgid_plural ""
+"Ensure this filename has at most %(max)d characters (it has %(length)d)."
+msgstr[0] ""
+
+msgid "Please either submit a file or check the clear checkbox, not both."
+msgstr ""
+
+msgid ""
+"Upload a valid image. The file you uploaded was either not an image or a "
+"corrupted image."
+msgstr ""
+
+#, python-format
+msgid "Select a valid choice. %(value)s is not one of the available choices."
+msgstr ""
+
+msgid "Enter a list of values."
+msgstr ""
+
+msgid "Enter a complete value."
+msgstr ""
+
+msgid "Enter a valid UUID."
+msgstr ""
+
+msgid "Enter a valid JSON."
+msgstr ""
+
+#. Translators: This is the default suffix added to form field labels
+msgid ":"
+msgstr ""
+
+#, python-format
+msgid "(Hidden field %(name)s) %(error)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"ManagementForm data is missing or has been tampered with. Missing fields: "
+"%(field_names)s. You may need to file a bug report if the issue persists."
+msgstr ""
+
+#, python-format
+msgid "Please submit at most %(num)d form."
+msgid_plural "Please submit at most %(num)d forms."
+msgstr[0] ""
+
+#, python-format
+msgid "Please submit at least %(num)d form."
+msgid_plural "Please submit at least %(num)d forms."
+msgstr[0] ""
+
+msgid "Order"
+msgstr ""
+
+msgid "Delete"
+msgstr "Өчүрүү"
+
+#, python-format
+msgid "Please correct the duplicate data for %(field)s."
+msgstr ""
+
+#, python-format
+msgid "Please correct the duplicate data for %(field)s, which must be unique."
+msgstr ""
+
+#, python-format
+msgid ""
+"Please correct the duplicate data for %(field_name)s which must be unique "
+"for the %(lookup)s in %(date_field)s."
+msgstr ""
+
+msgid "Please correct the duplicate values below."
+msgstr ""
+
+msgid "The inline value did not match the parent instance."
+msgstr ""
+
+msgid "Select a valid choice. That choice is not one of the available choices."
+msgstr ""
+
+#, python-format
+msgid "“%(pk)s” is not a valid value."
+msgstr ""
+
+#, python-format
+msgid ""
+"%(datetime)s couldn’t be interpreted in time zone %(current_timezone)s; it "
+"may be ambiguous or it may not exist."
+msgstr ""
+
+msgid "Clear"
+msgstr ""
+
+#, fuzzy
+#| msgid "Current language"
+msgid "Currently"
+msgstr "Учурдагы тил"
+
+msgid "Change"
+msgstr ""
+
+msgid "Unknown"
+msgstr ""
+
+msgid "Yes"
+msgstr "Ооба"
+
+msgid "No"
+msgstr "Жок"
+
+#. Translators: Please do not add spaces around commas.
+msgid "yes,no,maybe"
+msgstr ""
+
+#, python-format
+msgid "%(size)d byte"
+msgid_plural "%(size)d bytes"
+msgstr[0] ""
+
+#, python-format
+msgid "%s KB"
+msgstr ""
+
+#, python-format
+msgid "%s MB"
+msgstr ""
+
+#, python-format
+msgid "%s GB"
+msgstr ""
+
+#, python-format
+msgid "%s TB"
+msgstr ""
+
+#, python-format
+msgid "%s PB"
+msgstr ""
+
+msgid "p.m."
+msgstr ""
+
+msgid "a.m."
+msgstr ""
+
+msgid "PM"
+msgstr ""
+
+msgid "AM"
+msgstr ""
+
+msgid "midnight"
+msgstr ""
+
+msgid "noon"
+msgstr ""
+
+msgid "Monday"
+msgstr "Дүйшөмбү"
+
+msgid "Tuesday"
+msgstr "Шейшемби"
+
+msgid "Wednesday"
+msgstr "Шаршемби"
+
+msgid "Thursday"
+msgstr "Бейшемби"
+
+msgid "Friday"
+msgstr "Жума"
+
+msgid "Saturday"
+msgstr "Ишемби"
+
+msgid "Sunday"
+msgstr "Жекшемби"
+
+#, fuzzy
+#| msgid "Monthly"
+msgid "Mon"
+msgstr "Айлык"
+
+msgid "Tue"
+msgstr ""
+
+msgid "Wed"
+msgstr ""
+
+msgid "Thu"
+msgstr ""
+
+msgid "Fri"
+msgstr ""
+
+#, fuzzy
+#| msgid "Status"
+msgid "Sat"
+msgstr "Статус"
+
+#, fuzzy
+#| msgid "Student"
+msgid "Sun"
+msgstr "Студент"
+
+msgid "January"
+msgstr ""
+
+msgid "February"
+msgstr ""
+
+msgid "March"
+msgstr ""
+
+msgid "April"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
+msgid "June"
+msgstr ""
+
+msgid "July"
+msgstr ""
+
+msgid "August"
+msgstr ""
+
+msgid "September"
+msgstr ""
+
+msgid "October"
+msgstr ""
+
+msgid "November"
+msgstr ""
+
+msgid "December"
+msgstr ""
+
+msgid "jan"
+msgstr ""
+
+msgid "feb"
+msgstr ""
+
+msgid "mar"
+msgstr ""
+
+msgid "apr"
+msgstr ""
+
+msgid "may"
+msgstr ""
+
+msgid "jun"
+msgstr ""
+
+msgid "jul"
+msgstr ""
+
+msgid "aug"
+msgstr ""
+
+msgid "sep"
+msgstr ""
+
+msgid "oct"
+msgstr ""
+
+msgid "nov"
+msgstr ""
+
+msgid "dec"
+msgstr ""
+
+msgctxt "abbrev. month"
+msgid "Jan."
+msgstr ""
+
+msgctxt "abbrev. month"
+msgid "Feb."
+msgstr ""
+
+msgctxt "abbrev. month"
+msgid "March"
+msgstr ""
+
+msgctxt "abbrev. month"
+msgid "April"
+msgstr ""
+
+msgctxt "abbrev. month"
+msgid "May"
+msgstr ""
+
+msgctxt "abbrev. month"
+msgid "June"
+msgstr ""
+
+msgctxt "abbrev. month"
+msgid "July"
+msgstr ""
+
+msgctxt "abbrev. month"
+msgid "Aug."
+msgstr ""
+
+msgctxt "abbrev. month"
+msgid "Sept."
+msgstr ""
+
+msgctxt "abbrev. month"
+msgid "Oct."
+msgstr ""
+
+msgctxt "abbrev. month"
+msgid "Nov."
+msgstr ""
+
+msgctxt "abbrev. month"
+msgid "Dec."
+msgstr ""
+
+msgctxt "alt. month"
+msgid "January"
+msgstr ""
+
+msgctxt "alt. month"
+msgid "February"
+msgstr ""
+
+msgctxt "alt. month"
+msgid "March"
+msgstr ""
+
+msgctxt "alt. month"
+msgid "April"
+msgstr ""
+
+msgctxt "alt. month"
+msgid "May"
+msgstr ""
+
+msgctxt "alt. month"
+msgid "June"
+msgstr ""
+
+msgctxt "alt. month"
+msgid "July"
+msgstr ""
+
+msgctxt "alt. month"
+msgid "August"
+msgstr ""
+
+msgctxt "alt. month"
+msgid "September"
+msgstr ""
+
+msgctxt "alt. month"
+msgid "October"
+msgstr ""
+
+msgctxt "alt. month"
+msgid "November"
+msgstr ""
+
+msgctxt "alt. month"
+msgid "December"
+msgstr ""
+
+msgid "This is not a valid IPv6 address."
+msgstr ""
+
+#, python-format
+msgctxt "String to return when truncating text"
+msgid "%(truncated_text)s…"
+msgstr ""
+
+msgid "or"
+msgstr ""
+
+#. Translators: This string is used as a separator between list elements
+msgid ", "
+msgstr ""
+
+#, python-format
+msgid "%(num)d year"
+msgid_plural "%(num)d years"
+msgstr[0] ""
+
+#, python-format
+msgid "%(num)d month"
+msgid_plural "%(num)d months"
+msgstr[0] ""
+
+#, python-format
+msgid "%(num)d week"
+msgid_plural "%(num)d weeks"
+msgstr[0] ""
+
+#, python-format
+msgid "%(num)d day"
+msgid_plural "%(num)d days"
+msgstr[0] ""
+
+#, python-format
+msgid "%(num)d hour"
+msgid_plural "%(num)d hours"
+msgstr[0] ""
+
+#, python-format
+msgid "%(num)d minute"
+msgid_plural "%(num)d minutes"
+msgstr[0] ""
+
+msgid "Forbidden"
+msgstr ""
+
+msgid "CSRF verification failed. Request aborted."
+msgstr ""
+
+msgid ""
+"You are seeing this message because this HTTPS site requires a “Referer "
+"header” to be sent by your web browser, but none was sent. This header is "
+"required for security reasons, to ensure that your browser is not being "
+"hijacked by third parties."
+msgstr ""
+
+msgid ""
+"If you have configured your browser to disable “Referer” headers, please re-"
+"enable them, at least for this site, or for HTTPS connections, or for “same-"
+"origin” requests."
+msgstr ""
+
+msgid ""
+"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or "
+"including the “Referrer-Policy: no-referrer” header, please remove them. The "
+"CSRF protection requires the “Referer” header to do strict referer checking. "
+"If you’re concerned about privacy, use alternatives like <a "
+"rel=\"noreferrer\" …> for links to third-party sites."
+msgstr ""
+
+msgid ""
+"You are seeing this message because this site requires a CSRF cookie when "
+"submitting forms. This cookie is required for security reasons, to ensure "
+"that your browser is not being hijacked by third parties."
+msgstr ""
+
+msgid ""
+"If you have configured your browser to disable cookies, please re-enable "
+"them, at least for this site, or for “same-origin” requests."
+msgstr ""
+
+msgid "More information is available with DEBUG=True."
+msgstr ""
+
+#, fuzzy
+#| msgid "Not specified"
+msgid "No year specified"
+msgstr "Көрсөтүлгөн эмес"
+
+#, fuzzy
+#| msgid "Date of Birth"
+msgid "Date out of range"
+msgstr "Туулган күнү"
+
+#, fuzzy
+#| msgid "Not specified"
+msgid "No month specified"
+msgstr "Көрсөтүлгөн эмес"
+
+#, fuzzy
+#| msgid "Not specified"
+msgid "No day specified"
+msgstr "Көрсөтүлгөн эмес"
+
+#, fuzzy
+#| msgid "Not specified"
+msgid "No week specified"
+msgstr "Көрсөтүлгөн эмес"
+
+#, python-format
+msgid "No %(verbose_name_plural)s available"
+msgstr ""
+
+#, python-format
+msgid ""
+"Future %(verbose_name_plural)s not available because "
+"%(class_name)s.allow_future is False."
+msgstr ""
+
+#, python-format
+msgid "Invalid date string “%(datestr)s” given format “%(format)s”"
+msgstr ""
+
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr ""
+
+msgid "Page is not “last”, nor can it be converted to an int."
+msgstr ""
+
+#, python-format
+msgid "Invalid page (%(page_number)s): %(message)s"
+msgstr ""
+
+#, python-format
+msgid "Empty list and “%(class_name)s.allow_empty” is False."
+msgstr ""
+
+msgid "Directory indexes are not allowed here."
+msgstr ""
+
+#, python-format
+msgid "“%(path)s” does not exist"
+msgstr ""
+
+#, python-format
+msgid "Index of %(directory)s"
+msgstr ""
+
+msgid "The install worked successfully! Congratulations!"
+msgstr ""
+
+#, python-format
+msgid ""
+"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
+msgstr ""
+
+#, python-format
+msgid ""
+"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
+"%(version)s/ref/settings/#debug\" target=\"_blank\" "
+"rel=\"noopener\">DEBUG=True</a> is in your settings file and you have not "
+"configured any URLs."
+msgstr ""
+
+msgid "Django Documentation"
+msgstr ""
+
+msgid "Topics, references, &amp; how-to’s"
+msgstr ""
+
+msgid "Tutorial: A Polling App"
+msgstr ""
+
+msgid "Get started with Django"
+msgstr ""
+
+msgid "Django Community"
+msgstr ""
+
+msgid "Connect, get help, or contribute"
+msgstr ""
+
+#, fuzzy
+#~| msgid "My Schedule"
+#~ msgid "Today's Schedule"
+#~ msgstr "Менин расписанием"
+
+#~ msgid "Attendance"
+#~ msgstr "Катышуу"
+
+#~ msgid "No classes today"
+#~ msgstr "Бүгүн сабак жок"
+
+#, fuzzy
+#~| msgid "Reports"
+#~ msgid "Advanced Reports"
+#~ msgstr "Отчеттор"
+
+#~ msgid "No classes scheduled for today"
+#~ msgstr "Бүгүн сабак жок"
+
+#~ msgid "Enjoy your free day!"
+#~ msgstr "Эс алыңыз!"
+
+#~ msgid "My Schedule"
+#~ msgstr "Менин расписанием"
+
+#~ msgid "Admin Panel"
+#~ msgstr "Админ Панели"
+
+#~ msgid "Logout"
+#~ msgstr "Чыгуу"
