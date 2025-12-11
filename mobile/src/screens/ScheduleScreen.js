@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -12,22 +12,20 @@ import {
   FlatList,
   RefreshControl,
   Dimensions,
+  SafeAreaView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
 import api from '../services/api';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const ScheduleScreen = () => {
   const { user, updateUser } = useAuth();
+  const { language } = useLanguage();
   
-  
-  // Башкы state
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [courses, setCourses] = useState([]);
   const [groups, setGroups] = useState([]);
@@ -35,18 +33,13 @@ const ScheduleScreen = () => {
   const [teachers, setTeachers] = useState([]);
   const [timeSlots, setTimeSlots] = useState([]);
   
-  // Тандоолор
-  const [selectedCourse, setSelectedCourse] = useState('');
-  const [selectedGroup, setSelectedGroup] = useState('');
+  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [selectedGroup, setSelectedGroup] = useState(null);
   
-  // Расписание маалыматы
   const [scheduleData, setScheduleData] = useState({});
-  
-  // Ата-эне үчүн балдардын тизмеси
   const [myChildren, setMyChildren] = useState([]);
   const [childrenSchedules, setChildrenSchedules] = useState({});
   
-  // Модалдар
   const [showLessonModal, setShowLessonModal] = useState(false);
   const [currentLesson, setCurrentLesson] = useState(null);
   const [lessonForm, setLessonForm] = useState({
@@ -57,37 +50,220 @@ const ScheduleScreen = () => {
     day: ''
   });
   
-  // Attendance модалы
   const [showAttendanceModal, setShowAttendanceModal] = useState(false);
   const [currentLessonId, setCurrentLessonId] = useState(null);
   const [students, setStudents] = useState([]);
   const [attendanceData, setAttendanceData] = useState({});
-  
-  // Дни недели
+
+  // Translations
+  const translations = {
+    en: {
+      loading: 'Loading...',
+      error: 'Error',
+      dataLoadError: 'Error loading data',
+      scheduleLoadError: 'Error loading schedule',
+      teacherNotFound: 'Teacher profile not found',
+      noGroup: 'You are not assigned to a group yet',
+      noChildren: 'No students linked to you',
+      courses: 'Courses:',
+      noCourses: 'No courses',
+      selectCourse: 'Select course:',
+      groups: 'Groups:',
+      noGroups: 'No groups',
+      selectGroup: 'Select group:',
+      students: 'students',
+      time: 'Time',
+      notSpecified: 'Not specified',
+      empty: 'Empty',
+      add: 'Add',
+      editLesson: '✏️ Edit Lesson',
+      addLesson: '📚 Add New Lesson',
+      subject: '📖 Subject:',
+      teacher: '👨‍🏫 Teacher:',
+      room: '📍 Room:',
+      cancel: 'Cancel',
+      save: '💾 Save',
+      confirmDelete: 'Confirm Delete?',
+      deleteLesson: 'Delete this lesson?',
+      delete: 'Delete',
+      success: 'Success!',
+      lessonSaved: 'Lesson saved',
+      lessonDeleted: 'Lesson deleted',
+      saveError: 'Error saving',
+      deleteError: 'Error deleting',
+      markAttendance: '📋 Mark Student Attendance',
+      close: 'Close',
+      present: '✅ Present',
+      late: '⏰ Late',
+      absent: '❌ Absent',
+      attendanceOnly: 'Attendance marking is for teachers only',
+      todayOnly: 'You can only mark attendance for your today\'s lessons',
+      myLessonsOnly: 'You can only mark attendance for your own lessons',
+      noAttendanceData: 'No attendance data',
+      lessonNotFound: 'Lesson information not found',
+      attendanceSaved: 'Attendance saved successfully!',
+      attendanceButton: 'Attendance',
+      selectToView: 'Select course and group to view schedule',
+      monday: 'Monday',
+      tuesday: 'Tuesday',
+      wednesday: 'Wednesday',
+      thursday: 'Thursday',
+      friday: 'Friday',
+      saturday: 'Saturday',
+      monShort: 'Mon',
+      tueShort: 'Tue',
+      wedShort: 'Wed',
+      thuShort: 'Thu',
+      friShort: 'Fri',
+      satShort: 'Sat',
+    },
+    ru: {
+      loading: 'Загрузка...',
+      error: 'Ошибка',
+      dataLoadError: 'Ошибка загрузки данных',
+      scheduleLoadError: 'Ошибка загрузки расписания',
+      teacherNotFound: 'Профиль преподавателя не найден',
+      noGroup: 'Вы еще не назначены в группу',
+      noChildren: 'К вам не привязаны студенты',
+      courses: 'Курсы:',
+      noCourses: 'Нет курсов',
+      selectCourse: 'Выберите курс:',
+      groups: 'Группы:',
+      noGroups: 'Нет групп',
+      selectGroup: 'Выберите группу:',
+      students: 'студентов',
+      time: 'Время',
+      notSpecified: 'Не указано',
+      empty: 'Пусто',
+      add: 'Добавить',
+      editLesson: '✏️ Редактировать занятие',
+      addLesson: '📚 Добавить занятие',
+      subject: '📖 Предмет:',
+      teacher: '👨‍🏫 Преподаватель:',
+      room: '📍 Кабинет:',
+      cancel: 'Отмена',
+      save: '💾 Сохранить',
+      confirmDelete: 'Подтвердить удаление?',
+      deleteLesson: 'Удалить это занятие?',
+      delete: 'Удалить',
+      success: 'Успешно!',
+      lessonSaved: 'Занятие сохранено',
+      lessonDeleted: 'Занятие удалено',
+      saveError: 'Ошибка сохранения',
+      deleteError: 'Ошибка удаления',
+      markAttendance: '📋 Отметить посещаемость',
+      close: 'Закрыть',
+      present: '✅ Присутствовал',
+      late: '⏰ Опоздал',
+      absent: '❌ Отсутствовал',
+      attendanceOnly: 'Отметка посещаемости только для преподавателей',
+      todayOnly: 'Вы можете отмечать только сегодняшние занятия',
+      myLessonsOnly: 'Вы можете отмечать только свои занятия',
+      noAttendanceData: 'Нет данных посещаемости',
+      lessonNotFound: 'Информация о занятии не найдена',
+      attendanceSaved: 'Посещаемость успешно сохранена!',
+      attendanceButton: 'Посещаемость',
+      selectToView: 'Выберите курс и группу для просмотра расписания',
+      monday: 'Понедельник',
+      tuesday: 'Вторник',
+      wednesday: 'Среда',
+      thursday: 'Четверг',
+      friday: 'Пятница',
+      saturday: 'Суббота',
+      monShort: 'Пн',
+      tueShort: 'Вт',
+      wedShort: 'Ср',
+      thuShort: 'Чт',
+      friShort: 'Пт',
+      satShort: 'Сб',
+    },
+    ky: {
+      loading: 'Жүктөлүүдө...',
+      error: 'Ката',
+      dataLoadError: 'Маалыматтарды жүктөөдө ката чыкты',
+      scheduleLoadError: 'Расписаниени жүктөөдө ката чыкты',
+      teacherNotFound: 'Мугалим профили табылган жок',
+      noGroup: 'Сиз али группага киргизилген эмессиз',
+      noChildren: 'Сизге эч кандай студент байланышкан эмес',
+      courses: 'Курстар:',
+      noCourses: 'Курстар жок',
+      selectCourse: 'Курсту тандаңыз:',
+      groups: 'Группалар:',
+      noGroups: 'Группалар жок',
+      selectGroup: 'Группаны тандаңыз:',
+      students: 'студент',
+      time: 'Убакыт',
+      notSpecified: 'Белгиленген эмес',
+      empty: 'Бош',
+      add: 'Кошуу',
+      editLesson: '✏️ Сабакты өзгөртүү',
+      addLesson: '📚 Жаңы сабак кошуу',
+      subject: '📖 Сабак:',
+      teacher: '👨‍🏫 Мугалим:',
+      room: '📍 Кабинет:',
+      cancel: 'Жокко чыгаруу',
+      save: '💾 Сактоо',
+      confirmDelete: 'Ырас менен өчүрүү?',
+      deleteLesson: 'Бул сабакты өчүрөсүзбү?',
+      delete: 'Өчүрүү',
+      success: 'Ийгиликтүү!',
+      lessonSaved: 'Сабак сакталды',
+      lessonDeleted: 'Сабак өчүрүлдү',
+      saveError: 'Сактоодо ката чыкты',
+      deleteError: 'Өчүрүүдө ката чыкты',
+      markAttendance: '📋 Студенттердин катышуусун белгилөө',
+      close: 'Жабуу',
+      present: '✅ Келди',
+      late: '⏰ Кечикти',
+      absent: '❌ Келбеди',
+      attendanceOnly: 'Катышууну белгилөө мугалимдер үчүн гана',
+      todayOnly: 'Сиз өзүңүздүн бүгүнкү сабагыңызга гана жоктоо белгилей аласыз',
+      myLessonsOnly: 'Сиз өзүңүздүн сабактарыңызга гана жоктоо белгилей аласыз',
+      noAttendanceData: 'Жоктоо маалыматы жок',
+      lessonNotFound: 'Сабак маалыматы табылган жок',
+      attendanceSaved: 'Катышуу ийгиликтүү сакталды!',
+      attendanceButton: 'Жоктоо',
+      selectToView: 'Расписаниени көрүү үчүн курс жана группа тандаңыз',
+      monday: 'Дүйшөмбү',
+      tuesday: 'Шейшемби',
+      wednesday: 'Шаршемби',
+      thursday: 'Бейшемби',
+      friday: 'Жума',
+      saturday: 'Ишемби',
+      monShort: 'Дүй',
+      tueShort: 'Шей',
+      wedShort: 'Шар',
+      thuShort: 'Бей',
+      friShort: 'Жум',
+      satShort: 'Ише',
+    }
+  };
+
+  const t = translations[language] || translations.ky;
+
   const days = {
-    Monday: { short: 'Дүй', full: 'Дүйшөмбү' },
-    Tuesday: { short: 'Шей', full: 'Шейшемби' },
-    Wednesday: { short: 'Шар', full: 'Шаршемби' },
-    Thursday: { short: 'Бей', full: 'Бейшемби' },
-    Friday: { short: 'Жум', full: 'Жума' },
-    Saturday: { short: 'Ише', full: 'Ишемби' }
+    Monday: { short: t.monShort, full: t.monday },
+    Tuesday: { short: t.tueShort, full: t.tuesday },
+    Wednesday: { short: t.wedShort, full: t.wednesday },
+    Thursday: { short: t.thuShort, full: t.thursday },
+    Friday: { short: t.friShort, full: t.friday },
+    Saturday: { short: t.satShort, full: t.saturday }
   };
 
   const daysOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-  // Уруксаттар
   const canEdit = user?.role === 'ADMIN' || user?.role === 'MANAGER';
   const canViewAll = user?.role === 'ADMIN' || user?.role === 'MANAGER' || user?.role === 'TEACHER';
 
-  // Refresh функциясы
-  const onRefresh = () => {
+  const onRefresh = async () => {
     setRefreshing(true);
-    loadData();
+    await loadData();
+    setRefreshing(false);
   };
 
-  // Загрузка данных
   const loadData = async () => {
     try {
+      setLoading(true);
       await loadTimeSlots();
       
       if (user?.role === 'TEACHER') {
@@ -101,8 +277,9 @@ const ScheduleScreen = () => {
       }
     } catch (error) {
       console.error('Data loading error:', error);
+      Alert.alert(t.error, t.dataLoadError);
     } finally {
-      setRefreshing(false);
+      setLoading(false);
     }
   };
 
@@ -114,18 +291,16 @@ const ScheduleScreen = () => {
     }
   }, [user]);
 
-  // Курс тандалганда группаларды жүктөө
   useEffect(() => {
     if (selectedCourse) {
       loadGroups(selectedCourse);
-      setSelectedGroup('');
+      setSelectedGroup(null);
     } else {
       setGroups([]);
-      setSelectedGroup('');
+      setSelectedGroup(null);
     }
   }, [selectedCourse]);
 
-  // Группа тандалганда расписание жүктөө
   useEffect(() => {
     if (selectedGroup && canViewAll) {
       loadSchedule(selectedGroup);
@@ -134,7 +309,6 @@ const ScheduleScreen = () => {
     }
   }, [selectedGroup]);
 
-  // Teacher ID алуу
   const fetchTeacherId = async () => {
     try {
       const response = await api.get('/v1/profile/update/');
@@ -147,27 +321,34 @@ const ScheduleScreen = () => {
     }
   };
 
-  // API функциялары
   const loadTeacherSchedule = async () => {
     try {
-      setLoading(true);
-      
+      console.log('👨‍🏫 Loading teacher schedule...');
       const profileResponse = await api.get('/v1/profile/update/');
-      const profileData = profileResponse.data;
-      
       const teachersResponse = await api.get('/v1/teachers/');
       const teachersList = teachersResponse.data.results || teachersResponse.data || [];
       
       const currentTeacher = teachersList.find(t => t.user && t.user.id === user.id);
       
       if (!currentTeacher) {
-        Alert.alert('Ката', 'Мугалим профили табылган жок');
-        setLoading(false);
+        console.log('❌ Teacher not found');
+        Alert.alert(t.error, t.teacherNotFound);
         return;
+      }
+      
+      console.log('✅ Current teacher:', currentTeacher);
+      
+      // Teacher ID'ди user'ге сактоо
+      if (!user.teacher_id) {
+        const updatedUser = { ...user, teacher_id: currentTeacher.id };
+        updateUser(updatedUser);
+        console.log('💾 Saved teacher_id to user:', currentTeacher.id);
       }
       
       const schedulesResponse = await api.get(`/v1/schedules/?teacher=${currentTeacher.id}`);
       const mySchedules = schedulesResponse.data.results || schedulesResponse.data || [];
+      
+      console.log('📅 Teacher schedules loaded:', mySchedules.length);
       
       const gridData = {};
       daysOrder.forEach(day => {
@@ -186,7 +367,7 @@ const ScheduleScreen = () => {
             room: schedule.room,
             group: schedule.group?.name,
             subject_id: schedule.subject?.id,
-            teacher_id: schedule.teacher?.id,
+            teacher_id: currentTeacher.id, // currentTeacher.id'ди колдонобуз
             time_slot_id: timeSlotId,
             attendance_status: schedule.attendance_status,
             attendance_text: schedule.attendance_text
@@ -194,21 +375,28 @@ const ScheduleScreen = () => {
         }
       });
 
+      console.log('📊 Schedule grid created:', Object.keys(gridData).length, 'days');
       setScheduleData(gridData);
+      
+      // Расписание бар экенин текшерүү
+      const hasSchedule = Object.values(gridData).some(day => Object.keys(day).length > 0);
+      if (!hasSchedule) {
+        Alert.alert(
+          'Маалымат',
+          'Сизге али сабактар белгиленген эмес. Администратор менен байланышыңыз.'
+        );
+      }
+      
       await loadSubjects();
       await loadTeachers();
     } catch (error) {
-      console.error('Мугалим расписаниесин жүктөөдө ката:', error);
-      Alert.alert('Ката', 'Расписаниени жүктөөдө ката чыкты');
-    } finally {
-      setLoading(false);
+      console.error('❌ Мугалим расписаниесин жүктөөдө ката:', error);
+      Alert.alert(t.error, t.scheduleLoadError);
     }
   };
 
   const loadStudentSchedule = async () => {
     try {
-      setLoading(true);
-      
       const profileResponse = await api.get('/v1/profile/update/');
       const profileData = profileResponse.data;
       
@@ -224,20 +412,16 @@ const ScheduleScreen = () => {
         await loadSubjects();
         await loadTeachers();
       } else {
-        Alert.alert('Ката', 'Сиз али группага киргизилген эмессиз');
+        Alert.alert(t.error, t.noGroup);
       }
     } catch (error) {
       console.error('Студент расписаниесин жүктөөдө ката:', error);
-      Alert.alert('Ката', 'Расписаниени жүктөөдө ката чыкты');
-    } finally {
-      setLoading(false);
+      Alert.alert(t.error, t.scheduleLoadError);
     }
   };
 
   const loadParentSchedule = async () => {
     try {
-      setLoading(true);
-      
       const statsResponse = await api.get('/v1/dashboard/stats/');
       const statsData = statsResponse.data;
       const children = statsData.my_children || [];
@@ -297,14 +481,13 @@ const ScheduleScreen = () => {
           schedulesMap[result.childId] = result.scheduleData;
         });
         setChildrenSchedules(schedulesMap);
+        await loadTimeSlots();
       } else {
-        Alert.alert('Ката', 'Сизге эч кандай студент байланышкан эмес');
+        Alert.alert(t.error, t.noChildren);
       }
     } catch (error) {
       console.error('Ата-эне расписаниесин жүктөөдө ката:', error);
-      Alert.alert('Ката', 'Расписаниени жүктөөдө ката чыкты');
-    } finally {
-      setLoading(false);
+      Alert.alert(t.error, t.scheduleLoadError);
     }
   };
 
@@ -393,18 +576,17 @@ const ScheduleScreen = () => {
       console.log('TimeSlot API жок, дефолт убакыттарды колдонобуз');
     }
     
-    // Дефолт убакыт слоттары
     setTimeSlots([
       { id: 1, name: '1-пара', start_time: '08:00', end_time: '09:30' },
       { id: 2, name: '2-пара', start_time: '09:40', end_time: '11:10' },
       { id: 3, name: '3-пара', start_time: '11:20', end_time: '12:50' },
       { id: 4, name: '4-пара', start_time: '13:30', end_time: '15:00' },
-      { id: 5, name: '5-пара', start_time: '15:10', end_time: '16:40' }
+      { id: 5, name: '5-пара', start_time: '15:10', end_time: '16:40' },
+      { id: 6, name: '6-пара', start_time: '16:50', end_time: '18:20' },
     ]);
   };
 
   const loadSchedule = async (groupId) => {
-    setLoading(true);
     try {
       const response = await api.get(`/v1/schedules/?group=${groupId}`);
       const data = response.data;
@@ -444,12 +626,9 @@ const ScheduleScreen = () => {
     } catch (error) {
       console.error('Расписаниени жүктөөдө ката:', error);
       setScheduleData({});
-    } finally {
-      setLoading(false);
     }
   };
 
-  // Модал функциялары
   const openAddLessonModal = (timeSlotId, day) => {
     if (!canEdit) return;
     
@@ -515,30 +694,30 @@ const ScheduleScreen = () => {
 
       setShowLessonModal(false);
       loadSchedule(selectedGroup);
-      Alert.alert('Ийгиликтүү!', 'Сабак сакталды');
+      Alert.alert(t.success, t.lessonSaved);
     } catch (error) {
       console.error('Сабакты сактоодо ката:', error);
-      Alert.alert('Ката', 'Сабакты сактоодо ката чыкты');
+      Alert.alert(t.error, t.saveError);
     }
   };
 
   const deleteLesson = async (lessonId) => {
     Alert.alert(
-      'Ырас менен өчүрүү?',
-      'Бул сабакты өчүрөсүзбү?',
+      t.confirmDelete,
+      t.deleteLesson,
       [
-        { text: 'Жокко чыгаруу', style: 'cancel' },
+        { text: t.cancel, style: 'cancel' },
         {
-          text: 'Өчүрүү',
+          text: t.delete,
           style: 'destructive',
           onPress: async () => {
             try {
               await api.delete(`/v1/schedules/${lessonId}/`);
               loadSchedule(selectedGroup);
-              Alert.alert('Ийгиликтүү', 'Сабак өчүрүлдү');
+              Alert.alert(t.success, t.lessonDeleted);
             } catch (error) {
               console.error('Сабакты өчүрүүдө ката:', error);
-              Alert.alert('Ката', 'Өчүрүүдө ката чыкты');
+              Alert.alert(t.error, t.deleteError);
             }
           }
         }
@@ -546,7 +725,6 @@ const ScheduleScreen = () => {
     );
   };
 
-  // Attendance функциялары
   const isTeacherTodayLesson = (lesson, day) => {
     if (user?.role !== 'TEACHER') return false;
     
@@ -554,17 +732,47 @@ const ScheduleScreen = () => {
     const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const todayName = daysOfWeek[today.getDay()];
     
-    return day === todayName && lesson.teacher_id === user.teacher_id;
+    // Бүгүнкү күн жана мугалимдин өз сабагы
+    const isToday = day === todayName;
+    const isMyLesson = lesson.teacher_id === user.teacher_id;
+    
+    console.log('📅 Attendance check:', {
+      day,
+      todayName,
+      isToday,
+      lessonTeacherId: lesson.teacher_id,
+      userTeacherId: user.teacher_id,
+      isMyLesson,
+      canMark: isToday && isMyLesson
+    });
+    
+    return isToday && isMyLesson;
   };
 
   const openAttendanceModal = async (lessonId, lesson, day) => {
+    console.log('🎯 Opening attendance modal:', { lessonId, day, lesson });
+    console.log('👤 User info:', { role: user?.role, teacher_id: user?.teacher_id });
+    
     if (user?.role !== 'TEACHER') {
-      Alert.alert('Ката', 'Катышууну белгилөө мугалимдер үчүн гана');
+      Alert.alert(t.error, t.attendanceOnly);
       return;
     }
     
+    // Бүгүнкү күндү текшерүү
     if (!isTeacherTodayLesson(lesson, day)) {
-      Alert.alert('Ката', 'Сиз өзүңүздүн бүгүнкү сабагыңызга гана жоктоо белгилей аласыз');
+      Alert.alert(t.error, t.todayOnly);
+      return;
+    }
+    
+    // Мугалимдин өз сабагы экенин текшерүү
+    console.log('🔍 Checking lesson ownership:', {
+      lessonTeacherId: lesson.teacher_id,
+      userTeacherId: user.teacher_id,
+      match: lesson.teacher_id === user.teacher_id
+    });
+    
+    if (lesson.teacher_id !== user.teacher_id) {
+      Alert.alert(t.error, t.myLessonsOnly);
       return;
     }
 
@@ -572,8 +780,33 @@ const ScheduleScreen = () => {
     setShowAttendanceModal(true);
     
     try {
+      // Ошол эле убакытта жана күндө окутулган бардык параллелдүү сабактарды табуу
+      const currentTimeSlot = lesson.time_slot_id;
+      const parallelLessons = [];
+      
+      // Schedule data'дан ошол эле time slot жана day'дагы бардык сабактарды издөө
+      if (scheduleData[day] && scheduleData[day][currentTimeSlot]) {
+        const currentLesson = scheduleData[day][currentTimeSlot];
+        if (currentLesson.teacher_id === user.teacher_id) {
+          parallelLessons.push(currentLesson.id);
+        }
+      }
+      
+      // Эгер бир нече параллелдүү сабак болсо, аларды да кошуу керек
+      // Бирок scheduleData'да бир гана сабак бар (teacher'дин өз расписаниеси)
+      // Ошондуктан API'ден толук маалымат алуу керек
+      
+      console.log('📡 Fetching students for lesson:', lessonId);
       const response = await api.get(`/v1/schedules/${lessonId}/students/`);
       const studentsList = response.data.students || [];
+      const lessonInfo = response.data.lesson_info || {};
+      
+      console.log('👥 Students loaded:', studentsList.length);
+      console.log('📚 Lesson info:', lessonInfo);
+      
+      if (lessonInfo.total_groups > 1) {
+        console.log(`📢 Параллелдүү ${lessonInfo.total_groups} группа, ${lessonInfo.total_students} студент`);
+      }
       
       setStudents(studentsList);
       
@@ -584,14 +817,14 @@ const ScheduleScreen = () => {
       setAttendanceData(initialAttendance);
     } catch (error) {
       console.error('Студенттерди жүктөөдө ката:', error);
-      Alert.alert('Ката', 'Студенттерди жүктөөдө ката чыкты');
+      Alert.alert(t.error, t.scheduleLoadError);
       setShowAttendanceModal(false);
     }
   };
 
   const saveAttendance = async () => {
     if (!currentLessonId || Object.keys(attendanceData).length === 0) {
-      Alert.alert('Ката', 'Жоктоо маалыматы жок');
+      Alert.alert(t.error, t.noAttendanceData);
       return;
     }
 
@@ -608,7 +841,7 @@ const ScheduleScreen = () => {
       });
 
       if (!scheduleInfo) {
-        Alert.alert('Ката', 'Сабак маалыматы табылган жок');
+        Alert.alert(t.error, t.lessonNotFound);
         return;
       }
 
@@ -625,18 +858,17 @@ const ScheduleScreen = () => {
         attendance_records: attendanceRecords
       });
 
-      Alert.alert('Ийгиликтүү!', 'Катышуу ийгиликтүү сакталды!');
+      Alert.alert(t.success, t.attendanceSaved);
       setShowAttendanceModal(false);
       setStudents([]);
       setAttendanceData({});
       setCurrentLessonId(null);
     } catch (error) {
       console.error('Катышууну сактоодо ката:', error);
-      Alert.alert('Ката', 'Сактоодо ката чыкты');
+      Alert.alert(t.error, t.saveError);
     }
   };
 
-  // Attendance статусу боюнча цвет
   const getAttendanceColor = (status) => {
     switch (status) {
       case 'Present': return '#48bb78';
@@ -646,129 +878,169 @@ const ScheduleScreen = () => {
     }
   };
 
-  // Сабак карточкасы
+  // ОҢДОЛГОН: Сабак карточкасы вертикалдык созулуу
   const renderLessonCard = (lesson, day, timeSlotId) => {
     if (!lesson) return null;
 
     return (
-      <View style={styles.lessonCard}>
-        <View style={styles.lessonHeader}>
-          <Text style={styles.lessonSubject} numberOfLines={2}>
-            {lesson.subject}
-          </Text>
-          {canEdit && (
-            <View style={styles.lessonActions}>
-              <TouchableOpacity 
-                onPress={() => openEditLessonModal(lesson)}
-                style={styles.actionButton}
-              >
-                <Icon name="pencil" size={16} color="#4299e1" />
-              </TouchableOpacity>
-              <TouchableOpacity 
-                onPress={() => deleteLesson(lesson.id)}
-                style={styles.actionButton}
-              >
-                <Icon name="trash" size={16} color="#f56565" />
-              </TouchableOpacity>
+      <TouchableOpacity 
+        style={styles.lessonCard}
+        activeOpacity={0.8}
+        onPress={() => {
+          if (canEdit) {
+            openEditLessonModal(lesson);
+          }
+        }}
+      >
+        <View style={styles.lessonContent}>
+          <View style={styles.lessonHeader}>
+            <Text style={styles.lessonSubject} numberOfLines={2} ellipsizeMode='tail'>
+              {lesson.subject}
+            </Text>
+            {canEdit && (
+              <View style={styles.lessonActions}>
+                <TouchableOpacity 
+                  onPress={(e) => {
+                    e.stopPropagation();
+                    openEditLessonModal(lesson);
+                  }}
+                  style={styles.actionButton}
+                >
+                  <Icon name="pencil" size={16} color="#4299e1" />
+                </TouchableOpacity>
+                <TouchableOpacity 
+                  onPress={(e) => {
+                    e.stopPropagation();
+                    deleteLesson(lesson.id);
+                  }}
+                  style={styles.actionButton}
+                >
+                  <Icon name="trash" size={16} color="#f56565" />
+                </TouchableOpacity>
+              </View>
+            )}
+          </View>
+          
+          <View style={styles.lessonDetails}>
+            {lesson.teacher && user?.role !== 'TEACHER' && (
+              <View style={styles.detailRow}>
+                <Icon name="person" size={12} color="#718096" />
+                <Text style={styles.lessonDetail} numberOfLines={1} ellipsizeMode='tail'>
+                  {lesson.teacher}
+                </Text>
+              </View>
+            )}
+            
+            {lesson.group && user?.role === 'TEACHER' && (
+              <View style={styles.detailRow}>
+                <Icon name="people" size={12} color="#718096" />
+                <Text style={styles.lessonDetail} numberOfLines={1} ellipsizeMode='tail'>
+                  {lesson.group}
+                </Text>
+              </View>
+            )}
+            
+            <View style={styles.detailRow}>
+              <Icon name="business" size={12} color="#718096" />
+              <Text style={styles.lessonDetail} numberOfLines={1} ellipsizeMode='tail'>
+                {lesson.room || t.notSpecified}
+              </Text>
+            </View>
+          </View>
+          
+          {(user?.role === 'STUDENT' || user?.role === 'PARENT') && lesson.attendance_text && (
+            <View style={[styles.attendanceBadge, { backgroundColor: getAttendanceColor(lesson.attendance_status) }]}>
+              <Text style={styles.attendanceText}>
+                {lesson.attendance_text}
+              </Text>
             </View>
           )}
+          
+          {user?.role === 'TEACHER' && isTeacherTodayLesson(lesson, day) && (
+            <TouchableOpacity 
+              style={styles.attendanceButton}
+              onPress={(e) => {
+                e.stopPropagation();
+                console.log('📝 Attendance button pressed:', {
+                  lessonId: lesson.id,
+                  day,
+                  lessonTeacherId: lesson.teacher_id,
+                  userTeacherId: user.teacher_id
+                });
+                openAttendanceModal(lesson.id, lesson, day);
+              }}
+            >
+              <Icon name="clipboard" size={14} color="#fff" />
+              <Text style={styles.attendanceButtonText}>{t.attendanceButton}</Text>
+            </TouchableOpacity>
+          )}
         </View>
-        
-        {lesson.teacher && user?.role !== 'TEACHER' && (
-          <Text style={styles.lessonDetail} numberOfLines={1}>
-            <Icon name="person" size={12} color="#718096" /> {lesson.teacher}
-          </Text>
-        )}
-        
-        {lesson.group && user?.role === 'TEACHER' && (
-          <Text style={styles.lessonDetail} numberOfLines={1}>
-            <Icon name="people" size={12} color="#718096" /> {lesson.group}
-          </Text>
-        )}
-        
-        <Text style={styles.lessonDetail} numberOfLines={1}>
-          <Icon name="business" size={12} color="#718096" /> {lesson.room || 'Белгиленген эмес'}
-        </Text>
-        
-        {/* Катышуу статусу */}
-        {(user?.role === 'STUDENT' || user?.role === 'PARENT') && lesson.attendance_text && (
-          <View style={[styles.attendanceBadge, { backgroundColor: getAttendanceColor(lesson.attendance_status) }]}>
-            <Text style={styles.attendanceText}>
-              {lesson.attendance_text}
-            </Text>
-          </View>
-        )}
-        
-        {/* Мугалим үчүн жоктоо баскычы */}
-        {user?.role === 'TEACHER' && isTeacherTodayLesson(lesson, day) && (
-          <TouchableOpacity 
-            style={styles.attendanceButton}
-            onPress={() => openAttendanceModal(lesson.id, lesson, day)}
-          >
-            <Icon name="clipboard" size={14} color="#fff" />
-            <Text style={styles.attendanceButtonText}>Жоктоо</Text>
-          </TouchableOpacity>
-        )}
-      </View>
+      </TouchableOpacity>
     );
   };
 
-  // Свободная ячейка
   const renderEmptyCell = (timeSlotId, day) => {
     return (
       <TouchableOpacity 
         style={styles.emptyCell}
         onPress={() => canEdit && openAddLessonModal(timeSlotId, day)}
         disabled={!canEdit}
+        activeOpacity={0.8}
       >
-        {canEdit && (
-          <TouchableOpacity 
-            style={styles.addButton}
-            onPress={(e) => {
-              e.stopPropagation();
-              openAddLessonModal(timeSlotId, day);
-            }}
-          >
-            <Icon name="add" size={20} color="#48bb78" />
-          </TouchableOpacity>
+        {canEdit ? (
+          <View style={styles.emptyCellContent}>
+            <TouchableOpacity 
+              style={styles.addButton}
+              onPress={(e) => {
+                e.stopPropagation();
+                openAddLessonModal(timeSlotId, day);
+              }}
+            >
+              <Icon name="add" size={24} color="#48bb78" />
+            </TouchableOpacity>
+            <Text style={styles.emptyCellText}>{t.add}</Text>
+          </View>
+        ) : (
+          <Text style={styles.emptyCellText}>{t.empty}</Text>
         )}
-        <Text style={styles.emptyCellText}>Бош</Text>
       </TouchableOpacity>
     );
   };
 
-  // Детская расписание
   const renderChildSchedule = (child) => {
     const childSchedule = childrenSchedules[child.id] || {};
 
     return (
       <View key={child.id} style={styles.childScheduleContainer}>
         <View style={styles.childHeader}>
-          <Icon name="person-circle" size={30} color="#667eea" />
+          <Icon name="person-circle" size={30} color="#384da9ff" />
           <View style={styles.childInfo}>
             <Text style={styles.childName}>{child.name}</Text>
             <Text style={styles.childGroup}>{child.group?.name}</Text>
           </View>
         </View>
         
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        <ScrollView 
+          horizontal 
+          showsHorizontalScrollIndicator={true}
+          style={styles.scheduleScrollView}
+        >
           <View style={styles.scheduleTable}>
-            {/* Header */}
             <View style={styles.tableHeader}>
-              <View style={styles.timeSlotHeader}>
-                <Text style={styles.headerText}>Убакыт</Text>
+              <View style={[styles.timeSlotHeader, styles.timeSlotWidth]}>
+                <Text style={styles.headerText}>{t.time}</Text>
               </View>
               {daysOrder.map(day => (
-                <View key={day} style={styles.dayHeader}>
+                <View key={day} style={[styles.dayHeader, styles.fixedWidth]}>
                   <Text style={styles.headerText}>{days[day].short}</Text>
+                  <Text style={styles.headerSubText}>{days[day].full}</Text>
                 </View>
               ))}
             </View>
             
-            {/* Time slots */}
             {timeSlots.map(timeSlot => (
               <View key={timeSlot.id} style={styles.tableRow}>
-                <View style={styles.timeSlotCell}>
+                <View style={[styles.timeSlotCell, styles.timeSlotWidth]}>
                   <Text style={styles.timeSlotName}>{timeSlot.name}</Text>
                   <Text style={styles.timeSlotTime}>
                     {timeSlot.start_time} - {timeSlot.end_time}
@@ -778,19 +1050,25 @@ const ScheduleScreen = () => {
                 {daysOrder.map(day => {
                   const lesson = childSchedule[day]?.[timeSlot.id];
                   return (
-                    <View key={`${day}-${timeSlot.id}`} style={styles.dayCell}>
+                    <View key={`${day}-${timeSlot.id}`} style={[styles.dayCell, styles.fixedWidth]}>
                       {lesson ? (
                         <View style={styles.lessonCardSmall}>
-                          <Text style={styles.lessonSubjectSmall} numberOfLines={2}>
+                          <Text style={styles.lessonSubjectSmall} numberOfLines={2} ellipsizeMode='tail'>
                             {lesson.subject}
                           </Text>
+                          <View style={styles.lessonDetailsSmall}>
+                            <Icon name="person" size={10} color="#718096" />
+                            <Text style={styles.lessonDetailSmall} numberOfLines={1} ellipsizeMode='tail'>
+                              {lesson.teacher}
+                            </Text>
+                          </View>
                           {lesson.attendance_text && (
                             <View style={[
                               styles.attendanceBadgeSmall, 
                               { backgroundColor: getAttendanceColor(lesson.attendance_status) }
                             ]}>
                               <Text style={styles.attendanceTextSmall}>
-                                {lesson.attendance_text.substring(0, 10)}
+                                {lesson.attendance_text}
                               </Text>
                             </View>
                           )}
@@ -809,53 +1087,66 @@ const ScheduleScreen = () => {
     );
   };
 
-  // Основное расписание
+  // ОҢДОЛГОН: Негизги расписание - ячейкалар вертикалдык созулуу
   const renderMainSchedule = () => {
     return (
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <View style={styles.scheduleTable}>
-          {/* Header */}
-          <View style={styles.tableHeader}>
-            <View style={styles.timeSlotHeader}>
-              <Text style={styles.headerText}>Убакыт</Text>
+      <View style={styles.scheduleWrapper}>
+        <ScrollView 
+          horizontal 
+          showsHorizontalScrollIndicator={true}
+          style={styles.scheduleScrollView}
+        >
+          <View style={styles.scheduleTable}>
+            <View style={styles.tableHeader}>
+              <View style={[styles.timeSlotHeader, styles.timeSlotWidth]}>
+                <Text style={styles.headerText}>{t.time}</Text>
+              </View>
+              {daysOrder.map(day => (
+                <View key={day} style={[styles.dayHeader, styles.fixedWidth]}>
+                  <Text style={styles.headerText}>{days[day].short}</Text>
+                  <Text style={styles.headerSubText}>{days[day].full}</Text>
+                </View>
+              ))}
             </View>
-            {daysOrder.map(day => (
-              <View key={day} style={styles.dayHeader}>
-                <Text style={styles.headerText}>{days[day].short}</Text>
+            
+            {timeSlots.map(timeSlot => (
+              <View key={timeSlot.id} style={styles.tableRow}>
+                <View style={[styles.timeSlotCell, styles.timeSlotWidth]}>
+                  <Text style={styles.timeSlotName}>{timeSlot.name}</Text>
+                  <Text style={styles.timeSlotTime}>
+                    {timeSlot.start_time} - {timeSlot.end_time}
+                  </Text>
+                </View>
+                
+                {daysOrder.map(day => {
+                  const lesson = scheduleData[day]?.[timeSlot.id];
+                  return (
+                    <View key={`${day}-${timeSlot.id}`} style={[styles.dayCell, styles.fixedWidth]}>
+                      {lesson ? renderLessonCard(lesson, day, timeSlot.id) : renderEmptyCell(timeSlot.id, day)}
+                    </View>
+                  );
+                })}
               </View>
             ))}
           </View>
-          
-          {/* Time slots */}
-          {timeSlots.map(timeSlot => (
-            <View key={timeSlot.id} style={styles.tableRow}>
-              <View style={styles.timeSlotCell}>
-                <Text style={styles.timeSlotName}>{timeSlot.name}</Text>
-                <Text style={styles.timeSlotTime}>
-                  {timeSlot.start_time} - {timeSlot.end_time}
-                </Text>
-              </View>
-              
-              {daysOrder.map(day => {
-                const lesson = scheduleData[day]?.[timeSlot.id];
-                return (
-                  <View key={`${day}-${timeSlot.id}`} style={styles.dayCell}>
-                    {lesson ? renderLessonCard(lesson, day, timeSlot.id) : renderEmptyCell(timeSlot.id, day)}
-                  </View>
-                );
-              })}
-            </View>
-          ))}
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
     );
   };
 
-  // Курс кнопкалары
   const renderCourseButtons = () => {
+    if (courses.length === 0) {
+      return (
+        <View style={styles.filterSection}>
+          <Text style={styles.filterLabel}>{t.courses}</Text>
+          <Text style={styles.noDataText}>{t.noCourses}</Text>
+        </View>
+      );
+    }
+
     return (
       <View style={styles.filterSection}>
-        <Text style={styles.filterLabel}>Курсту тандаңыз:</Text>
+        <Text style={styles.filterLabel}>{t.selectCourse}</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <View style={styles.courseButtons}>
             {courses.map(course => (
@@ -863,13 +1154,13 @@ const ScheduleScreen = () => {
                 key={course.id}
                 style={[
                   styles.courseButton,
-                  selectedCourse == course.id && styles.activeButton
+                  selectedCourse === course.id && styles.activeButton
                 ]}
                 onPress={() => setSelectedCourse(course.id)}
               >
                 <Text style={[
                   styles.courseButtonText,
-                  selectedCourse == course.id && styles.activeButtonText
+                  selectedCourse === course.id && styles.activeButtonText
                 ]}>
                   {course.year}-курс
                 </Text>
@@ -881,11 +1172,19 @@ const ScheduleScreen = () => {
     );
   };
 
-  // Группа кнопкалары
   const renderGroupButtons = () => {
+    if (groups.length === 0) {
+      return (
+        <View style={styles.filterSection}>
+          <Text style={styles.filterLabel}>{t.groups}</Text>
+          <Text style={styles.noDataText}>{t.noGroups}</Text>
+        </View>
+      );
+    }
+
     return (
       <View style={styles.filterSection}>
-        <Text style={styles.filterLabel}>Группаны тандаңыз:</Text>
+        <Text style={styles.filterLabel}>{t.selectGroup}</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <View style={styles.groupButtons}>
             {groups.map(group => (
@@ -893,19 +1192,19 @@ const ScheduleScreen = () => {
                 key={group.id}
                 style={[
                   styles.groupButton,
-                  selectedGroup == group.id && styles.activeButton
+                  selectedGroup === group.id && styles.activeButton
                 ]}
                 onPress={() => setSelectedGroup(group.id)}
               >
-                <Icon name="people" size={16} color={selectedGroup == group.id ? '#fff' : '#667eea'} />
+                <Icon name="people" size={16} color={selectedGroup === group.id ? '#fff' : '#667eea'} />
                 <Text style={[
                   styles.groupButtonText,
-                  selectedGroup == group.id && styles.activeButtonText
+                  selectedGroup === group.id && styles.activeButtonText
                 ]}>
                   {group.name}
                 </Text>
                 <Text style={styles.studentCount}>
-                  ({group.student_count || 0} студент)
+                  ({group.student_count || 0} {t.students})
                 </Text>
               </TouchableOpacity>
             ))}
@@ -915,31 +1214,6 @@ const ScheduleScreen = () => {
     );
   };
 
-  // Информационная карточка
-  const renderInfoCard = () => {
-    let message = '';
-    
-    switch (user?.role) {
-      case 'STUDENT':
-        message = 'Сиздин группаңыздын расписаниеси жана катышуу тартибиңиз';
-        break;
-      case 'PARENT':
-        message = 'Балдарыңыздын расписаниелери жана катышуу тартиби';
-        break;
-      case 'TEACHER':
-        message = 'Бардык расписаниени көрө аласыз. Өзүңүздүн бүгүнкү сабагыңызга гана жоктоо белгилей аласыз.';
-        break;
-    }
-
-    return (
-      <View style={styles.infoCard}>
-        <Icon name="information-circle" size={24} color="#fff" />
-        <Text style={styles.infoText}>{message}</Text>
-      </View>
-    );
-  };
-
-  // Lesson Modal компонент
   const renderLessonModal = () => (
     <Modal
       visible={showLessonModal}
@@ -951,7 +1225,7 @@ const ScheduleScreen = () => {
         <View style={styles.modalContent}>
           <View style={styles.modalHeader}>
             <Text style={styles.modalTitle}>
-              {currentLesson ? '✏️ Сабакты өзгөртүү' : '📚 Жаңы сабак кошуу'}
+              {currentLesson ? t.editLesson : t.addLesson}
             </Text>
             <TouchableOpacity onPress={() => setShowLessonModal(false)}>
               <Icon name="close" size={24} color="#fff" />
@@ -960,9 +1234,8 @@ const ScheduleScreen = () => {
 
           <ScrollView style={styles.modalBody}>
             <View style={styles.formGroup}>
-              <Text style={styles.formLabel}>📖 Сабак:</Text>
-              <View style={styles.pickerContainer}>
-                {/* React Native'де Picker компонентин колдонуңуз */}
+              <Text style={styles.formLabel}>{t.subject}</Text>
+              <ScrollView style={styles.pickerContainer}>
                 {subjects.map(subject => (
                   <TouchableOpacity
                     key={subject.id}
@@ -980,12 +1253,12 @@ const ScheduleScreen = () => {
                     </Text>
                   </TouchableOpacity>
                 ))}
-              </View>
+              </ScrollView>
             </View>
 
             <View style={styles.formGroup}>
-              <Text style={styles.formLabel}>👨‍🏫 Мугалим:</Text>
-              <View style={styles.pickerContainer}>
+              <Text style={styles.formLabel}>{t.teacher}</Text>
+              <ScrollView style={styles.pickerContainer}>
                 {teachers.map(teacher => (
                   <TouchableOpacity
                     key={teacher.id}
@@ -1003,11 +1276,11 @@ const ScheduleScreen = () => {
                     </Text>
                   </TouchableOpacity>
                 ))}
-              </View>
+              </ScrollView>
             </View>
 
             <View style={styles.formGroup}>
-              <Text style={styles.formLabel}>📍 Кабинет:</Text>
+              <Text style={styles.formLabel}>{t.room}</Text>
               <TextInput
                 style={styles.input}
                 placeholder="304, Lab-1, Ауд-205..."
@@ -1022,14 +1295,14 @@ const ScheduleScreen = () => {
               style={styles.secondaryButton}
               onPress={() => setShowLessonModal(false)}
             >
-              <Text style={styles.secondaryButtonText}>Жокко чыгаруу</Text>
+              <Text style={styles.secondaryButtonText}>{t.cancel}</Text>
             </TouchableOpacity>
             <TouchableOpacity 
               style={[styles.primaryButton, !lessonForm.subject_id && styles.disabledButton]}
               onPress={saveLesson}
               disabled={!lessonForm.subject_id}
             >
-              <Text style={styles.primaryButtonText}>💾 Сактоо</Text>
+              <Text style={styles.primaryButtonText}>{t.save}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -1037,7 +1310,6 @@ const ScheduleScreen = () => {
     </Modal>
   );
 
-  // Attendance Modal компонент
   const renderAttendanceModal = () => (
     <Modal
       visible={showAttendanceModal}
@@ -1048,7 +1320,7 @@ const ScheduleScreen = () => {
       <View style={styles.modalOverlay}>
         <View style={[styles.modalContent, styles.attendanceModal]}>
           <View style={styles.modalHeader}>
-            <Text style={styles.modalTitle}>📋 Студенттердин катышуусун белгилөө</Text>
+            <Text style={styles.modalTitle}>{t.markAttendance}</Text>
             <TouchableOpacity onPress={() => setShowAttendanceModal(false)}>
               <Icon name="close" size={24} color="#fff" />
             </TouchableOpacity>
@@ -1059,9 +1331,17 @@ const ScheduleScreen = () => {
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item, index }) => (
               <View style={styles.studentItem}>
-                <Text style={styles.studentName}>
-                  {index + 1}. {item.name || item.full_name}
-                </Text>
+                <View style={styles.studentHeader}>
+                  <Text style={styles.studentName}>
+                    {index + 1}. {item.name || item.full_name}
+                  </Text>
+                  {item.group && (
+                    <View style={styles.groupBadge}>
+                      <Icon name="people" size={12} color="#667eea" />
+                      <Text style={styles.groupBadgeText}>{item.group}</Text>
+                    </View>
+                  )}
+                </View>
                 
                 <View style={styles.attendanceButtons}>
                   {['Present', 'Late', 'Absent'].map((status) => (
@@ -1075,8 +1355,8 @@ const ScheduleScreen = () => {
                       onPress={() => setAttendanceData({...attendanceData, [item.id]: status})}
                     >
                       <Text style={styles.attendanceStatusText}>
-                        {status === 'Present' ? '✅ Келди' :
-                         status === 'Late' ? '⏰ Кечикти' : '❌ Келбеди'}
+                        {status === 'Present' ? t.present :
+                         status === 'Late' ? t.late : t.absent}
                       </Text>
                     </TouchableOpacity>
                   ))}
@@ -1085,7 +1365,7 @@ const ScheduleScreen = () => {
             )}
             ListEmptyComponent={
               <View style={styles.emptyList}>
-                <Text>Студенттер жүктөлүүдө...</Text>
+                <Text style={styles.emptyListText}>Студенттер жүктөлүүдө...</Text>
               </View>
             }
           />
@@ -1095,14 +1375,14 @@ const ScheduleScreen = () => {
               style={styles.secondaryButton}
               onPress={() => setShowAttendanceModal(false)}
             >
-              <Text style={styles.secondaryButtonText}>Жабуу</Text>
+              <Text style={styles.secondaryButtonText}>{t.close}</Text>
             </TouchableOpacity>
             <TouchableOpacity 
               style={[styles.primaryButton, Object.keys(attendanceData).length === 0 && styles.disabledButton]}
               onPress={saveAttendance}
               disabled={Object.keys(attendanceData).length === 0}
             >
-              <Text style={styles.primaryButtonText}>💾 Сактоо</Text>
+              <Text style={styles.primaryButtonText}>{t.save}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -1114,88 +1394,113 @@ const ScheduleScreen = () => {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#667eea" />
-        <Text style={styles.loadingText}>Жүктөлүүдө...</Text>
+        <Text style={styles.loadingText}>{t.loading}</Text>
       </View>
     );
   }
 
   return (
-    <ScrollView
-      style={styles.container}
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }
-    >
-      {/* Курс жана Группа тандоо */}
-      {canViewAll && user?.role !== 'TEACHER' && (
-        <View style={styles.filtersContainer}>
-          {renderCourseButtons()}
-          {selectedCourse && groups.length > 0 && renderGroupButtons()}
-        </View>
-      )}
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView
+        style={styles.container}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+        contentContainerStyle={styles.scrollContent}
+      >
+        {canViewAll && user?.role !== 'TEACHER' && (
+          <View style={styles.filtersContainer}>
+            {renderCourseButtons()}
+            {selectedCourse && groups.length > 0 && renderGroupButtons()}
+          </View>
+        )}
 
-      {/* Информация карточкасы */}
-      {(user?.role === 'STUDENT' || user?.role === 'PARENT' || user?.role === 'TEACHER') && 
-       selectedGroup && renderInfoCard()}
+        {user?.role === 'PARENT' && myChildren.length > 0 ? (
+          <View style={styles.childrenContainer}>
+            {myChildren.map(child => renderChildSchedule(child))}
+          </View>
+        ) : (selectedGroup || user?.role === 'TEACHER') && Object.keys(scheduleData).length > 0 ? (
+          <View style={styles.scheduleContainer}>
+            {renderMainSchedule()}
+          </View>
+        ) : user?.role === 'TEACHER' && Object.keys(scheduleData).length === 0 ? (
+          <View style={styles.emptyState}>
+            <Icon name="calendar-outline" size={60} color="#cbd5e0" />
+            <Text style={styles.emptyStateText}>
+              Сизге али сабактар белгиленген эмес
+            </Text>
+          </View>
+        ) : canViewAll && user?.role !== 'TEACHER' && (
+          <View style={styles.emptyState}>
+            <Icon name="calendar-outline" size={60} color="#cbd5e0" />
+            <Text style={styles.emptyStateText}>
+              {t.selectToView}
+            </Text>
+          </View>
+        )}
 
-      {/* Ата-эне үчүн балдардын расписаниеси */}
-      {user?.role === 'PARENT' && myChildren.length > 0 ? (
-        <View style={styles.childrenContainer}>
-          {myChildren.map(child => renderChildSchedule(child))}
-        </View>
-      ) : (
-        // Студент/Мугалим/Админ үчүн негизги расписание
-        <View style={styles.scheduleContainer}>
-          {renderMainSchedule()}
-        </View>
-      )}
-
-      {/* Эгер эч нерсе тандалбаса */}
-      {!selectedGroup && canViewAll && (
-        <View style={styles.emptyState}>
-          <Icon name="calendar-outline" size={60} color="#cbd5e0" />
-          <Text style={styles.emptyStateText}>
-            Расписаниени көрүү үчүн курс жана группа тандаңыз
-          </Text>
-        </View>
-      )}
-
-      {/* Модалдар */}
-      {renderLessonModal()}
-      {renderAttendanceModal()}
-    </ScrollView>
+        {renderLessonModal()}
+        {renderAttendanceModal()}
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
+// ОҢДОЛГОН: Ячейкалардын өлчөмдөрү - квадрат клеткалар
+const TIME_SLOT_WIDTH = 90; // Убакыт үчүн узун
+const CELL_WIDTH = 200; // Квадрат клеткалар үчүн
+const CELL_HEIGHT = 110; // Квадрат өлчөм
+
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+  },
   container: {
     flex: 1,
-    backgroundColor: '#ffffffff',
+    backgroundColor: '#ffffff',
+  },
+  scrollContent: {
+    flexGrow: 1,
   },
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#ffffff',
   },
   loadingText: {
     marginTop: 10,
     fontSize: 16,
-    color: '#000000ff',
+    color: '#4a5568',
+    fontWeight: '600',
   },
   filtersContainer: {
     padding: 15,
+    backgroundColor: '#ffffff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#e2e8f0',
   },
   filterSection: {
     marginBottom: 20,
   },
   filterLabel: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: '700',
     color: '#2d3748',
     marginBottom: 10,
+    marginLeft: 5,
+  },
+  noDataText: {
+    fontSize: 14,
+    color: '#a0aec0',
+    fontStyle: 'italic',
+    paddingVertical: 10,
+    paddingHorizontal: 5,
   },
   courseButtons: {
     flexDirection: 'row',
+    paddingHorizontal: 5,
   },
   courseButton: {
     paddingHorizontal: 20,
@@ -1205,9 +1510,12 @@ const styles = StyleSheet.create({
     marginRight: 10,
     borderWidth: 2,
     borderColor: '#e2e8f0',
+    minWidth: 100,
+    alignItems: 'center',
   },
   groupButtons: {
     flexDirection: 'row',
+    paddingHorizontal: 5,
   },
   groupButton: {
     flexDirection: 'row',
@@ -1219,10 +1527,17 @@ const styles = StyleSheet.create({
     marginRight: 10,
     borderWidth: 2,
     borderColor: '#e2e8f0',
+    minWidth: 120,
+    justifyContent: 'center',
   },
   activeButton: {
     backgroundColor: '#667eea',
     borderColor: '#667eea',
+    shadowColor: '#667eea',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
   },
   courseButtonText: {
     fontSize: 14,
@@ -1234,181 +1549,238 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#4a5568',
     marginLeft: 5,
+    marginRight: 5,
   },
   activeButtonText: {
     color: '#fff',
+    fontWeight: '700',
   },
   studentCount: {
-    fontSize: 12,
+    fontSize: 11,
     color: '#718096',
-    marginLeft: 5,
-  },
-  infoCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#667eea',
-    padding: 15,
-    margin: 15,
-    borderRadius: 12,
-  },
-  infoText: {
-    color: '#fff',
-    fontSize: 14,
-    marginLeft: 10,
-    flex: 1,
+    marginLeft: 2,
   },
   childrenContainer: {
     padding: 15,
+    backgroundColor: '#ffffff',
   },
   childScheduleContainer: {
     backgroundColor: '#fff',
     borderRadius: 12,
     padding: 15,
-    marginBottom: 15,
+    marginBottom: 20,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 3,
+    borderWidth: 1,
+    borderColor: '#e2e8f0',
   },
   childHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 15,
+    paddingBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e2e8f0',
   },
   childInfo: {
-    marginLeft: 10,
+    marginLeft: 12,
+    flex: 1,
   },
   childName: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '700',
     color: '#2d3748',
   },
   childGroup: {
     fontSize: 14,
     color: '#718096',
+    marginTop: 2,
   },
+  
+  // ============ ОҢДОЛГОН РАСПИСАНИЕ СТИЛДЕРИ ============
   scheduleContainer: {
+    flex: 1,
     padding: 15,
+    backgroundColor: '#ffffff',
+    minHeight: height * 0.7,
+  },
+  scheduleWrapper: {
+    flex: 1,
+    backgroundColor: '#f8fafc',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#e2e8f0',
+    overflow: 'hidden',
+  },
+  scheduleScrollView: {
+    flex: 1,
   },
   scheduleTable: {
-    minWidth: width * 1.5,
+    flexDirection: 'column',
+    // minWidth: CELL_WIDTH * (daysOrder.length + 1),
   },
   tableHeader: {
     flexDirection: 'row',
-    backgroundColor: '#f7fafc',
-    borderBottomWidth: 1,
-    borderBottomColor: '#e2e8f0',
+    backgroundColor: '#667eea',
+    borderBottomWidth: 2,
+    borderBottomColor: '#5568d3',
+    minHeight: 60,
+  },
+  fixedWidth: {
+    width: CELL_WIDTH,
+    minWidth: CELL_WIDTH,
+    maxWidth: CELL_WIDTH,
+    height: CELL_HEIGHT,
+    minHeight: CELL_HEIGHT,
+    maxHeight: CELL_HEIGHT,
+  },
+  timeSlotWidth: {
+    width: TIME_SLOT_WIDTH,
+    minWidth: TIME_SLOT_WIDTH,
+    maxWidth: TIME_SLOT_WIDTH,
+    height: CELL_HEIGHT,
+    minHeight: CELL_HEIGHT,
+    maxHeight: CELL_HEIGHT,
   },
   timeSlotHeader: {
-    width: 100,
-    padding: 10,
+    padding: 12,
     alignItems: 'center',
+    justifyContent: 'center',
+    borderRightWidth: 1,
+    borderRightColor: '#5568d3',
+    backgroundColor: '#4c63d4',
   },
   dayHeader: {
-    flex: 1,
-    padding: 10,
+    padding: 8,
     alignItems: 'center',
-    minWidth: 120,
+    justifyContent: 'center',
+    borderRightWidth: 1,
+    borderRightColor: '#5568d3',
   },
   headerText: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#2d3748',
+    fontSize: 11,
+    fontWeight: '800',
+    color: '#fff',
+    textAlign: 'center',
+    textTransform: 'uppercase',
+  },
+  headerSubText: {
+    fontSize: 9,
+    color: '#e2e8f0',
+    textAlign: 'center',
+    marginTop: 2,
   },
   tableRow: {
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderBottomColor: '#e2e8f0',
+    backgroundColor: '#ffffff',
   },
   timeSlotCell: {
-    width: 100,
-    padding: 10,
+    padding: 12,
     backgroundColor: '#f8f9fa',
-    justifyContent: 'center',
-  },
-  timeSlotName: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#2d3748',
-  },
-  timeSlotTime: {
-    fontSize: 12,
-    color: '#718096',
-    marginTop: 2,
-  },
-  dayCell: {
-    flex: 1,
-    padding: 10,
-    minWidth: 120,
-    minHeight: 120,
-  },
-  lessonCard: {
-    backgroundColor: '#fff',
-    padding: 10,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#e2e8f0',
-    flex: 1,
-  },
-  lessonCardSmall: {
-    backgroundColor: '#f8f9fa',
-    padding: 5,
-    borderRadius: 6,
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    borderRightWidth: 1,
+    borderRightColor: '#e2e8f0',
+  },
+  timeSlotName: {
+    fontSize: 10,
+    fontWeight: '700',
+    color: '#2d3748',
+    textAlign: 'center',
+  },
+  timeSlotTime: {
+    fontSize: 9,
+    color: '#718096',
+    marginTop: 4,
+    textAlign: 'center',
+  },
+  dayCell: {
+    padding: 4,
+    borderRightWidth: 1,
+    borderRightColor: '#e2e8f0',
+    backgroundColor: '#ffffff',
+  },
+  
+  // ОҢДОЛГОН: Вертикалдык созулуучу сабак карточкасы
+  lessonCard: {
+    flex: 1,
+    // backgroundColor: '#ffffffff',
+    // padding: 12,
+    // borderRadius: 8,
+    // borderWidth: 1,
+    // borderColor: '#e2e8f0',
+    // height: DAY_CELL_HEIGHT - 16,
+    // justifyContent: 'space-between',
+    // shadowColor: '#000',
+    // shadowOffset: { width: 0, height: 1 },
+    // shadowOpacity: 0.05,
+    // shadowRadius: 2,
+    // elevation: 2,
+  },
+  lessonContent: {
+    flex: 1,
+    justifyContent: 'space-between',
   },
   lessonHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
+    marginBottom: 8,
   },
   lessonSubject: {
-    fontSize: 14,
-    fontWeight: '600',
+    fontSize: 10,
+    fontWeight: '700',
     color: '#2d3748',
     flex: 1,
-  },
-  lessonSubjectSmall: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: '#2d3748',
-    textAlign: 'center',
+    textAlign: 'left',
+    lineHeight: 13,
   },
   lessonActions: {
     flexDirection: 'row',
   },
   actionButton: {
     padding: 4,
-    marginLeft: 5,
+    marginLeft: 4,
+    backgroundColor: '#fff',
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: '#e2e8f0',
+  },
+  lessonDetails: {
+    flex: 1,
+    justifyContent: 'space-around',
+    marginBottom: 8,
+  },
+  detailRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 4,
   },
   lessonDetail: {
-    fontSize: 12,
+    fontSize: 9,
     color: '#718096',
-    marginTop: 4,
+    marginLeft: 4,
+    flex: 1,
+    lineHeight: 11,
   },
   attendanceBadge: {
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 12,
     alignSelf: 'flex-start',
-    marginTop: 8,
-  },
-  attendanceBadgeSmall: {
-    paddingHorizontal: 6,
-    paddingVertical: 2,
-    borderRadius: 8,
     marginTop: 4,
+    minWidth: 60,
   },
   attendanceText: {
-    fontSize: 10,
-    color: '#fff',
-    fontWeight: '600',
-  },
-  attendanceTextSmall: {
     fontSize: 8,
     color: '#fff',
+    fontWeight: '700',
+    textAlign: 'center',
   },
   attendanceButton: {
     flexDirection: 'row',
@@ -1418,62 +1790,137 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     borderRadius: 6,
     alignSelf: 'flex-start',
-    marginTop: 8,
+    marginTop: 4,
   },
   attendanceButtonText: {
     fontSize: 10,
     color: '#fff',
-    fontWeight: '600',
+    fontWeight: '700',
     marginLeft: 4,
   },
+  
+  // Балдар үчүн кичине сабак карточкасы
+  lessonCardSmall: {
+    flex: 1,
+    backgroundColor: '#f8f9fa',
+    padding: 8,
+    borderRadius: 6,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: CELL_HEIGHT - 16,
+    borderWidth: 1,
+    borderColor: '#e2e8f0',
+  },
+  lessonSubjectSmall: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: '#2d3748',
+    textAlign: 'center',
+    lineHeight: 16,
+    marginBottom: 4,
+  },
+  lessonDetailsSmall: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 4,
+  },
+  lessonDetailSmall: {
+    fontSize: 10,
+    color: '#718096',
+    marginLeft: 4,
+    lineHeight: 12,
+  },
+  attendanceBadgeSmall: {
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 8,
+    marginTop: 4,
+    minWidth: 50,
+  },
+  attendanceTextSmall: {
+    fontSize: 9,
+    color: '#fff',
+    fontWeight: '700',
+    textAlign: 'center',
+  },
+  
+  // ОҢДОЛГОН: Бош ячейка
   emptyCell: {
+    flex: 1,
     backgroundColor: '#f8f9fa',
     padding: 10,
     borderRadius: 8,
     borderWidth: 1,
     borderColor: '#e2e8f0',
-    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: CELL_HEIGHT - 16,
+  },
+  emptyCellContent: {
     justifyContent: 'center',
     alignItems: 'center',
   },
   addButton: {
-    marginBottom: 5,
+    marginBottom: 8,
+    padding: 8,
+    backgroundColor: '#fff',
+    borderRadius: 25,
+    borderWidth: 2,
+    borderColor: '#48bb78',
+    shadowColor: '#48bb78',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
   },
   emptyCellText: {
     fontSize: 12,
     color: '#a0aec0',
     textAlign: 'center',
+    fontStyle: 'italic',
   },
   emptyTextSmall: {
     fontSize: 12,
     color: '#a0aec0',
     textAlign: 'center',
+    fontStyle: 'italic',
   },
+  
   emptyState: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 40,
+    backgroundColor: '#ffffff',
+    minHeight: height * 0.5,
   },
   emptyStateText: {
     fontSize: 16,
     color: '#718096',
     textAlign: 'center',
     marginTop: 10,
+    lineHeight: 24,
+    fontWeight: '500',
   },
-  // Modal стили
+  
+  // МОДАЛ СТИЛДЕРИ
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
     justifyContent: 'center',
     alignItems: 'center',
   },
   modalContent: {
     backgroundColor: '#fff',
-    borderRadius: 12,
+    borderRadius: 16,
     width: '90%',
     maxHeight: '80%',
     overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 10,
   },
   attendanceModal: {
     width: '95%',
@@ -1484,34 +1931,40 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#667eea',
-    padding: 15,
+    padding: 20,
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
   },
   modalTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '800',
     color: '#fff',
     flex: 1,
   },
   modalBody: {
-    padding: 15,
+    padding: 20,
   },
   formGroup: {
-    marginBottom: 20,
+    marginBottom: 24,
   },
   formLabel: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: '700',
     color: '#2d3748',
-    marginBottom: 10,
+    marginBottom: 12,
   },
   pickerContainer: {
-    maxHeight: 200,
+    maxHeight: 150,
+    borderWidth: 1,
+    borderColor: '#e2e8f0',
+    borderRadius: 8,
+    padding: 5,
   },
   optionButton: {
     padding: 12,
     backgroundColor: '#f8f9fa',
-    borderRadius: 8,
-    marginBottom: 8,
+    borderRadius: 6,
+    marginBottom: 6,
     borderWidth: 1,
     borderColor: '#e2e8f0',
   },
@@ -1522,9 +1975,11 @@ const styles = StyleSheet.create({
   optionText: {
     fontSize: 14,
     color: '#4a5568',
+    textAlign: 'center',
   },
   selectedOptionText: {
     color: '#fff',
+    fontWeight: '600',
   },
   input: {
     borderWidth: 1,
@@ -1533,28 +1988,35 @@ const styles = StyleSheet.create({
     padding: 12,
     fontSize: 16,
     backgroundColor: '#fff',
+    color: '#2d3748',
   },
   modalFooter: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 15,
+    padding: 20,
     borderTopWidth: 1,
     borderTopColor: '#e2e8f0',
+    backgroundColor: '#f8fafc',
   },
   primaryButton: {
     backgroundColor: '#667eea',
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-    borderRadius: 8,
+    paddingHorizontal: 24,
+    paddingVertical: 14,
+    borderRadius: 10,
     flex: 1,
     marginLeft: 10,
     alignItems: 'center',
+    shadowColor: '#667eea',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
   },
   secondaryButton: {
     backgroundColor: '#e2e8f0',
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-    borderRadius: 8,
+    paddingHorizontal: 24,
+    paddingVertical: 14,
+    borderRadius: 10,
     flex: 1,
     marginRight: 10,
     alignItems: 'center',
@@ -1565,27 +2027,52 @@ const styles = StyleSheet.create({
   primaryButtonText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: '700',
   },
   secondaryButtonText: {
     color: '#4a5568',
     fontSize: 16,
     fontWeight: '600',
   },
-  // Attendance modal
   studentItem: {
     backgroundColor: '#fff',
     padding: 15,
     marginBottom: 10,
-    borderRadius: 8,
+    borderRadius: 10,
     borderWidth: 1,
     borderColor: '#e2e8f0',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  studentHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 12,
   },
   studentName: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: '700',
     color: '#2d3748',
-    marginBottom: 10,
+    flex: 1,
+  },
+  groupBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#eef2ff',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+    marginLeft: 8,
+  },
+  groupBadgeText: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#667eea',
+    marginLeft: 4,
   },
   attendanceButtons: {
     flexDirection: 'row',
@@ -1593,23 +2080,40 @@ const styles = StyleSheet.create({
   },
   attendanceStatusButton: {
     flex: 1,
-    padding: 10,
-    borderRadius: 6,
-    marginHorizontal: 5,
+    padding: 12,
+    borderRadius: 8,
+    marginHorizontal: 4,
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
   },
   activeStatusButton: {
     borderWidth: 2,
     borderColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 5,
   },
   attendanceStatusText: {
     color: '#fff',
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: '700',
+    textAlign: 'center',
   },
   emptyList: {
     padding: 40,
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+  emptyListText: {
+    fontSize: 14,
+    color: '#a0aec0',
+    fontStyle: 'italic',
   },
 });
 

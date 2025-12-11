@@ -12,11 +12,13 @@ import {
   RefreshControl
 } from 'react-native';
 import { useAuth } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
 import api from '../services/api';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const Notifications = () => {
   const { user } = useAuth();
+  const { t } = useLanguage();
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -35,7 +37,7 @@ const Notifications = () => {
       setNotifications(Array.isArray(data) ? data : data.results || []);
     } catch (error) {
       console.error('Failed to fetch notifications:', error);
-      Alert.alert('Ката', 'Билдирүүлөрдү жүктөөдө ката чыкты');
+      Alert.alert(t('error'), t('error') + ': ' + error.message);
       setNotifications([]);
     } finally {
       setLoading(false);
@@ -54,7 +56,7 @@ const Notifications = () => {
       fetchNotifications();
     } catch (error) {
       console.error('Failed to mark as read:', error);
-      Alert.alert('Ката', 'Белгилөөдө ката чыкты');
+      Alert.alert(t('error'), t('error') + ': ' + error.message);
     }
   };
 
@@ -62,30 +64,30 @@ const Notifications = () => {
     try {
       await api.post('/v1/notifications/mark_all_read/');
       fetchNotifications();
-      Alert.alert('Ийгиликтүү', 'Баары окулган деп белгиленди');
+      Alert.alert(t('success'), t('markAllAsRead'));
     } catch (error) {
       console.error('Failed to mark all as read:', error);
-      Alert.alert('Ката', 'Белгилөөдө ката чыкты');
+      Alert.alert(t('error'), t('error') + ': ' + error.message);
     }
   };
 
   const deleteNotification = async (notificationId) => {
     Alert.alert(
-      'Билдирүүнү өчүрүү',
-      'Билдирүүнү өчүрөсүзбү?',
+      t('deleteNotification'),
+      t('confirmDelete'),
       [
-        { text: 'Жокко чыгаруу', style: 'cancel' },
+        { text: t('cancel'), style: 'cancel' },
         {
-          text: 'Өчүрүү',
+          text: t('delete'),
           style: 'destructive',
           onPress: async () => {
             try {
               await api.delete(`/v1/notifications/${notificationId}/`);
               fetchNotifications();
-              Alert.alert('Ийгиликтүү', 'Билдирүү өчүрүлдү');
+              Alert.alert(t('success'), t('deleted') || t('success'));
             } catch (error) {
               console.error('Failed to delete notification:', error);
-              Alert.alert('Ката', 'Өчүрүүдө ката чыкты');
+              Alert.alert(t('error'), t('error') + ': ' + error.message);
             }
           }
         }
@@ -119,7 +121,7 @@ const Notifications = () => {
       case 'SCHEDULE':
         return '#9f7aea'; // purple
       default:
-        return '#667eea'; // primary blue
+        return '#002fffff'; // primary blue
     }
   };
 
@@ -152,9 +154,9 @@ const Notifications = () => {
         style={[styles.filterTab, filter === 'all' && styles.filterTabActive]}
         onPress={() => setFilter('all')}
       >
-        <Icon name="inbox" size={16} color={filter === 'all' ? '#667eea' : '#718096'} />
+        <Icon name="inbox" size={16} color={filter === 'all' ? '#002fffff' : '#0800ffff'} />
         <Text style={[styles.filterTabText, filter === 'all' && styles.filterTabTextActive]}>
-          Баары
+          {t('all')}
         </Text>
         <View style={styles.filterBadge}>
           <Text style={styles.filterBadgeText}>{notifications.length}</Text>
@@ -167,7 +169,7 @@ const Notifications = () => {
       >
         <Icon name="envelope" size={16} color={filter === 'unread' ? '#667eea' : '#718096'} />
         <Text style={[styles.filterTabText, filter === 'unread' && styles.filterTabTextActive]}>
-          Окулбаган
+          {t('unread')}
         </Text>
         <View style={styles.filterBadge}>
           <Text style={styles.filterBadgeText}>{getUnreadCount()}</Text>
@@ -180,7 +182,7 @@ const Notifications = () => {
       >
         <Icon name="envelope-open" size={16} color={filter === 'read' ? '#667eea' : '#718096'} />
         <Text style={[styles.filterTabText, filter === 'read' && styles.filterTabTextActive]}>
-          Окулган
+          {t('read')}
         </Text>
         <View style={styles.filterBadge}>
           <Text style={styles.filterBadgeText}>{getReadCount()}</Text>
@@ -239,13 +241,13 @@ const Notifications = () => {
   const renderEmptyState = () => (
     <View style={styles.emptyState}>
       <Icon name="bell-slash" size={64} color="#cbd5e0" />
-      <Text style={styles.emptyStateTitle}>Билдирүүлөр жок</Text>
+      <Text style={styles.emptyStateTitle}>{t('noData')}</Text>
       <Text style={styles.emptyStateText}>
         {filter === 'all' 
-          ? 'Эч кандай билдирүүлөр жок' 
+          ? t('noData')
           : filter === 'unread' 
-            ? 'Окулбаган билдирүүлөр жок'
-            : 'Окулган билдирүүлөр жок'
+            ? t('noUnread') || t('noData')
+            : t('noRead') || t('noData')
         }
       </Text>
     </View>
@@ -254,10 +256,10 @@ const Notifications = () => {
   if (loading && !refreshing) {
     return (
       <SafeAreaView style={styles.container}>
-        <StatusBar backgroundColor="#667eea" />
+        <StatusBar backgroundColor="#000000ff" />
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color="#667eea" />
-          <Text style={styles.loadingText}>Билдирүүлөр жүктөлүүдө...</Text>
+          <Text style={styles.loadingText}>{t('loading')}</Text>
         </View>
       </SafeAreaView>
     );
@@ -267,20 +269,7 @@ const Notifications = () => {
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="#667eea" />
       
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>
-          <Icon name="bell" size={24} color="white" /> Билдирүүлөр
-        </Text>
-        <TouchableOpacity
-          style={styles.markAllButton}
-          onPress={markAllAsRead}
-          disabled={getUnreadCount() === 0}
-        >
-          <Icon name="check-double" size={16} color="white" />
-          <Text style={styles.markAllButtonText}>Баарын окуу</Text>
-        </TouchableOpacity>
-      </View>
-
+      
       <ScrollView
         style={styles.scrollView}
         refreshControl={
@@ -329,7 +318,7 @@ const styles = StyleSheet.create({
     color: '#667eea',
   },
   header: {
-    backgroundColor: '#667eea',
+    backgroundColor: '#002fffff',
     padding: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -500,7 +489,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(72, 187, 120, 0.1)',
   },
   deleteButton: {
-    borderColor: 'rgba(245, 101, 101, 0.3)',
+    borderColor: 'rgba(255, 255, 255, 1)',
     backgroundColor: 'rgba(245, 101, 101, 0.1)',
   },
   emptyState: {

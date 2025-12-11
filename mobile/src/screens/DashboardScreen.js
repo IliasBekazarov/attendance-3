@@ -15,6 +15,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useAuth } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
 import api from '../services/api';
 
 
@@ -22,6 +23,7 @@ const { width } = Dimensions.get('window');
 
 const DashboardScreen = () => {
   const { user } = useAuth();
+  const { t } = useLanguage();
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -53,28 +55,28 @@ const DashboardScreen = () => {
     <>
       <View style={styles.statsGrid}>
         <StatCard
-          title="Студенттер"
+          title={t('students')}
           value={stats?.total_students || 0}
           icon="people"
           color="#667eea"
           gradient={['#002fffff', '#2200ffff']}
         />
         <StatCard
-          title="Мугалимдер"
+          title={t('teachers')}
           value={stats?.total_teachers || 0}
           icon="school"
           color="#48bb78"
           gradient={['#48bb78', '#38a169']}
         />
         <StatCard
-          title="Группалар"
+          title={t('groups')}
           value={stats?.total_groups || 0}
           icon="layers"
           color="#4299e1"
           gradient={['#4299e1', '#3182ce']}
         />
         <StatCard
-          title="Предметтер"
+          title={t('subjects')}
           value={stats?.total_subjects || 0}
           icon="book"
           color="#ed8936"
@@ -86,29 +88,29 @@ const DashboardScreen = () => {
       <View style={styles.card}>
         <View style={styles.cardHeader}>
           <Icon name="calendar" size={20} color="#667eea" />
-          <Text style={styles.cardTitle}>Бүгүнкү статистика</Text>
+          <Text style={styles.cardTitle}>{t('todayStatistics')}</Text>
         </View>
         <View style={styles.todayStatsContainer}>
           <TodayStatItem
-            label="Жалпы"
+            label={t('total')}
             value={stats?.today_total || 0}
             color="#4299e1"
             percentage={100}
           />
           <TodayStatItem
-            label="Келген"
+            label={t('present')}
             value={stats?.today_present || 0}
             color="#48bb78"
             percentage={stats?.today_present_rate || 0}
           />
           <TodayStatItem
-            label="Келбеген"
+            label={t('absent')}
             value={stats?.today_absent || 0}
             color="#f56565"
             percentage={stats?.today_absent_rate || 0}
           />
           <TodayStatItem
-            label="Кечикти"
+            label={t('late')}
             value={stats?.today_late || 0}
             color="#ed8936"
             percentage={stats?.today_late_rate || 0}
@@ -121,16 +123,16 @@ const DashboardScreen = () => {
         <View style={[styles.card, styles.tableCard]}>
           <View style={styles.cardHeader}>
             <Icon name="stats-chart" size={20} color="#667eea" />
-            <Text style={styles.cardTitle}>Группалар боюнча статистика</Text>
+            <Text style={styles.cardTitle}>{t('statistics')} - {t('groups')}</Text>
           </View>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <View>
               <View style={styles.tableHeader}>
-                <Text style={[styles.tableHeaderCell, { width: 150 }]}>Группа</Text>
-                <Text style={[styles.tableHeaderCell, { width: 80 }]}>Жалпы</Text>
-                <Text style={[styles.tableHeaderCell, { width: 80 }]}>Келген</Text>
-                <Text style={[styles.tableHeaderCell, { width: 80 }]}>Келбеген</Text>
-                <Text style={[styles.tableHeaderCell, { width: 80 }]}>Пайыз</Text>
+                <Text style={[styles.tableHeaderCell, { width: 150 }]}>{t('groups')}</Text>
+                <Text style={[styles.tableHeaderCell, { width: 80 }]}>{t('total')}</Text>
+                <Text style={[styles.tableHeaderCell, { width: 80 }]}>{t('present')}</Text>
+                <Text style={[styles.tableHeaderCell, { width: 80 }]}>{t('absent')}</Text>
+                <Text style={[styles.tableHeaderCell, { width: 80 }]}>%</Text>
               </View>
               {stats.groups_stats.map((group) => (
                 <View key={group.id} style={styles.tableRow}>
@@ -188,28 +190,28 @@ const DashboardScreen = () => {
   const renderStudentDashboard = () => (
     <View style={styles.statsGrid}>
       <StatCard
-        title="Катышуу пайызы"
+        title={t('attendanceRate')}
         value={`${stats?.attendance_percentage || 0}%`}
         icon="trending-up"
         color="#667eea"
         gradient={['#667eea', '#764ba2']}
       />
       <StatCard
-        title="Келген күндөр"
+        title={t('present')}
         value={stats?.present_days || 0}
         icon="checkmark-circle"
         color="#48bb78"
         gradient={['#48bb78', '#38a169']}
       />
       <StatCard
-        title="Келбеген күндөр"
+        title={t('absent')}
         value={stats?.absent_days || 0}
         icon="close-circle"
         color="#f56565"
         gradient={['#f56565', '#e53e3e']}
       />
       <StatCard
-        title="Кеч калган"
+        title={t('late')}
         value={stats?.late_days || 0}
         icon="time"
         color="#ed8936"
@@ -223,7 +225,7 @@ const DashboardScreen = () => {
     <View style={styles.card}>
       <View style={styles.cardHeader}>
         <Icon name="people" size={20} color="#667eea" />
-        <Text style={styles.cardTitle}>Балдарым</Text>
+        <Text style={styles.cardTitle}>{t('myChildren') || 'Балдарым'}</Text>
       </View>
       <View style={styles.childrenGrid}>
         {stats?.my_children?.map((child) => (
@@ -237,28 +239,28 @@ const DashboardScreen = () => {
   const renderTeacherDashboard = () => (
     <View style={styles.statsGrid}>
       <StatCard
-        title="Бүгүнкү сабактар"
+        title={t('todayClasses') || t('upcomingClasses')}
         value={stats?.today_classes_count || 0}
         icon="calendar"
         color="#667eea"
         gradient={['#667eea', '#764ba2']}
       />
       <StatCard
-        title="Белгиленген"
+        title={t('marked') || t('attendanceMarked')}
         value={stats?.marked_classes_count || 0}
         icon="checkmark-done"
         color="#48bb78"
         gradient={['#48bb78', '#38a169']}
       />
       <StatCard
-        title="Күтүүдө"
+        title={t('pending')}
         value={stats?.unmarked_classes_count || 0}
         icon="time"
         color="#ed8936"
         gradient={['#ed8936', '#dd6b20']}
       />
       <StatCard
-        title="Студенттер"
+        title={t('students')}
         value={stats?.my_students_count || 0}
         icon="people"
         color="#4299e1"
@@ -271,7 +273,7 @@ const DashboardScreen = () => {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#667eea" />
-        <Text style={styles.loadingText}>Жүктөлүүдө...</Text>
+        <Text style={styles.loadingText}>{t('loading')}</Text>
       </View>
     );
   }
@@ -303,15 +305,15 @@ const DashboardScreen = () => {
             </View>
           )}
           <View style={styles.userDetails}>
-            <Text style={styles.greeting}>Салам,</Text>
+            <Text style={styles.greeting}>{t('welcome')},</Text>
             <Text style={styles.userName}>{user?.full_name || user?.username}</Text>
             <View style={styles.roleBadge}>
               <Icon name="shield" size={12} color="#fff" />
               <Text style={styles.roleText}>
-                {user?.role === 'ADMIN' ? 'Администратор' :
-                 user?.role === 'TEACHER' ? 'Мугалим' :
-                 user?.role === 'STUDENT' ? 'Студент' :
-                 user?.role === 'PARENT' ? 'Ата-эне' : 'Колдонуучу'}
+                {user?.role === 'ADMIN' ? t('admin') || 'Admin' :
+                 user?.role === 'TEACHER' ? t('teacher') || t('teachers') :
+                 user?.role === 'STUDENT' ? t('student') || t('students') :
+                 user?.role === 'PARENT' ? t('parent') || 'Parent' : t('user') || 'User'}
               </Text>
             </View>
           </View>
@@ -407,7 +409,7 @@ const ChildCard = ({ child }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#ffffffff',
   },
   loadingContainer: {
     flex: 1,
@@ -441,7 +443,7 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     borderRadius: 35,
-    backgroundColor: 'rgba(255,255,255,0.2)',
+    backgroundColor: 'rgba(255, 255, 255, 1)',
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 3,

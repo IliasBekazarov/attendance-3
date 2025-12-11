@@ -142,7 +142,8 @@ class LeaveRequestSerializer(serializers.ModelSerializer):
         model = LeaveRequest
         fields = [
             'id', 'student', 'leave_type', 'start_date', 'end_date', 
-            'reason', 'status', 'approved_by', 'created_at', 'updated_at'
+            'reason', 'document', 'status', 'approved_by', 'rejection_reason',
+            'created_at', 'updated_at'
         ]
         read_only_fields = ['approved_by', 'created_at', 'updated_at']
 
@@ -150,7 +151,7 @@ class LeaveRequestCreateSerializer(serializers.ModelSerializer):
     """Бошотуу сурамын түзүү үчүн serializer"""
     class Meta:
         model = LeaveRequest
-        fields = ['leave_type', 'start_date', 'end_date', 'reason']
+        fields = ['leave_type', 'start_date', 'end_date', 'reason', 'document']
 
 class NotificationSerializer(serializers.ModelSerializer):
     recipient = UserSerializer(read_only=True)

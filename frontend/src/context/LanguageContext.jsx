@@ -20,6 +20,7 @@ const translations = {
     profile: 'Профиль',
     notifications: 'Билдирүүлөр',
     leaveRequests: 'Арыз берүү',
+    reports: 'Отчеттор',
     logout: 'Чыгуу',
     
     // Common
@@ -49,6 +50,7 @@ const translations = {
     profile: 'Профиль',
     notifications: 'Уведомления',
     leaveRequests: 'Заявки',
+    reports: 'Отчеты',
     logout: 'Выход',
     
     // Common
@@ -78,6 +80,7 @@ const translations = {
     profile: 'Profile',
     notifications: 'Notifications',
     leaveRequests: 'Leave Requests',
+    reports: 'Reports',
     logout: 'Logout',
     
     // Common

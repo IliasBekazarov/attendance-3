@@ -434,3 +434,39 @@ def change_username(request):
         'message': 'Логин ийгиликтүү өзгөртүлдү',
         'username': new_username
     })
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_profile_photo(request):
+    """Профиль сүрөтүн өчүрүү"""
+    user = request.user
+    
+    try:
+        profile = user.userprofile
+    except UserProfile.DoesNotExist:
+        return Response(
+            {'error': 'Profile not found'}, 
+            status=status.HTTP_404_NOT_FOUND
+        )
+    
+    # Сүрөттү өчүрүү
+    if profile.profile_photo:
+        # Файлды дискадан өчүрүү
+        try:
+            profile.profile_photo.delete(save=False)
+        except:
+            pass
+        
+        profile.profile_photo = None
+        profile.save()
+        
+        return Response({
+            'success': True,
+            'message': 'Профиль сүрөтү ийгиликтүү өчүрүлдү'
+        })
+    else:
+        return Response(
+            {'error': 'Профиль сүрөтү жок'},
+            status=status.HTTP_400_BAD_REQUEST
+        )

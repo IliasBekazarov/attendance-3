@@ -101,6 +101,7 @@ const Layout = ({ children }) => {
     { path: '/dashboard', icon: 'fa-home', label: t('dashboard') },
     { path: '/schedule', icon: 'fa-calendar-alt', label: t('schedule') },
     ...(user?.role === 'TEACHER' ? [{ path: '/mark-attendance', icon: 'fa-user-check', label: 'Катышуу' }] : []),
+    ...(user?.role === 'ADMIN' || user?.role === 'MANAGER' ? [{ path: '/reports', icon: 'fa-chart-bar', label: t('reports') }] : []),
     { path: '/notifications', icon: 'fa-bell', label: t('notifications') },
     { path: '/leave-requests', icon: 'fa-file-alt', label: t('leaveRequests') },
     { path: '/profile', icon: 'fa-user', label: t('profile') }

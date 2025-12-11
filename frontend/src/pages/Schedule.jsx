@@ -1031,9 +1031,16 @@ const Schedule = () => {
               ) : (
                 students.map((student, index) => (
                   <div key={student.id} className="student-item">
-                    <div className="student-name">
-                      {index + 1}. {student.name || student.full_name || `Студент #${student.id}`}
-                      {student.is_marked && ' 🔒'}
+                    <div className="student-header">
+                      <div className="student-name">
+                        {index + 1}. {student.name || student.full_name || `Студент #${student.id}`}
+                        {student.is_marked && ' 🔒'}
+                      </div>
+                      {student.group && (
+                        <span className="group-badge">
+                          <i className="fas fa-users"></i> {student.group}
+                        </span>
+                      )}
                     </div>
                     
                     {student.is_marked && (

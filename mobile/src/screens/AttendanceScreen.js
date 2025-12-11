@@ -9,10 +9,12 @@ import {
   Alert,
 } from 'react-native';
 import { useAuth } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
 import api from '../services/api';
 
 const AttendanceScreen = () => {
   const { user } = useAuth();
+  const { t } = useLanguage();
   const [loading, setLoading] = useState(false);
   const [todaySchedules, setTodaySchedules] = useState([]);
   const [selectedSchedule, setSelectedSchedule] = useState(null);
@@ -45,7 +47,7 @@ const AttendanceScreen = () => {
       setTodaySchedules(mySchedules);
     } catch (error) {
       console.error('Сабактарды жүктөөдө ката:', error);
-      Alert.alert('Ката', 'Сабактарды жүктөөдө ката чыкты');
+      Alert.alert(t('error'), t('error') + ': ' + error.message);
     } finally {
       setLoading(false);
     }
@@ -69,7 +71,7 @@ const AttendanceScreen = () => {
         setAttendance(initialAttendance);
       } catch (error) {
         console.error('Студенттерди жүктөөдө ката:', error);
-        Alert.alert('Ката', 'Студенттерди жүктөөдө ката чыкты');
+        Alert.alert(t('error'), t('error') + ': ' + error.message);
       } finally {
         setLoading(false);
       }
@@ -93,7 +95,7 @@ const AttendanceScreen = () => {
 
   const saveAttendance = async () => {
     if (!selectedSchedule) {
-      Alert.alert('Эскертүү', 'Сабак тандаңыз');
+      Alert.alert(t('warning'), t('selectLesson') || 'Сабак тандаңыз');
       return;
     }
 
@@ -110,14 +112,14 @@ const AttendanceScreen = () => {
         attendance_data: attendanceList
       });
       
-      Alert.alert('Ийгилик', 'Attendance сакталды');
+      Alert.alert(t('success'), t('attendanceMarked'));
       setSelectedSchedule(null);
       setStudents([]);
       setAttendance({});
       loadTodaySchedules();
     } catch (error) {
       console.error('Attendance сактоодо ката:', error);
-      Alert.alert('Ката', 'Attendance сактоодо ката чыкты: ' + (error.response?.data?.error || error.message));
+      Alert.alert(t('error'), t('error') + ': ' + (error.response?.data?.error || error.message));
     } finally {
       setSaving(false);
     }
@@ -127,7 +129,7 @@ const AttendanceScreen = () => {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#667eea" />
-        <Text style={styles.loadingText}>Жүктөлүүдө...</Text>
+        <Text style={styles.loadingText}>{t('loading')}</Text>
       </View>
     );
   }
@@ -135,8 +137,8 @@ const AttendanceScreen = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>Attendance белгилөө</Text>
-        <Text style={styles.subtitle}>Бүгүнкү сабактар</Text>
+        <Text style={styles.title}>{t('markAttendance')}</Text>
+        <Text style={styles.subtitle}>{t('todayClasses')}</Text>
       </View>
 
       {!selectedSchedule ? (
@@ -164,7 +166,7 @@ const AttendanceScreen = () => {
           ) : (
             <View style={styles.emptyState}>
               <Text style={styles.emptyText}>📅</Text>
-              <Text style={styles.emptyMessage}>Бүгүн сабактар жок</Text>
+              <Text style={styles.emptyMessage}>{t('noSchedule')}</Text>
             </View>
           )}
         </View>
@@ -179,7 +181,7 @@ const AttendanceScreen = () => {
                 setAttendance({});
               }}
             >
-              <Text style={styles.backText}>‹ Артка</Text>
+              <Text style={styles.backText}>‹ {t('back')}</Text>
             </TouchableOpacity>
             
             <Text style={styles.selectedSubject}>{selectedSchedule.subject?.name}</Text>
@@ -194,7 +196,7 @@ const AttendanceScreen = () => {
               style={[styles.bulkButton, styles.bulkButtonPresent]}
               onPress={() => markAll('Present')}
             >
-              <Text style={styles.bulkButtonText}>Баарын Келген</Text>
+              <Text style={styles.bulkButtonText}>{t('selectAll')} - {t('present')}</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.bulkButton, styles.bulkButtonAbsent]}
@@ -262,7 +264,7 @@ const AttendanceScreen = () => {
             {saving ? (
               <ActivityIndicator color="#fff" />
             ) : (
-              <Text style={styles.saveButtonText}>Сактоо</Text>
+              <Text style={styles.saveButtonText}>{t('save')}</Text>
             )}
           </TouchableOpacity>
         </View>

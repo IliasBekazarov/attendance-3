@@ -3,6 +3,7 @@ import { Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useAuth } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
 import Entypo from '@expo/vector-icons/Entypo';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 
@@ -14,6 +15,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import AttendanceScreen from '../screens/AttendanceScreen';
 import LeaveRequestsScreen from '../screens/LeaveRequestsScreen';
 import NotificationsScreen from '../screens/NotificationsScreen';
+import ReportsScreen from '../screens/ReportsScreen';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
@@ -23,6 +25,7 @@ const Tab = createBottomTabNavigator();
 
 const MainTabs = () => {
   const { user } = useAuth();
+  const { t } = useLanguage();
 
   return (
     <Tab.Navigator
@@ -34,6 +37,8 @@ const MainTabs = () => {
             iconText = <Entypo name="home" size={24} color="black" />;
           } else if (route.name === 'Schedule') {
             iconText = <FontAwesome6 name="calendar-days" size={24} color="black" />;
+          } else if (route.name === 'Reports') {
+            iconText = <Ionicons name="bar-chart" size={24} color="black" />;
           } else if (route.name === 'Profile') {
             iconText = <Ionicons name="person-sharp" size={24} color="black" />;
           } else if (route.name === 'Attendance') {
@@ -54,40 +59,43 @@ const MainTabs = () => {
       <Tab.Screen 
         name="Dashboard" 
         component={DashboardScreen}
-        options={{ title: 'Башкы' }}
+        options={{ title: t('dashboard') }}
       />
       <Tab.Screen 
         name="Schedule" 
         component={ScheduleScreen}
-        options={{ title: 'Расписание' }}
+        options={{ title: t('schedule') }}
       />
       
-      {user?.role === 'TEACHER' && (
+      {/* Reports - Admin/Manager only */}
+      {(user?.role === 'ADMIN' || user?.role === 'MANAGER') && (
         <Tab.Screen 
-          name="Attendance" 
-          component={AttendanceScreen}
-          options={{ title: 'Жоктоо' }}
-        />
-      )}
-      
-      {(user?.role === 'STUDENT' || user?.role === 'PARENT') && (
-        <Tab.Screen 
-          name="LeaveRequests" 
-          component={LeaveRequestsScreen}
-          options={{ title: 'Арыздар' }}
+          name="Reports" 
+          component={ReportsScreen}
+          options={{ title: t('reports') }}
         />
       )}
       
       <Tab.Screen 
         name="Notifications" 
         component={NotificationsScreen}
-        options={{ title: 'Билдирүүлөр' }}
+        options={{ title: t('notifications') }}
+      />
+      
+      <Tab.Screen 
+        name="LeaveRequests" 
+        component={LeaveRequestsScreen}
+        options={{ 
+          title: (user?.role === 'ADMIN' || user?.role === 'MANAGER') 
+            ? 'Арыз берүү' 
+            : t('leaveRequests') 
+        }}
       />
       
       <Tab.Screen 
         name="Profile" 
         component={ProfileScreen}
-        options={{ title: 'Профиль' }}
+        options={{ title: t('profile') }}
       />
     </Tab.Navigator>
   );

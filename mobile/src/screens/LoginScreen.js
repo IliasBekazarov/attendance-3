@@ -13,16 +13,18 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useAuth } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
 
 const LoginScreen = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const { login } = useAuth();
+    const { t } = useLanguage();
 
     const handleLogin = async () => {
         if (!username || !password) {
-            Alert.alert('Ката', 'Колдонуучу аты жана паролду киргизиңиз');
+            Alert.alert(t('error'), t('enterUsername') + ' жана ' + t('enterPassword'));
             return;
         }
 
@@ -31,7 +33,7 @@ const LoginScreen = () => {
         setLoading(false);
 
         if (!result.success) {
-            Alert.alert('Ката', result.error || 'Кирүү катасы');
+            Alert.alert(t('error'), result.error || t('loginFailed'));
         }
     };
 
@@ -56,15 +58,15 @@ const LoginScreen = () => {
                                 resizeMode="contain"
                             />
                         </View>
-                        <Text style={styles.title}>Attendance System</Text>
+                        <Text style={styles.title}>SU System</Text>
                     </View>
 
                     <View style={styles.formContainer}>
                         <View style={styles.inputContainer}>
-                            <Text style={styles.label}>Колдонуучу аты</Text>
+                            <Text style={styles.label}>{t('username')}</Text>
                             <TextInput
                                 style={styles.input}
-                                placeholder="Колдонуучу аты"
+                                placeholder={t('username')}
                                 value={username}
                                 onChangeText={setUsername}
                                 autoCapitalize="none"
@@ -73,32 +75,24 @@ const LoginScreen = () => {
                         </View>
 
                         <View style={styles.inputContainer}>
-                            <Text style={styles.label}>Пароль</Text>
+                            <Text style={styles.label}>{t('password')}</Text>
                             <TextInput
                                 style={styles.input}
-                                placeholder="Пароль"
+                                placeholder={t('password')}
                                 value={password}
                                 onChangeText={setPassword}
                                 secureTextEntry
                                 autoCapitalize="none"
                             />
                         </View>
-                        <View style={styles.rememberContainer}>
-                            <TouchableOpacity style={styles.rememberMe}>
-                                <View style={styles.checkbox} />
-                                <Text style={styles.rememberText}>Эстеп калуу</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity>
-                                <Text style={styles.forgotPassword}>Паролду унуттуңузбу?</Text>
-                            </TouchableOpacity>
-                        </View>
+
                         <TouchableOpacity
                             style={[styles.loginButton, loading && styles.loginButtonDisabled]}
                             onPress={handleLogin}
                             disabled={loading}
                         >
                             <Text style={styles.loginButtonText}>
-                                {loading ? 'Жүктөлүүдө...' : 'Кирүү'}
+                                {loading ? t('loading') : t('login')}
                             </Text>
                         </TouchableOpacity>
                     </View>
@@ -245,7 +239,7 @@ const styles = StyleSheet.create({
         height: 18,
         borderRadius: 4,
         borderWidth: 1.5,
-        borderColor: '#667eea',
+        borderColor: '#002fff',
         marginRight: 8,
     },
     rememberText: {
@@ -277,8 +271,8 @@ const styles = StyleSheet.create({
         overflow: 'hidden', // Important for circular image
     },
     logoImage: {
-        width: '80%',
-        height: '80%',
+        width: '90%',
+        height: '90%',
     },
 });
 

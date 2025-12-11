@@ -215,8 +215,10 @@ class LeaveRequest(models.Model):
     start_date = models.DateField(verbose_name='Башталуу күнү')
     end_date = models.DateField(verbose_name='Аяктоо күнү')
     reason = models.TextField(verbose_name='Себеби')
+    document = models.FileField(upload_to='leave_documents/', null=True, blank=True, verbose_name='Документ')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='PENDING')
     approved_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='approved_leaves')
+    rejection_reason = models.TextField(null=True, blank=True, verbose_name='Четке кагуунун себеби')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
