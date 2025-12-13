@@ -164,6 +164,8 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',
     'https://*.pythonanywhere.com',
     'https://attandance-su.vercel.app',
+    'https://attendance-3-os22.vercel.app',
+    'https://*.vercel.app',
 ]
 
 # Session Security 
@@ -222,6 +224,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:3000',
     'https://attandance-su.vercel.app',
     'https://attendance-3.vercel.app',
+    'https://attendance-3-os22.vercel.app',
+    'https://attendance-3-os22-git-main-ilias-projects-2d94f9ba.vercel.app',
 ]
 
 # Vercel preview deployments үчүн
