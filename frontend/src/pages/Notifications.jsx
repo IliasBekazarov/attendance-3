@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
+import { useLanguage } from '../context/LanguageContext'
 import api from '../services/api'
 
 const Notifications = () => {
   const { user } = useAuth()
+  const { t } = useLanguage()
   const [notifications, setNotifications] = useState([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('all') // all, unread, read
@@ -45,7 +47,7 @@ const Notifications = () => {
   }
 
   const deleteNotification = async (notificationId) => {
-    if (!confirm('Билдирүүнү өчүрөсүзбү?')) return
+    if (!confirm(t('confirmDelete'))) return
 
     try {
       await api.delete(`/v1/notifications/${notificationId}/`)
@@ -78,15 +80,15 @@ const Notifications = () => {
     const diffHours = Math.floor(diffMs / 3600000)
     const diffDays = Math.floor(diffMs / 86400000)
 
-    if (diffMins < 1) return 'Азыр эле'
-    if (diffMins < 60) return `${diffMins} мүнөт мурун`
-    if (diffHours < 24) return `${diffHours} саат мурун`
-    if (diffDays < 7) return `${diffDays} күн мурун`
+    if (diffMins < 1) return t('justNow')
+    if (diffMins < 60) return `${diffMins} ${t('minutesAgo')}`
+    if (diffHours < 24) return `${diffHours} ${t('hoursAgo')}`
+    if (diffDays < 7) return `${diffDays} ${t('daysAgo')}`
     return date.toLocaleDateString('ky-KG')
   }
 
   if (loading) {
-    return <div className="loading">Жүктөлүүдө...</div>
+    return <div className="loading">{t('loading')}</div>
   }
 
   return (
@@ -95,7 +97,7 @@ const Notifications = () => {
         <div className="card-header">
           <h5>
             <i className="fas fa-bell"></i>
-            Билдирүүлөр
+            {t('notificationsTitle')}
           </h5>
           <div className="header-actions">
             <button
@@ -104,7 +106,7 @@ const Notifications = () => {
               disabled={notifications.filter(n => !n.is_read).length === 0}
             >
               <i className="fas fa-check-double"></i>
-              Баарын окуу
+              {t('markAllRead')}
             </button>
           </div>
         </div>
@@ -117,7 +119,7 @@ const Notifications = () => {
               onClick={() => setFilter('all')}
             >
               <i className="fas fa-inbox"></i>
-              Баары
+              {t('allNotifications')}
               <span className="badge">{notifications.length}</span>
             </button>
             <button
@@ -125,7 +127,7 @@ const Notifications = () => {
               onClick={() => setFilter('unread')}
             >
               <i className="fas fa-envelope"></i>
-              Окулбаган
+              {t('unreadNotifications')}
               <span className="badge">{notifications.filter(n => !n.is_read).length}</span>
             </button>
             <button
@@ -133,7 +135,7 @@ const Notifications = () => {
               onClick={() => setFilter('read')}
             >
               <i className="fas fa-envelope-open"></i>
-              Окулган
+              {t('readNotifications')}
               <span className="badge">{notifications.filter(n => n.is_read).length}</span>
             </button>
           </div>
@@ -143,7 +145,7 @@ const Notifications = () => {
             {notifications.length === 0 ? (
               <div className="empty-state">
                 <i className="fas fa-bell-slash"></i>
-                <p>Билдирүүлөр жок</p>
+                <p>{t('noNotifications')}</p>
               </div>
             ) : (
               notifications.map((notification) => (
@@ -167,7 +169,7 @@ const Notifications = () => {
                     {notification.action_url && (
                       <a href={notification.action_url} className="notification-action">
                         <i className="fas fa-external-link-alt"></i>
-                        Көрүү
+                        {t('view')}
                       </a>
                     )}
                   </div>
@@ -177,7 +179,7 @@ const Notifications = () => {
                       <button
                         className="btn-icon"
                         onClick={() => markAsRead(notification.id)}
-                        title="Окулган деп белгилөө"
+                        title={t('markAllRead')}
                       >
                         <i className="fas fa-check"></i>
                       </button>
@@ -185,7 +187,7 @@ const Notifications = () => {
                     <button
                       className="btn-icon btn-danger"
                       onClick={() => deleteNotification(notification.id)}
-                      title="Өчүрүү"
+                      title={t('delete')}
                     >
                       <i className="fas fa-trash"></i>
                     </button>

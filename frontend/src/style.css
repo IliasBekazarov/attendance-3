@@ -577,14 +577,15 @@ body {
 }
 
 .avatar-placeholder {
-  background: rgb(8, 0, 255);
   color: white;
   font-size: 18px;
 }
 
+
+
 .avatar-xs {
-  width: 24px;
-  height: 24px;
+  width: 44px;
+  height: 44px;
   font-size: 10px;
 }
 
@@ -610,7 +611,7 @@ body {
   width: 120px;
   height: 120px;
   font-size: 48px;
-  border: 4px solid #667eea;
+  border: 0.1px solid #000;
 }
 
 .user-avatar {
@@ -1463,7 +1464,7 @@ textarea.form-control {
   .login-right {
     flex: 1;
     width: 100%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #0004ff;
   }
 
   .login-card {
@@ -1948,6 +1949,9 @@ textarea.form-control {
 
 .profile-photo-wrapper {
   position: relative;
+  display: inline-block;
+  padding: 8px;
+  border-radius: 50%;
 }
 
 .profile-photo-xl {
@@ -1955,56 +1959,46 @@ textarea.form-control {
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid var(--primary);
+  border: 0.1px solid #000;
+  box-shadow: 0 0 0 0.1px rgba(0, 0, 0, 0.2);
 }
 
 .photo-upload-btn {
   position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 40px;
-  height: 40px;
+  bottom: 5px;
+  right: 5px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: var(--primary);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border: 3px solid white;
-  box-shadow: var(--shadow);
-  transition: all 0.3s ease;
+  border: 0.1px solid #000;
+  box-shadow: 0 0 0 0.1px rgba(0, 0, 0, 0.3);
+  font-size: 16px;
+  z-index: 10;
 }
 
 .photo-upload-btn:hover {
-  transform: scale(1.1);
-  background: #5568d3;
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
 }
 
 .photo-upload-hint {
   position: absolute;
-  bottom: -30px;
+  bottom: -40px;
   left: 50%;
   transform: translateX(-50%);
-  background: #10b981;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   color: white;
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 11px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
   white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
-  animation: fadeInUp 0.3s ease;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
+  border: 0.1px solid rgba(0, 0, 0, 0.2);
 }
 
 .profile-info-header h3 {
@@ -2589,6 +2583,7 @@ textarea.form-control {
 }
 
 /* ==================== UNIFIED SCHEDULE STYLES ==================== */
+.schedule-container,
 .unified-schedule-container {
   max-width: 1400px;
   margin: 0 auto;
@@ -2776,6 +2771,62 @@ textarea.form-control {
 
 #scheduleContent::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(135deg, #9ca3af, #6b7280);
+}
+
+/* Schedule Grid Container - Desktop жана Mobile үчүн */
+.schedule-grid-container {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  margin: 20px 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background: white;
+  /* Custom scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: #667eea #f1f5f9;
+}
+
+.schedule-grid-container::-webkit-scrollbar {
+  height: 10px;
+}
+
+.schedule-grid-container::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 5px;
+}
+
+.schedule-grid-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.schedule-grid-container::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #764ba2, #667eea);
+}
+
+/* Child Schedule Header - Ата-эне үчүн */
+.child-schedule-header {
+  padding: 15px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 12px 12px 0 0;
+  margin-bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.child-schedule-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.child-schedule-header p {
+  margin: 5px 0 0 0;
+  opacity: 0.9;
+  font-size: 0.95rem;
 }
 
 .schedule-grid {
@@ -3119,15 +3170,91 @@ textarea.form-control {
     font-size: 1.8rem;
   }
 
+  /* Mobile үчүн schedule container */
+  .schedule-grid-container {
+    margin: 15px 0;
+    border-radius: 8px;
+    /* Mobile скролл hint */
+    position: relative;
+  }
+  
+  .schedule-grid-container::after {
+    content: '👉 Оңго жылдырыңыз';
+    position: sticky;
+    right: 0;
+    top: 50%;
+    background: rgba(102, 126, 234, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px 0 0 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    z-index: 10;
+    box-shadow: -3px 0 10px rgba(0, 0, 0, 0.2);
+    animation: slideHint 2s ease-in-out infinite;
+  }
+  
+  @keyframes slideHint {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-10px); }
+  }
+  
+  /* Скролл болгондо hint жок болот */
+  .schedule-grid-container.scrolled::after {
+    display: none;
+  }
+
   .schedule-grid {
-    grid-template-columns: 100px repeat(6, 1fr);
-    min-width: 700px;
+    grid-template-columns: 100px repeat(6, minmax(140px, 1fr));
+    min-width: 1000px;
+    gap: 1px;
   }
 
   .schedule-cell {
-    min-height: 60px;
-    padding: 8px 4px;
+    min-height: 65px;
+    padding: 10px 6px;
+    font-size: 0.75rem;
+  }
+  
+  .header-cell {
+    font-size: 0.8rem;
+    padding: 10px 5px;
+  }
+  
+  .time-cell {
     font-size: 0.7rem;
+    padding: 8px 4px;
+  }
+  
+  .lesson-cell {
+    padding: 10px 8px;
+  }
+  
+  .lesson-title {
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+  }
+  
+  .lesson-teacher {
+    font-size: 0.7rem;
+  }
+  
+  .lesson-room {
+    font-size: 0.65rem;
+  }
+  
+  .lesson-attendance {
+    font-size: 0.65rem;
+    padding: 3px 6px;
+    margin-top: 4px;
+  }
+  
+  .child-schedule-header h3 {
+    font-size: 1.1rem;
+  }
+  
+  .child-schedule-header p {
+    font-size: 0.85rem;
   }
 
   .attendance-modal-content {
@@ -3141,15 +3268,58 @@ textarea.form-control {
 }
 
 @media (max-width: 480px) {
+  .schedule-grid-container::after {
+    content: '👉';
+    font-size: 1.2rem;
+    padding: 6px 10px;
+  }
+
   .schedule-grid {
-    grid-template-columns: 70px repeat(6, minmax(100px, 1fr));
-    min-width: 650px;
+    grid-template-columns: 80px repeat(6, minmax(120px, 1fr));
+    min-width: 850px;
+    gap: 1px;
   }
 
   .schedule-cell {
-    min-height: 50px;
-    padding: 6px 2px;
+    min-height: 60px;
+    padding: 8px 4px;
+    font-size: 0.7rem;
+  }
+  
+  .header-cell {
+    font-size: 0.75rem;
+    padding: 8px 3px;
+  }
+  
+  .time-cell {
     font-size: 0.65rem;
+    padding: 6px 2px;
+  }
+  
+  .lesson-title {
+    font-size: 0.75rem;
+    margin-bottom: 3px;
+  }
+  
+  .lesson-teacher {
+    font-size: 0.65rem;
+  }
+  
+  .lesson-room {
+    font-size: 0.6rem;
+  }
+  
+  .lesson-attendance {
+    font-size: 0.6rem;
+    padding: 2px 5px;
+  }
+  
+  .child-schedule-header h3 {
+    font-size: 1rem;
+  }
+  
+  .child-schedule-header p {
+    font-size: 0.8rem;
   }
 
   .students-list {

@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
+import { useLanguage } from '../context/LanguageContext'
 import api from '../services/api'
 import Avatar from '../components/Avatar'
 
 const LeaveRequests = () => {
   const { user } = useAuth()
+  const { t } = useLanguage()
   const [requests, setRequests] = useState([])
   const [loading, setLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
@@ -94,9 +96,9 @@ const LeaveRequests = () => {
 
   const getStatusBadge = (status) => {
     const badges = {
-      PENDING: { class: 'warning', text: 'Күтүүдө', icon: 'clock' },
-      APPROVED: { class: 'success', text: 'Кабыл алынды', icon: 'check' },
-      REJECTED: { class: 'danger', text: 'Четке кагылды', icon: 'times' }
+      PENDING: { class: 'warning', text: t('pending'), icon: 'clock' },
+      APPROVED: { class: 'success', text: t('approved'), icon: 'check' },
+      REJECTED: { class: 'danger', text: t('rejected'), icon: 'times' }
     }
     const badge = badges[status] || badges.PENDING
     return (
@@ -108,7 +110,7 @@ const LeaveRequests = () => {
   }
 
   if (loading) {
-    return <div className="loading">Жүктөлүүдө...</div>
+    return <div className="loading">{t('loading')}</div>
   }
 
   return (
@@ -117,7 +119,7 @@ const LeaveRequests = () => {
         <div className="card-header">
           <h5>
             <i className="fas fa-file-medical"></i>
-            Өтүнмөлөр
+            {t('leaveRequestsTitle')}
           </h5>
           {(user?.role === 'STUDENT' || user?.role === 'TEACHER') && (
             <button
@@ -125,7 +127,7 @@ const LeaveRequests = () => {
               onClick={() => setShowForm(!showForm)}
             >
               <i className="fas fa-plus"></i>
-              Жаңы өтүнмө
+              {t('newRequest')}
             </button>
           )}
         </div>
@@ -138,7 +140,7 @@ const LeaveRequests = () => {
                 <div className="form-group">
                   <label>
                     <i className="fas fa-calendar-alt"></i>
-                    Башталыш күнү
+                    {t('startDate')}
                   </label>
                   <input
                     type="date"
@@ -153,7 +155,7 @@ const LeaveRequests = () => {
                 <div className="form-group">
                   <label>
                     <i className="fas fa-calendar-alt"></i>
-                    Аяктоо күнү
+                    {t('endDate')}
                   </label>
                   <input
                     type="date"
@@ -169,7 +171,7 @@ const LeaveRequests = () => {
               <div className="form-group">
                 <label>
                   <i className="fas fa-comment-alt"></i>
-                  Себеби
+                  {t('reason')}
                 </label>
                 <textarea
                   name="reason"
@@ -184,7 +186,7 @@ const LeaveRequests = () => {
               <div className="form-group">
                 <label>
                   <i className="fas fa-file-upload"></i>
-                  Документ (сылтама, справка)
+                  {t('uploadDocument')}
                 </label>
                 <input
                   type="file"
@@ -202,11 +204,11 @@ const LeaveRequests = () => {
                   onClick={() => setShowForm(false)}
                 >
                   <i className="fas fa-times"></i>
-                  Жокко чыгаруу
+                  {t('cancel')}
                 </button>
                 <button type="submit" className="btn btn-primary">
                   <i className="fas fa-paper-plane"></i>
-                  Жөнөтүү
+                  {t('submit')}
                 </button>
               </div>
             </form>
@@ -217,19 +219,14 @@ const LeaveRequests = () => {
             {requests.length === 0 ? (
               <div className="empty-state">
                 <i className="fas fa-inbox"></i>
-                <p>Өтүнмөлөр жок</p>
+                <p>{t('noRequests')}</p>
               </div>
             ) : (
               requests.map((request) => (
                 <div key={request.id} className="request-card">
                   <div className="request-header">
                     <div className="request-student">
-                      <Avatar
-                        src={request.student?.profile_photo}
-                        alt={request.student?.full_name}
-                        size="md"
-                        className="student-avatar"
-                      />
+                      
                       <div>
                         <h6>{request.student?.full_name}</h6>
                         <small className="text-muted">
@@ -254,20 +251,20 @@ const LeaveRequests = () => {
                     </div>
 
                     <div className="request-reason">
-                      <p><strong>Себеби:</strong> {request.reason}</p>
+                      <p><strong>{t('reason')}:</strong> {request.reason}</p>
                     </div>
 
                     {request.document && (
                       <a href={request.document} target="_blank" className="request-document">
                         <i className="fas fa-file-download"></i>
-                        Документти жүктөп алуу
+                        {t('downloadDocument')}
                       </a>
                     )}
 
                     {request.rejection_reason && (
                       <div className="rejection-reason">
                         <i className="fas fa-exclamation-circle"></i>
-                        <strong>Четке кагуунун себеби:</strong> {request.rejection_reason}
+                        <strong>{t('rejectionReason')}:</strong> {request.rejection_reason}
                       </div>
                     )}
                   </div>
@@ -280,14 +277,14 @@ const LeaveRequests = () => {
                         onClick={() => handleApprove(request.id)}
                       >
                         <i className="fas fa-check"></i>
-                        Кабыл алуу
+                        {t('approve')}
                       </button>
                       <button
                         className="btn btn-danger btn-sm"
                         onClick={() => handleReject(request.id)}
                       >
                         <i className="fas fa-times"></i>
-                        Четке кагуу
+                        {t('reject')}
                       </button>
                     </div>
                   )}
@@ -295,7 +292,7 @@ const LeaveRequests = () => {
                   <div className="request-footer">
                     <small className="text-muted">
                       <i className="fas fa-clock"></i>
-                      Жөнөтүлгөн: {new Date(request.created_at).toLocaleString('ky-KG')}
+                      {t('requestSubmitted')}: {new Date(request.created_at).toLocaleString('ky-KG')}
                     </small>
                   </div>
                 </div>

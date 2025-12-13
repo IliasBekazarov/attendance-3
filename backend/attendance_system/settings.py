@@ -14,11 +14,11 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-a#fhk5(u^2defh7#&ddq&pp4q#l3x_!dsf9q*v21#)pb%=pnjb'
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-a#fhk5(u^2defh7#&ddq&pp4q#l3x_!dsf9q*v21#)pb%=pnjb')
 
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['attandance-su.onrender.com', 'localhost', '127.0.0.1', 'mrkalpak.pythonanywhere.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'mrkalpak.pythonanywhere.com', '.pythonanywhere.com']
 
 
 INSTALLED_APPS = [
@@ -159,7 +159,12 @@ CSRF_COOKIE_SAMESITE = 'Lax'
 CSRF_USE_SESSIONS = False
 CSRF_COOKIE_AGE = 86400
 # CSRF функцияларын толук өчүрүү
-CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000', 'http://localhost:8000']
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:8000', 
+    'http://localhost:8000',
+    'https://*.pythonanywhere.com',
+    'https://attandance-su.vercel.app',
+]
 
 # Session Security 
 SESSION_COOKIE_SECURE = False  # Development үчүн False, production деген True болушу керек
@@ -215,6 +220,7 @@ SIMPLE_JWT = {
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
+    'https://attandance-su.vercel.app',
 ]
 
 CORS_ALLOW_CREDENTIALS = True

@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
+import { useLanguage } from '../context/LanguageContext'
 import logo from '../imgs/logo.png'
 
 const Login = () => {
   const { login } = useAuth()
+  const { t } = useLanguage()
   const [formData, setFormData] = useState({
     username: '',
     password: ''
@@ -65,8 +67,8 @@ const Login = () => {
       <div className="login-right">
         <div className="login-card">
           <div className="login-header">
-            <h2>Welcome Back!</h2>
-            <p>Please sign in to your account</p>
+            <h2>{t('welcomeBack')}</h2>
+            <p>{t('signInToAccount')}</p>
           </div>
 
           {error && (
@@ -80,7 +82,7 @@ const Login = () => {
             <div className="form-group">
               <label htmlFor="username">
                 <i className="fas fa-user"></i>
-                Username
+                {t('username')}
               </label>
               <input
                 type="text"
@@ -90,7 +92,7 @@ const Login = () => {
                 onChange={handleChange}
                 required
                 disabled={loading}
-                placeholder="Enter your username"
+                placeholder={t('username')}
                 autoComplete="username"
               />
             </div>
@@ -98,7 +100,7 @@ const Login = () => {
             <div className="form-group">
               <label htmlFor="password">
                 <i className="fas fa-lock"></i>
-                Password
+                {t('password')}
               </label>
               <div className="password-input-wrapper">
                 <input
@@ -109,7 +111,7 @@ const Login = () => {
                   onChange={handleChange}
                   required
                   disabled={loading}
-                  placeholder="Enter your password"
+                  placeholder={t('password')}
                   autoComplete="current-password"
                 />
                 <button
@@ -123,13 +125,13 @@ const Login = () => {
               </div>
             </div>
 
-            <div className="form-options">
+            {/* <div className="form-options">
               <label className="checkbox-label">
                 <input type="checkbox" />
-                <span>Remember me</span>
+                <span>{t('rememberMe')}</span>
               </label>
-              <a href="#" className="forgot-link">Forgot password?</a>
-            </div>
+              <a href="#" className="forgot-link">{t('forgotPassword')}</a>
+            </div> */}
 
             <button 
               type="submit" 
@@ -139,12 +141,12 @@ const Login = () => {
               {loading ? (
                 <>
                   <i className="fas fa-spinner fa-spin"></i>
-                  <span>Signing in...</span>
+                  <span>{t('signingIn')}</span>
                 </>
               ) : (
                 <>
                   <i className="fas fa-sign-in-alt"></i>
-                  <span>Sign In</span>
+                  <span>{t('signIn')}</span>
                 </>
               )}
             </button>

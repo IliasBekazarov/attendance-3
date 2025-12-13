@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment } from 'react'
+import { useState, useEffect, Fragment, useRef } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useLanguage } from '../context/LanguageContext'
 import api from '../services/api'
@@ -7,6 +7,9 @@ import '../styles/attendance-modal.css'
 const Schedule = () => {
   const { user, updateUser } = useAuth()
   const { t } = useLanguage()
+  
+  // Refs - скролл үчүн
+  const scheduleContainerRef = useRef(null)
   
   // Башкы state
   const [loading, setLoading] = useState(false)
@@ -113,6 +116,28 @@ const Schedule = () => {
       setScheduleData({})
     }
   }, [selectedGroup])
+  
+  // Скролл hint үчүн event listener
+  useEffect(() => {
+    const handleScroll = (e) => {
+      if (e.target.scrollLeft > 50) {
+        e.target.classList.add('scrolled')
+      } else {
+        e.target.classList.remove('scrolled')
+      }
+    }
+    
+    const containers = document.querySelectorAll('.schedule-grid-container')
+    containers.forEach(container => {
+      container.addEventListener('scroll', handleScroll)
+    })
+    
+    return () => {
+      containers.forEach(container => {
+        container.removeEventListener('scroll', handleScroll)
+      })
+    }
+  }, [scheduleData, childrenSchedules])
 
   // API чакыруулар
   const loadTeacherSchedule = async () => {
@@ -715,30 +740,18 @@ const Schedule = () => {
       {/* Студент үчүн маалымат */}
       {user?.role === 'STUDENT' && selectedGroup && (
         <div className="student-schedule-info">
-          <div className="info-card">
-            <i className="fas fa-info-circle"></i>
-            <p>Сиздин группаңыздын 1 жумалык расписаниеси жана акыркы жумадагы катышуу тартибиңиз</p>
-          </div>
         </div>
       )}
 
       {/* Ата-эне үчүн маалымат */}
       {user?.role === 'PARENT' && myChildren.length > 0 && (
         <div className="student-schedule-info">
-          <div className="info-card">
-            <i className="fas fa-users"></i>
-            <p>Балдарыңыздын 1 жумалык расписаниелери жана акыркы жумадагы катышуу тартиби</p>
-          </div>
         </div>
       )}
 
       {/* Мугалим үчүн маалымат */}
       {user?.role === 'TEACHER' && selectedGroup && (
         <div className="student-schedule-info">
-          <div className="info-card teacher-info">
-            <i className="fas fa-chalkboard-teacher"></i>
-            <p>📋 Сиз бардык расписаниени көрө аласыз. Өзүңүздүн бүгүнкү сабагыңызга гана жоктоо белгилей аласыз.</p>
-          </div>
         </div>
       )}
 
@@ -749,7 +762,7 @@ const Schedule = () => {
             const childSchedule = childrenSchedules[child.id] || {}
             
             return (
-              <div key={child.id} className="schedule-grid-container" style={{ marginBottom: '40px' }}>
+              <div key={child.id} style={{ marginBottom: '40px' }}>
                 <div className="child-schedule-header" style={{
                   padding: '15px 20px',
                   background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
@@ -770,7 +783,8 @@ const Schedule = () => {
                   </div>
                 </div>
                 
-                <div className="schedule-grid" style={{ borderRadius: '0 0 12px 12px' }}>
+                <div className="schedule-grid-container">
+                  <div className="schedule-grid" style={{ borderRadius: '0 0 12px 12px' }}>
                   {/* Header Row */}
                   <div className="schedule-cell header-cell">Убакыт</div>
                   {Object.keys(days).map(dayKey => (
@@ -824,6 +838,7 @@ const Schedule = () => {
                       })}
                     </Fragment>
                   ))}
+                  </div>
                 </div>
               </div>
             )
