@@ -4,16 +4,41 @@
     "slug": "attendance-system-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.attendancesystem.app"
+      "bundleIdentifier": "com.attendancesystem.app",
+      "buildNumber": "1.0.0"
     },
     "android": {
-      "package": "com.attendancesystem.app"
+      "package": "com.attendancesystem.app",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "permissions": [
+        "INTERNET",
+        "ACCESS_NETWORK_STATE"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
     },
     "extra": {
-      "apiUrl": "http://127.0.0.1:8000/api"
-    }
+      "apiUrl": "https://ilias123.pythonanywhere.com/api",
+      "eas": {
+        "projectId": "attendance-system-mobile"
+      }
+    },
+    "plugins": [
+      "expo-font"
+    ]
   }
 }
