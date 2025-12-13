@@ -221,7 +221,13 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
     'https://attandance-su.vercel.app',
+    'https://attendance-3.vercel.app',
 ]
+
+# Vercel preview deployments үчүн
+CORS_ALLOW_ALL_ORIGINS = False  # Production'до False калсын
+if DEBUG:
+    CORS_ALLOW_ALL_ORIGINS = False  # Development'те да False
 
 CORS_ALLOW_CREDENTIALS = True
 
