@@ -133,15 +133,19 @@ class ScheduleSerializer(serializers.ModelSerializer):
             if target_student and obj.subject:
                 from datetime import date, timedelta
                 today = date.today()
+                
+                # Ушул жумалык маалыматтарды алабыз
                 week_start = today - timedelta(days=today.weekday())  # Дүйшөмбү
                 week_end = week_start + timedelta(days=6)  # Жекшемби
                 
-                print(f"🔍 Attendance check: student={target_student.full_name}, subject={obj.subject.name}")
-                print(f"📅 Week range: {week_start} to {week_end}")
+                print(f"🔍 Attendance check: student={target_student.full_name}, subject={obj.subject.name}, day={obj.day}")
+                print(f"📅 Week range: {week_start} to {week_end}, Today: {today}")
                 
+                # Так ушул schedule үчүн attendance издейбиз (schedule_id менен)
                 latest_attendance = Attendance.objects.filter(
                     student=target_student,
                     subject=obj.subject,
+                    schedule=obj,  # Так ушул schedule үчүн
                     date__range=[week_start, week_end]
                 ).order_by('-date').first()
                 
@@ -149,7 +153,17 @@ class ScheduleSerializer(serializers.ModelSerializer):
                     print(f"✅ Found attendance: {latest_attendance.status} on {latest_attendance.date}")
                     return latest_attendance.status
                 else:
-                    print(f"❌ No attendance found for this week")
+                    print(f"❌ No attendance found for this schedule in this week")
+                    # Эгерде schedule_id боюнча табылбаса, date жана subject боюнча издейбиз
+                    latest_attendance = Attendance.objects.filter(
+                        student=target_student,
+                        subject=obj.subject,
+                        date__range=[week_start, week_end]
+                    ).order_by('-date').first()
+                    
+                    if latest_attendance:
+                        print(f"✅ Found attendance by subject: {latest_attendance.status} on {latest_attendance.date}")
+                        return latest_attendance.status
         except Exception as e:
             print(f"Error getting attendance status: {e}")
         
