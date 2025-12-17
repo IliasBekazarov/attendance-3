@@ -850,7 +850,9 @@ const Schedule = () => {
                               {lesson.attendance_status === 'Present' && '✅ '}
                               {lesson.attendance_status === 'Absent' && '❌ '}
                               {lesson.attendance_status === 'Late' && '⏰ '}
-                              {lesson.attendance_text || t('attendanceMarked')}
+                              {lesson.attendance_text === 'Белгилене элек' || !lesson.attendance_text 
+                                ? t('notMarkedYet')
+                                : lesson.attendance_text}
                             </div>
                           </div>
                         ) : (
@@ -942,7 +944,9 @@ const Schedule = () => {
                           {lesson.attendance_status === 'Present' && '✅ '}
                           {lesson.attendance_status === 'Absent' && '❌ '}
                           {lesson.attendance_status === 'Late' && '⏰ '}
-                          {lesson.attendance_text || t('attendanceMarked')}
+                          {lesson.attendance_text === 'Белгилене элек' || !lesson.attendance_text 
+                            ? t('notMarkedYet')
+                            : lesson.attendance_text}
                         </div>
                       )}
                     </div>
