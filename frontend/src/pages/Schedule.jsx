@@ -853,8 +853,8 @@ const Schedule = () => {
                             <div className="lesson-teacher">👨‍🏫 {lesson.teacher}</div>
                             <div className="lesson-room">📍 {lesson.room || t('notSpecified')}</div>
                             
-                            {/* Attendance маалыматы - ар дайым көрсөтүлөт */}
-                            <div className={`lesson-attendance ${
+                            {/* АЗЫРЫНЧА КОМЕНТТЕ: Attendance маалыматы - ата-эне үчүн */}
+                            {/* <div className={`lesson-attendance ${
                               lesson.attendance_status === 'Present' ? 'attendance-present' :
                               lesson.attendance_status === 'Absent' ? 'attendance-absent' :
                               lesson.attendance_status === 'Late' ? 'attendance-late' :
@@ -866,7 +866,7 @@ const Schedule = () => {
                               {lesson.attendance_text === 'Белгилене элек' || !lesson.attendance_text 
                                 ? t('notMarkedYet')
                                 : lesson.attendance_text}
-                            </div>
+                            </div> */}
                           </div>
                         ) : (
                           <div
@@ -947,7 +947,7 @@ const Schedule = () => {
                       <div className="lesson-room">📍 {lesson.room || t('notSpecified')}</div>
                       
                       {/* Attendance маалыматы - студент жана ата-эне үчүн */}
-                      {(user?.role === 'STUDENT' || user?.role === 'PARENT') && (
+                      {/* {(user?.role === 'STUDENT' || user?.role === 'PARENT') && (
                         <div className={`lesson-attendance ${
                           lesson.attendance_status === 'Present' ? 'attendance-present' :
                           lesson.attendance_status === 'Absent' ? 'attendance-absent' :
@@ -961,7 +961,7 @@ const Schedule = () => {
                             ? t('notMarkedYet')
                             : lesson.attendance_text}
                         </div>
-                      )}
+                      )} */}
                     </div>
                   ) : (
                     <div
@@ -1172,7 +1172,7 @@ const Schedule = () => {
                 onClick={saveAttendance}
                 disabled={Object.keys(attendanceData).length === 0}
               >
-                💾 {t('save')}
+                 {t('save')}
               </button>
             </div>
           </div>
