@@ -145,6 +145,11 @@ const translations = {
     markAll: 'Баарын белгилөө',
     attendanceMarked: 'Катышуу белгиленди',
     attendanceSaved: 'Катышуу сакталды',
+    noAttendanceData: 'Жоктоо маалыматы жок',
+    lessonNotFound: 'Сабак маалыматы табылган жок',
+    attendanceOnlyForTeachers: 'Катышууну белгилөө мугалимдер үчүн гана',
+    onlyTodayLessons: 'Сиз өзүңүздүн бүгүнкү сабагыңызга гана жоктоо белгилей аласыз',
+    studentsLoadError: 'Студенттерди жүктөөдө ката чыкты',
     
     // Leave Requests
     leaveRequestsTitle: 'Өтүнмөлөр',
@@ -341,6 +346,11 @@ const translations = {
     markAll: 'Отметить всех',
     attendanceMarked: 'Посещаемость отмечена',
     attendanceSaved: 'Посещаемость сохранена',
+    noAttendanceData: 'Нет данных о посещаемости',
+    lessonNotFound: 'Данные о занятии не найдены',
+    attendanceOnlyForTeachers: 'Отмечать посещаемость могут только учителя',
+    onlyTodayLessons: 'Вы можете отметить посещаемость только для своих сегодняшних занятий',
+    studentsLoadError: 'Ошибка при загрузке студентов',
     
     // Leave Requests
     leaveRequestsTitle: 'Заявки на отсутствие',
@@ -537,6 +547,11 @@ const translations = {
     markAll: 'Mark All',
     attendanceMarked: 'Attendance Marked',
     attendanceSaved: 'Attendance Saved',
+    noAttendanceData: 'No attendance data',
+    lessonNotFound: 'Lesson information not found',
+    attendanceOnlyForTeachers: 'Only teachers can mark attendance',
+    onlyTodayLessons: 'You can only mark attendance for your today\'s lessons',
+    studentsLoadError: 'Error loading students',
     
     // Leave Requests
     leaveRequestsTitle: 'Leave Requests',

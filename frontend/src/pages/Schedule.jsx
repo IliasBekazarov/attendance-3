@@ -603,13 +603,13 @@ const Schedule = () => {
   
   const openAttendanceModal = async (lessonId, lesson) => {
     if (user?.role !== 'TEACHER') {
-      alert('Катышууну белгилөө мугалимдер үчүн гана')
+      alert(t('attendanceOnlyForTeachers'))
       return
     }
     
     // Бүгүнкү сабак экенин жана мугалимдики экенин текшерүү
     if (!isTeacherTodayLesson(lesson)) {
-      alert('Сиз өзүңүздүн бүгүнкү сабагыңызга гана жоктоо белгилей аласыз')
+      alert(t('onlyTodayLessons'))
       return
     }
 
@@ -617,8 +617,12 @@ const Schedule = () => {
     setShowAttendanceModal(true)
     
     try {
+      console.log('📚 Loading students for lesson:', lessonId)
+      
       // Студенттерди жүктөө
       const response = await api.get(`/v1/schedules/${lessonId}/students/`)
+      console.log('👥 Students response:', response.data)
+      
       const studentsList = response.data.students || []
       
       setStudents(studentsList)
@@ -629,21 +633,27 @@ const Schedule = () => {
         initialAttendance[student.id] = student.current_status || 'Present'
       })
       setAttendanceData(initialAttendance)
+      
+      console.log('✅ Students loaded:', studentsList.length)
     } catch (error) {
-      console.error('Студенттерди жүктөөдө ката:', error)
-      alert('Студенттерди жүктөөдө ката чыкты')
+      console.error('❌ Error loading students:', error)
+      console.error('Error details:', error.response?.data)
+      alert(t('studentsLoadError'))
       setShowAttendanceModal(false)
     }
   }
 
   const saveAttendance = async () => {
     if (!currentLessonId || Object.keys(attendanceData).length === 0) {
-      alert('Жоктоо маалыматы жок')
+      alert(t('noAttendanceData'))
       return
     }
 
     try {
       const today = new Date().toISOString().split('T')[0]
+      
+      console.log('📋 Saving attendance for lesson:', currentLessonId)
+      console.log('📊 Attendance data:', attendanceData)
       
       // Find the lesson to get schedule details
       let scheduleInfo = null
@@ -655,8 +665,10 @@ const Schedule = () => {
         })
       })
 
+      console.log('📚 Schedule info:', scheduleInfo)
+
       if (!scheduleInfo) {
-        alert('Сабак маалыматы табылган жок')
+        alert(t('lessonNotFound'))
         return
       }
 
@@ -669,18 +681,23 @@ const Schedule = () => {
         schedule_id: currentLessonId
       }))
 
-      await api.post('/v1/attendance/bulk/', {
+      console.log('📤 Sending attendance records:', attendanceRecords)
+
+      const response = await api.post('/v1/attendance/bulk/', {
         attendance_records: attendanceRecords
       })
 
-      alert('✅ Катышуу ийгиликтүү сакталды!')
+      console.log('✅ Response:', response.data)
+
+      alert('✅ ' + t('attendanceSaved'))
       setShowAttendanceModal(false)
       setStudents([])
       setAttendanceData({})
       setCurrentLessonId(null)
     } catch (error) {
-      console.error('Катышууну сактоодо ката:', error)
-      alert('❌ Ката чыкты: ' + (error.response?.data?.error || error.message))
+      console.error('❌ Error saving attendance:', error)
+      console.error('Error response:', error.response?.data)
+      alert('❌ ' + t('error') + ': ' + (error.response?.data?.error || error.message))
     }
   }
 
