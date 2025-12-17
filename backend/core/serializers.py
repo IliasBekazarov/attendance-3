@@ -138,7 +138,7 @@ class ScheduleSerializer(serializers.ModelSerializer):
                 week_start = today - timedelta(days=today.weekday())  # Дүйшөмбү
                 week_end = week_start + timedelta(days=6)  # Жекшемби
                 
-                print(f"🔍 Attendance check: student={target_student.full_name}, subject={obj.subject.name}, day={obj.day}")
+                print(f"🔍 Attendance check: student={target_student.name}, subject={obj.subject.subject_name}, day={obj.day}")
                 print(f"📅 Week range: {week_start} to {week_end}, Today: {today}")
                 
                 # Так ушул schedule үчүн attendance издейбиз (schedule_id менен)
