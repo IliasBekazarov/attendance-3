@@ -703,6 +703,19 @@ const Schedule = () => {
       setStudents([])
       setAttendanceData({})
       setCurrentLessonId(null)
+      
+      // Расписаниени кайра жүктөп, attendance статусун жаңыртуу
+      console.log('🔄 Reloading schedule to update attendance status...')
+      if (user?.role === 'TEACHER') {
+        await loadTeacherSchedule()
+      } else if (user?.role === 'STUDENT') {
+        await loadStudentSchedule()
+      } else if (user?.role === 'PARENT') {
+        await loadParentSchedule()
+      } else if (selectedGroup) {
+        await loadSchedule(selectedGroup)
+      }
+      console.log('✅ Schedule reloaded with updated attendance')
     } catch (error) {
       console.error('❌ Error saving attendance:', error)
       console.error('Error response:', error.response?.data)

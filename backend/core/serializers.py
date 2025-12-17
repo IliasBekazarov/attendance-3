@@ -136,6 +136,9 @@ class ScheduleSerializer(serializers.ModelSerializer):
                 week_start = today - timedelta(days=today.weekday())  # Дүйшөмбү
                 week_end = week_start + timedelta(days=6)  # Жекшемби
                 
+                print(f"🔍 Attendance check: student={target_student.full_name}, subject={obj.subject.name}")
+                print(f"📅 Week range: {week_start} to {week_end}")
+                
                 latest_attendance = Attendance.objects.filter(
                     student=target_student,
                     subject=obj.subject,
@@ -143,7 +146,10 @@ class ScheduleSerializer(serializers.ModelSerializer):
                 ).order_by('-date').first()
                 
                 if latest_attendance:
+                    print(f"✅ Found attendance: {latest_attendance.status} on {latest_attendance.date}")
                     return latest_attendance.status
+                else:
+                    print(f"❌ No attendance found for this week")
         except Exception as e:
             print(f"Error getting attendance status: {e}")
         
