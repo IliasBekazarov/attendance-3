@@ -230,24 +230,33 @@ const Schedule = () => {
         // Курсту автоматтык тандоо
         if (profileData.group.course && profileData.group.course.id) {
           setSelectedCourse(profileData.group.course.id)
+          console.log('📚 Курс орнотулду:', profileData.group.course.id)
         }
         
         // Группаны автоматтык тандоо
         setSelectedGroup(groupId)
+        console.log('👥 Группа орнотулду:', groupId)
         
         // Расписаниени жүктөө
+        console.log('📡 loadSchedule чакырылууда...')
         await loadSchedule(groupId)
+        console.log('✅ loadSchedule аяктады')
+        
         await loadSubjects()
         await loadTeachers()
+        
+        console.log('🎉 Студент расписаниеси толук жүктөлдү')
       } else {
         console.log('⚠️ Студент группага киргизилбеген')
         alert('Сиз али группага киргизилген эмессиз. Администратор менен байланышыңыз.')
       }
     } catch (error) {
       console.error('❌ Студент расписаниесин жүктөөдө ката:', error)
-      alert('Расписаниени жүктөөдө ката чыкты')
+      console.error('Error details:', error.response?.data)
+      alert('Расписаниени жүктөөдө ката чыкты: ' + (error.response?.data?.detail || error.message))
     } finally {
       setLoading(false)
+      console.log('⏹️ loadStudentSchedule аяктады, loading=false')
     }
   }
 
@@ -756,7 +765,7 @@ const Schedule = () => {
       )}
 
       {/* Студент үчүн маалымат */}
-      {user?.role === 'STUDENT' && selectedGroup && (
+      {user?.role === 'STUDENT' && Object.keys(scheduleData).length > 0 && (
         <div className="student-schedule-info">
         </div>
       )}
@@ -865,7 +874,7 @@ const Schedule = () => {
       )}
 
       {/* Расписание таблицасы - Студент/Мугалим/Админ үчүн */}
-      {user?.role !== 'PARENT' && selectedGroup && Object.keys(scheduleData).length > 0 && (
+      {user?.role !== 'PARENT' && Object.keys(scheduleData).length > 0 && (
         <div className="schedule-grid-container">
           <div className="schedule-grid">
             {/* Header Row */}
