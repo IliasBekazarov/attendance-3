@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from datetime import date, timedelta
 from .models import (
     UserProfile, Student, Teacher, Course, Group, Subject, 
     Schedule, Attendance, LeaveRequest, Notification
@@ -83,6 +84,10 @@ class ScheduleSerializer(serializers.ModelSerializer):
     time_slot_id = serializers.IntegerField(required=False, allow_null=True)
     day_of_week = serializers.CharField(source='day', read_only=True)
     
+    # Attendance маалыматы (акыркы жума үчүн)
+    attendance_status = serializers.SerializerMethodField()
+    attendance_text = serializers.SerializerMethodField()
+    
     # Writable fields for create/update
     subject_id = serializers.IntegerField(write_only=True, required=False)
     group_id = serializers.IntegerField(write_only=True, required=False)
@@ -93,7 +98,8 @@ class ScheduleSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'subject', 'group', 'teacher', 'day', 'day_of_week', 
             'start_time', 'end_time', 'time_slot', 'time_slot_id', 'room',
-            'subject_id', 'group_id', 'teacher_id'
+            'subject_id', 'group_id', 'teacher_id',
+            'attendance_status', 'attendance_text'  # Кошулду
         ]
     
     def get_time_slot(self, obj):
@@ -106,6 +112,55 @@ class ScheduleSerializer(serializers.ModelSerializer):
                 'end_time': str(obj.time_slot.end_time)
             }
         return None
+    
+    def get_attendance_status(self, obj):
+        """Студент үчүн акыркы жумалык attendance статусун алуу"""
+        request = self.context.get('request')
+        if not request or not request.user.is_authenticated:
+            return None
+        
+        try:
+            profile = request.user.userprofile
+            target_student = None
+            
+            # Студент же Ата-эне үчүн гана
+            if profile.role == 'STUDENT':
+                target_student = Student.objects.filter(user=request.user).first()
+            elif profile.role == 'PARENT':
+                # Ата-эне үчүн: group менен дал келген баланы табуу
+                target_student = profile.parent_profiles.filter(group=obj.group).first()
+            
+            if target_student and obj.subject:
+                from datetime import date, timedelta
+                today = date.today()
+                week_start = today - timedelta(days=today.weekday())  # Дүйшөмбү
+                week_end = week_start + timedelta(days=6)  # Жекшемби
+                
+                latest_attendance = Attendance.objects.filter(
+                    student=target_student,
+                    subject=obj.subject,
+                    date__range=[week_start, week_end]
+                ).order_by('-date').first()
+                
+                if latest_attendance:
+                    return latest_attendance.status
+        except Exception as e:
+            print(f"Error getting attendance status: {e}")
+        
+        return None
+    
+    def get_attendance_text(self, obj):
+        """Attendance статусунун текстин алуу"""
+        status = self.get_attendance_status(obj)
+        if status:
+            status_map = {
+                'Present': 'Катышкан',
+                'Absent': 'Катышпаган',
+                'Late': 'Кечиккен',
+                'Excused': 'Себептүү'
+            }
+            return status_map.get(status, 'Белгилене элек')
+        return 'Белгилене элек'
     
     def create(self, validated_data):
         """Жаңы schedule кошуу"""

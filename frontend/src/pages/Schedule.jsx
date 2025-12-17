@@ -47,13 +47,14 @@ const Schedule = () => {
   const [students, setStudents] = useState([])
   const [attendanceData, setAttendanceData] = useState({})
 
+  // Динамикалык күндөрдүн котормосу
   const days = {
-    Monday: 'Дүйшөмбү',
-    Tuesday: 'Шейшемби',
-    Wednesday: 'Шаршемби',
-    Thursday: 'Бейшемби',
-    Friday: 'Жума',
-    Saturday: 'Ишемби'
+    Monday: t('Monday'),
+    Tuesday: t('Tuesday'),
+    Wednesday: t('Wednesday'),
+    Thursday: t('Thursday'),
+    Friday: t('Friday'),
+    Saturday: t('Saturday')
   }
 
   // Уруксаттар
@@ -687,7 +688,7 @@ const Schedule = () => {
     return (
       <div className="loading-container">
         <div className="spinner"></div>
-        <p>Жүктөлүүдө...</p>
+        <p>{t('loading')}</p>
       </div>
     )
   }
@@ -701,7 +702,7 @@ const Schedule = () => {
         <div className="filters-section">
           {/* Курс тандоо */}
           <div className="filter-step">
-            <label className="filter-label">Курсту тандаңыз:</label>
+            <label className="filter-label">{t('selectCourse')}:</label>
             <div className="course-buttons" id="courseButtons">
               {courses.map(course => (
                 <button
@@ -719,7 +720,7 @@ const Schedule = () => {
           {/* Группа тандоо */}
           {selectedCourse && groups.length > 0 && (
             <div className="filter-step group-section" id="groupSection">
-              <label className="filter-label">Группаны тандаңыз:</label>
+              <label className="filter-label">{t('selectGroup')}:</label>
               <div className="group-buttons" id="groupButtons">
                 {groups.map(group => (
                   <button
@@ -728,7 +729,7 @@ const Schedule = () => {
                     data-group-id={group.id}
                     onClick={() => setSelectedGroup(group.id)}
                   >
-                    👥 {group.name} <small>({group.student_count || 0} студент)</small>
+                    👥 {group.name} <small>({group.student_count || 0} {t('student')})</small>
                   </button>
                 ))}
               </div>
@@ -786,7 +787,7 @@ const Schedule = () => {
                 <div className="schedule-grid-container">
                   <div className="schedule-grid" style={{ borderRadius: '0 0 12px 12px' }}>
                   {/* Header Row */}
-                  <div className="schedule-cell header-cell">Убакыт</div>
+                  <div className="schedule-cell header-cell">{t('time')}</div>
                   {Object.keys(days).map(dayKey => (
                     <div key={dayKey} className="schedule-cell header-cell">
                       {days[dayKey]}
@@ -811,7 +812,7 @@ const Schedule = () => {
                           >
                             <div className="lesson-title">{lesson.subject}</div>
                             <div className="lesson-teacher">👨‍🏫 {lesson.teacher}</div>
-                            <div className="lesson-room">📍 {lesson.room || 'Белгиленген эмес'}</div>
+                            <div className="lesson-room">📍 {lesson.room || t('notSpecified')}</div>
                             
                             {/* Attendance маалыматы - ар дайым көрсөтүлөт */}
                             <div className={`lesson-attendance ${
@@ -823,7 +824,7 @@ const Schedule = () => {
                               {lesson.attendance_status === 'Present' && '✅ '}
                               {lesson.attendance_status === 'Absent' && '❌ '}
                               {lesson.attendance_status === 'Late' && '⏰ '}
-                              {lesson.attendance_text || 'Белгилене элек'}
+                              {lesson.attendance_text || t('attendanceMarked')}
                             </div>
                           </div>
                         ) : (
@@ -832,7 +833,7 @@ const Schedule = () => {
                             className="schedule-cell empty-cell"
                             style={{ cursor: 'default' }}
                           >
-                            Эркин убакыт
+                            {t('freeTime')}
                           </div>
                         )
                       })}
@@ -847,11 +848,11 @@ const Schedule = () => {
       )}
 
       {/* Расписание таблицасы - Студент/Мугалим/Админ үчүн */}
-      {user?.role !== 'PARENT' && selectedGroup && (
+      {user?.role !== 'PARENT' && selectedGroup && Object.keys(scheduleData).length > 0 && (
         <div className="schedule-grid-container">
           <div className="schedule-grid">
             {/* Header Row */}
-            <div className="schedule-cell header-cell">Убакыт</div>
+            <div className="schedule-cell header-cell">{t('time')}</div>
             {Object.keys(days).map(dayKey => (
               <div key={dayKey} className="schedule-cell header-cell">
                 {days[dayKey]}
@@ -902,7 +903,7 @@ const Schedule = () => {
                       {lesson.teacher && user?.role !== 'TEACHER' && (
                         <div className="lesson-teacher">👨‍🏫 {lesson.teacher}</div>
                       )}
-                      <div className="lesson-room">📍 {lesson.room || 'Белгиленген эмес'}</div>
+                      <div className="lesson-room">📍 {lesson.room || t('notSpecified')}</div>
                       
                       {/* Attendance маалыматы - студент жана ата-эне үчүн */}
                       {(user?.role === 'STUDENT' || user?.role === 'PARENT') && (
@@ -915,7 +916,7 @@ const Schedule = () => {
                           {lesson.attendance_status === 'Present' && '✅ '}
                           {lesson.attendance_status === 'Absent' && '❌ '}
                           {lesson.attendance_status === 'Late' && '⏰ '}
-                          {lesson.attendance_text || 'Белгилене элек'}
+                          {lesson.attendance_text || t('attendanceMarked')}
                         </div>
                       )}
                     </div>
@@ -933,10 +934,10 @@ const Schedule = () => {
                             e.stopPropagation()
                             openAddLessonModal(timeSlot.id, dayKey)
                           }}
-                          title="Кошуу"
+                          title={t('add')}
                         >➕</button>
                       )}
-                      Эркин убакыт
+                      {t('freeTime')}
                     </div>
                   )
                 })}
@@ -952,21 +953,21 @@ const Schedule = () => {
           <div className="modal-content lesson-modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <h3 className="modal-title">
-                {currentLesson ? '✏️ Сабакты өзгөртүү' : '📚 Жаңы сабак кошуу'}
+                {currentLesson ? `✏️ ${t('editLesson')}` : `📚 ${t('addLesson')}`}
               </h3>
               <button className="close-btn" onClick={() => setShowLessonModal(false)}>&times;</button>
             </div>
 
             <div className="modal-body">
               <div className="form-group">
-                <label className="form-label">📖 Сабак:</label>
+                <label className="form-label">📖 {t('subject')}:</label>
                 <select
                   className="form-select"
                   value={lessonForm.subject_id}
                   onChange={(e) => handleSubjectChange(e.target.value)}
                   required
                 >
-                  <option value="">Сабакты тандаңыз...</option>
+                  <option value="">{t('selectLesson')}</option>
                   {subjects.map(subject => (
                     <option key={subject.id} value={subject.id}>
                       {subject.name || subject.subject_name}
@@ -976,13 +977,13 @@ const Schedule = () => {
               </div>
 
               <div className="form-group">
-                <label className="form-label">👨‍🏫 Мугалим:</label>
+                <label className="form-label">👨‍🏫 {t('teacher')}:</label>
                 <select
                   className="form-select"
                   value={lessonForm.teacher_id}
                   onChange={(e) => setLessonForm({...lessonForm, teacher_id: e.target.value})}
                 >
-                  <option value="">Мугалимди тандаңыз...</option>
+                  <option value="">{t('selectLesson')}</option>
                   {teachers.map(teacher => (
                     <option key={teacher.id} value={teacher.id}>{teacher.name}</option>
                   ))}
@@ -990,7 +991,7 @@ const Schedule = () => {
               </div>
 
               <div className="form-group">
-                <label className="form-label">📍 Кабинет:</label>
+                <label className="form-label">📍 {t('room')}:</label>
                 <input
                   type="text"
                   className="form-control"
@@ -998,7 +999,7 @@ const Schedule = () => {
                   value={lessonForm.room}
                   onChange={(e) => setLessonForm({...lessonForm, room: e.target.value})}
                 />
-                <small className="form-text">Кабинет белгиленбесе, "Белгиленген эмес" деп чыгат</small>
+                <small className="form-text">{t('notSpecified')}</small>
               </div>
             </div>
 
@@ -1007,14 +1008,14 @@ const Schedule = () => {
                 className="btn btn-secondary" 
                 onClick={() => setShowLessonModal(false)}
               >
-                Жокко чыгаруу
+                {t('cancel')}
               </button>
               <button 
                 className="btn btn-primary" 
                 onClick={saveLesson}
                 disabled={!lessonForm.subject_id}
               >
-                💾 Сактоо
+                💾 {t('save')}
               </button>
             </div>
           </div>
@@ -1025,7 +1026,7 @@ const Schedule = () => {
       {!selectedGroup && canViewAll && (
         <div className="empty-state">
           <i className="fas fa-calendar-times"></i>
-          <p>Расписаниени көрүү үчүн курс жана группа тандаңыз</p>
+          <p>{t('selectCourse')} {t('selectGroup')}</p>
         </div>
       )}
 
@@ -1034,14 +1035,14 @@ const Schedule = () => {
         <div className="modal" onClick={() => setShowAttendanceModal(false)}>
           <div className="modal-content attendance-modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <h3 className="modal-title">📋 Студенттердин катышуусун белгилөө</h3>
+              <h3 className="modal-title">📋 {t('markAttendanceTitle')}</h3>
               <button className="close-btn" onClick={() => setShowAttendanceModal(false)}>&times;</button>
             </div>
 
             <div className="students-list">
               {students.length === 0 ? (
                 <div className="empty-state">
-                  <p>Студенттер жүктөлүүдө...</p>
+                  <p>{t('loading')}</p>
                 </div>
               ) : (
                 students.map((student, index) => (
@@ -1071,7 +1072,7 @@ const Schedule = () => {
                         onClick={() => !student.is_marked && setAttendanceData({...attendanceData, [student.id]: 'Present'})}
                         disabled={student.is_marked}
                       >
-                        ✅ Келди
+                        ✅ {t('present')}
                       </button>
                       <button
                         type="button"
@@ -1079,7 +1080,7 @@ const Schedule = () => {
                         onClick={() => !student.is_marked && setAttendanceData({...attendanceData, [student.id]: 'Late'})}
                         disabled={student.is_marked}
                       >
-                        ⏰ Кечикти
+                        ⏰ {t('late')}
                       </button>
                       <button
                         type="button"
@@ -1087,7 +1088,7 @@ const Schedule = () => {
                         onClick={() => !student.is_marked && setAttendanceData({...attendanceData, [student.id]: 'Absent'})}
                         disabled={student.is_marked}
                       >
-                        ❌ Келбеди
+                        ❌ {t('absent')}
                       </button>
                     </div>
                   </div>
@@ -1121,14 +1122,14 @@ const Schedule = () => {
                 className="btn btn-secondary" 
                 onClick={() => setShowAttendanceModal(false)}
               >
-                Жабуу
+                {t('close')}
               </button>
               <button 
                 className="btn btn-primary" 
                 onClick={saveAttendance}
                 disabled={Object.keys(attendanceData).length === 0}
               >
-                💾 Сактоо
+                💾 {t('save')}
               </button>
             </div>
           </div>
