@@ -64,7 +64,7 @@ const Dashboard = () => {
               </div>
               <div className="stat-content">
                 <h3>{stats?.total_students || 0}</h3>
-                <p>Студенттер</p>
+                <p>{t('totalStudents')}</p>
               </div>
             </div>
 
@@ -74,7 +74,7 @@ const Dashboard = () => {
               </div>
               <div className="stat-content">
                 <h3>{stats?.total_teachers || 0}</h3>
-                <p>Мугалимдер</p>
+                <p>{t('totalTeachers')}</p>
               </div>
             </div>
 
@@ -84,7 +84,7 @@ const Dashboard = () => {
               </div>
               <div className="stat-content">
                 <h3>{stats?.total_groups || 0}</h3>
-                <p>Группалар</p>
+                <p>{t('totalGroups')}</p>
               </div>
             </div>
 
@@ -94,7 +94,7 @@ const Dashboard = () => {
               </div>
               <div className="stat-content">
                 <h3>{stats?.total_subjects || 0}</h3>
-                <p>Предметтер</p>
+                <p>{t('totalSubjects')}</p>
               </div>
             </div>
           </div>
@@ -104,17 +104,17 @@ const Dashboard = () => {
             <div className="card-header">
               <h5>
                 <i className="fas fa-calendar-day"></i>
-                Бүгүнкү статистика
+                {t('todayStatistics')}
               </h5>
             </div>
             <div className="card-body">
               <div className="today-stats">
                 <div className="today-stat">
-                  <div className="today-stat-label">Жалпы</div>
+                  <div className="today-stat-label">{t('total')}</div>
                   <div className="today-stat-value">{stats?.today_total || 0}</div>
                 </div>
                 <div className="today-stat success">
-                  <div className="today-stat-label">Келген</div>
+                  <div className="today-stat-label">{t('presentStudents')}</div>
                   <div className="today-stat-value">{stats?.today_present || 0}</div>
                   <div className="progress-bar">
                     <div 
@@ -124,7 +124,7 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <div className="today-stat danger">
-                  <div className="today-stat-label">Келбеген</div>
+                  <div className="today-stat-label">{t('absentStudents')}</div>
                   <div className="today-stat-value">{stats?.today_absent || 0}</div>
                   <div className="progress-bar">
                     <div 
@@ -134,7 +134,7 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <div className="today-stat warning">
-                  <div className="today-stat-label">Кечикти</div>
+                  <div className="today-stat-label">{t('lateStudents')}</div>
                   <div className="today-stat-value">{stats?.today_late || 0}</div>
                   <div className="progress-bar">
                     <div 
@@ -153,7 +153,7 @@ const Dashboard = () => {
               <div className="card-header">
                 <h5>
                   <i className="fas fa-table"></i>
-                  Группалар боюнча статистика
+                  {t('groupStatistics')}
                 </h5>
               </div>
               <div className="card-body">
@@ -161,12 +161,12 @@ const Dashboard = () => {
                   <table className="table">
                     <thead>
                       <tr>
-                        <th>Группа</th>
-                        <th className="text-center">Жалпы</th>
-                        <th className="text-center">Келген</th>
-                        <th className="text-center">Келбеген</th>
-                        <th className="text-center">Пайыз</th>
-                        <th>Прогресс</th>
+                        <th>{t('group')}</th>
+                        <th className="text-center">{t('total')}</th>
+                        <th className="text-center">{t('presentStudents')}</th>
+                        <th className="text-center">{t('absentStudents')}</th>
+                        <th className="text-center">{t('percentage')}</th>
+                        <th>{t('progress')}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -233,7 +233,7 @@ const Dashboard = () => {
             </div>
             <div className="stat-content">
               <h3>{stats?.today_classes_count || 0}</h3>
-              <p>Бүгүнкү сабактар</p>
+              <p>{t('todayClasses')}</p>
             </div>
           </div>
 
@@ -243,7 +243,7 @@ const Dashboard = () => {
             </div>
             <div className="stat-content">
               <h3>{stats?.marked_classes_count || 0}</h3>
-              <p>Белгиленген</p>
+              <p>{t('markedClasses')}</p>
             </div>
           </div>
 
@@ -253,7 +253,7 @@ const Dashboard = () => {
             </div>
             <div className="stat-content">
               <h3>{stats?.unmarked_classes_count || 0}</h3>
-              <p>Күтүүдө</p>
+              <p>{t('pending')}</p>
             </div>
           </div>
 
@@ -263,7 +263,7 @@ const Dashboard = () => {
             </div>
             <div className="stat-content">
               <h3>{stats?.my_students_count || 0}</h3>
-              <p>Студенттер</p>
+              <p>{t('totalStudents')}</p>
             </div>
           </div>
         </div>
@@ -278,7 +278,7 @@ const Dashboard = () => {
             </div>
             <div className="stat-content">
               <h3>{stats?.attendance_percentage || 0}%</h3>
-              <p>Катышуу пайызы</p>
+              <p>{t('attendancePercentage')}</p>
             </div>
           </div>
 
@@ -288,7 +288,7 @@ const Dashboard = () => {
             </div>
             <div className="stat-content">
               <h3>{stats?.present_days || 0}</h3>
-              <p>Келген күндөр</p>
+              <p>{t('presentDays')}</p>
             </div>
           </div>
 
@@ -298,7 +298,7 @@ const Dashboard = () => {
             </div>
             <div className="stat-content">
               <h3>{stats?.absent_days || 0}</h3>
-              <p>Келбеген күндөр</p>
+              <p>{t('absentDays')}</p>
             </div>
           </div>
         </div>
@@ -310,7 +310,7 @@ const Dashboard = () => {
           <div className="card-header">
             <h5>
               <i className="fas fa-child"></i>
-              Балдарым
+              {t('myChildren')}
             </h5>
           </div>
           <div className="card-body">
@@ -322,15 +322,15 @@ const Dashboard = () => {
                   <div className="child-stats">
                     <div className="child-stat success">
                       <span>{child.present_count || 0}</span>
-                      <small>Келген</small>
+                      <small>{t('presentStudents')}</small>
                     </div>
                     <div className="child-stat danger">
                       <span>{child.absent_count || 0}</span>
-                      <small>Келбеген</small>
+                      <small>{t('absentStudents')}</small>
                     </div>
                     <div className="child-stat primary">
                       <span>{child.attendance_percentage || 0}%</span>
-                      <small>Пайыз</small>
+                      <small>{t('percentage')}</small>
                     </div>
                   </div>
                 </div>

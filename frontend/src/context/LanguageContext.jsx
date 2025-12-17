@@ -84,10 +84,27 @@ const translations = {
     changePassword: 'Паролду өзгөртүү',
     changeUsername: 'Логинди өзгөртүү',
     currentPassword: 'Учурдагы пароль',
+    currentUsername: 'Учурдагы логин',
     newPassword: 'Жаңы пароль',
     confirmPassword: 'Паролду ырастоо',
     newUsername: 'Жаңы логин',
     profilePhotoUpdated: 'Профиль фотосу жаңыртылды',
+    security: 'Коопсуздук',
+    course: 'Курс',
+    subjects: 'Предметтер',
+    
+    // Dashboard
+    totalTeachers: 'Мугалимдер',
+    totalGroups: 'Группалар',
+    totalSubjects: 'Предметтер',
+    groupStatistics: 'Группалар боюнча статистика',
+    percentage: 'Пайыз',
+    progress: 'Прогресс',
+    todayClasses: 'Бүгүнкү сабактар',
+    markedClasses: 'Белгиленген',
+    attendancePercentage: 'Катышуу пайызы',
+    presentDays: 'Келген күндөр',
+    absentDays: 'Келбеген күндөр',
     
     // Schedule
     scheduleTitle: 'Сабактар расписаниеси',
@@ -182,7 +199,17 @@ const translations = {
     confirmDelete: 'Өчүрөсүзбү?',
     saved: 'Сакталды',
     deleted: 'Өчүрүлдү',
-    updated: 'Жаңыртылды'
+    updated: 'Жаңыртылды',
+    profileUpdated: 'Профиль ийгиликтүү жаңыртылды!',
+    profileUpdateError: 'Профилди жаңыртууда ката',
+    passwordMismatch: 'Жаңы пароль туура эмес экенин текшериңиз!',
+    passwordTooShort: 'Пароль кеминде 6 символдон турушу керек!',
+    passwordChanged: 'Пароль ийгиликтүү өзгөртүлдү!',
+    passwordChangeError: 'Паролду өзгөртүүдө ката',
+    usernameRequired: 'Жаңы логинди жазыңыз!',
+    usernameTooShort: 'Логин кеминде 3 символдон турушу керек!',
+    usernameChanged: 'Логин ийгиликтүү өзгөртүлдү!',
+    usernameChangeError: 'Логинди өзгөртүүдө ката'
   },
   ru: {
     // Navigation
@@ -240,6 +267,17 @@ const translations = {
     mySchedule: 'Мое расписание',
     todaySchedule: 'Расписание на сегодня',
     noSchedule: 'Сегодня нет занятий',
+    totalTeachers: 'Учителей',
+    totalGroups: 'Групп',
+    totalSubjects: 'Предметов',
+    groupStatistics: 'Статистика по группам',
+    percentage: 'Процент',
+    progress: 'Прогресс',
+    todayClasses: 'Сегодняшние занятия',
+    markedClasses: 'Отмечено',
+    attendancePercentage: 'Процент посещаемости',
+    presentDays: 'Дней присутствовал',
+    absentDays: 'Дней отсутствовал',
     
     // Profile
     myProfile: 'Мой профиль',
@@ -255,10 +293,14 @@ const translations = {
     changePassword: 'Изменить пароль',
     changeUsername: 'Изменить логин',
     currentPassword: 'Текущий пароль',
+    currentUsername: 'Текущий логин',
     newPassword: 'Новый пароль',
     confirmPassword: 'Подтвердите пароль',
     newUsername: 'Новый логин',
     profilePhotoUpdated: 'Фото профиля обновлено',
+    security: 'Безопасность',
+    course: 'Курс',
+    subjects: 'Предметы',
     
     // Schedule
     scheduleTitle: 'Расписание занятий',
@@ -353,7 +395,17 @@ const translations = {
     confirmDelete: 'Удалить?',
     saved: 'Сохранено',
     deleted: 'Удалено',
-    updated: 'Обновлено'
+    updated: 'Обновлено',
+    profileUpdated: 'Профиль успешно обновлен!',
+    profileUpdateError: 'Ошибка при обновлении профиля',
+    passwordMismatch: 'Новый пароль не совпадает!',
+    passwordTooShort: 'Пароль должен содержать минимум 6 символов!',
+    passwordChanged: 'Пароль успешно изменен!',
+    passwordChangeError: 'Ошибка при изменении пароля',
+    usernameRequired: 'Введите новый логин!',
+    usernameTooShort: 'Логин должен содержать минимум 3 символа!',
+    usernameChanged: 'Логин успешно изменен!',
+    usernameChangeError: 'Ошибка при изменении логина'
   },
   en: {
     // Navigation
@@ -411,6 +463,17 @@ const translations = {
     mySchedule: 'My Schedule',
     todaySchedule: "Today's Schedule",
     noSchedule: 'No classes today',
+    totalTeachers: 'Total Teachers',
+    totalGroups: 'Total Groups',
+    totalSubjects: 'Total Subjects',
+    groupStatistics: 'Group Statistics',
+    percentage: 'Percentage',
+    progress: 'Progress',
+    todayClasses: "Today's Classes",
+    markedClasses: 'Marked',
+    attendancePercentage: 'Attendance Percentage',
+    presentDays: 'Present Days',
+    absentDays: 'Absent Days',
     
     // Profile
     myProfile: 'My Profile',
@@ -426,10 +489,14 @@ const translations = {
     changePassword: 'Change Password',
     changeUsername: 'Change Username',
     currentPassword: 'Current Password',
+    currentUsername: 'Current Username',
     newPassword: 'New Password',
     confirmPassword: 'Confirm Password',
     newUsername: 'New Username',
     profilePhotoUpdated: 'Profile photo updated',
+    security: 'Security',
+    course: 'Course',
+    subjects: 'Subjects',
     
     // Schedule
     scheduleTitle: 'Class Schedule',
@@ -524,7 +591,17 @@ const translations = {
     confirmDelete: 'Delete?',
     saved: 'Saved',
     deleted: 'Deleted',
-    updated: 'Updated'
+    updated: 'Updated',
+    profileUpdated: 'Profile successfully updated!',
+    profileUpdateError: 'Error updating profile',
+    passwordMismatch: 'New password does not match!',
+    passwordTooShort: 'Password must be at least 6 characters!',
+    passwordChanged: 'Password successfully changed!',
+    passwordChangeError: 'Error changing password',
+    usernameRequired: 'Please enter a new username!',
+    usernameTooShort: 'Username must be at least 3 characters!',
+    usernameChanged: 'Username successfully changed!',
+    usernameChangeError: 'Error changing username'
   }
 }
 

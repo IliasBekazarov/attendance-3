@@ -99,11 +99,11 @@ const Profile = () => {
       }
       
       setEditing(false)
-      alert('✅ Профиль ийгиликтүү жаңыртылды!')
+      alert('✅ ' + t('profileUpdated'))
     } catch (error) {
       console.error('❌ Failed to update profile:', error)
       console.error('Error details:', error.response?.data)
-      alert('❌ Профилди жаңыртууда ката: ' + (error.response?.data?.detail || error.message))
+      alert('❌ ' + t('profileUpdateError') + ': ' + (error.response?.data?.detail || error.message))
     } finally {
       setLoading(false)
     }
@@ -113,12 +113,12 @@ const Profile = () => {
     e.preventDefault()
     
     if (passwordData.new_password !== passwordData.confirm_password) {
-      alert('❌ Жаңы пароль туура эмес экенин текшериңиз!')
+      alert('❌ ' + t('passwordMismatch'))
       return
     }
 
     if (passwordData.new_password.length < 6) {
-      alert('❌ Пароль кеминде 6 символдон турушу керек!')
+      alert('❌ ' + t('passwordTooShort'))
       return
     }
 
@@ -129,12 +129,12 @@ const Profile = () => {
         new_password: passwordData.new_password
       })
       
-      alert('✅ Пароль ийгиликтүү өзгөртүлдү!')
+      alert('✅ ' + t('passwordChanged'))
       setShowPasswordModal(false)
       setPasswordData({ current_password: '', new_password: '', confirm_password: '' })
     } catch (error) {
       console.error('❌ Password change error:', error)
-      alert('❌ Паролду өзгөртүүдө ката: ' + (error.response?.data?.error || error.message))
+      alert('❌ ' + t('passwordChangeError') + ': ' + (error.response?.data?.error || error.message))
     } finally {
       setLoading(false)
     }
@@ -144,12 +144,12 @@ const Profile = () => {
     e.preventDefault()
     
     if (!usernameData.new_username.trim()) {
-      alert('❌ Жаңы логинди жазыңыз!')
+      alert('❌ ' + t('usernameRequired'))
       return
     }
 
     if (usernameData.new_username.length < 3) {
-      alert('❌ Логин кеминде 3 символдон турушу керек!')
+      alert('❌ ' + t('usernameTooShort'))
       return
     }
 
@@ -165,12 +165,12 @@ const Profile = () => {
       setUser(updatedUser)
       localStorage.setItem('user', JSON.stringify(updatedUser))
       
-      alert('✅ Логин ийгиликтүү өзгөртүлдү!')
+      alert('✅ ' + t('usernameChanged'))
       setShowUsernameModal(false)
       setUsernameData({ new_username: '', password: '' })
     } catch (error) {
       console.error('❌ Username change error:', error)
-      alert('❌ Логинди өзгөртүүдө ката: ' + (error.response?.data?.error || error.message))
+      alert('❌ ' + t('usernameChangeError') + ': ' + (error.response?.data?.error || error.message))
     } finally {
       setLoading(false)
     }
@@ -182,17 +182,17 @@ const Profile = () => {
         <div className="card-header">
           <h5>
             <i className="fas fa-user"></i>
-            Профилим
+            {t('myProfile')}
           </h5>
           <div className="profile-header-actions">
             {/* Мобилдик logout баткычы */}
             <button
               className="btn btn-danger mobile-logout-btn"
               onClick={logout}
-              title="Чыгуу"
+              title={t('logout')}
             >
               <i className="fas fa-sign-out-alt"></i>
-              <span>Чыгуу</span>
+              <span>{t('logout')}</span>
             </button>
             {!editing && (
               <button
@@ -200,7 +200,7 @@ const Profile = () => {
                 onClick={() => setEditing(true)}
               >
                 <i className="fas fa-edit"></i>
-                Өзгөртүү
+                {t('edit')}
               </button>
             )}
           </div>
@@ -252,7 +252,7 @@ const Profile = () => {
                 <div className="form-group">
                   <label>
                     <i className="fas fa-user"></i>
-                    Аты
+                    {t('firstName')}
                   </label>
                   <input
                     type="text"
@@ -266,7 +266,7 @@ const Profile = () => {
                 <div className="form-group">
                   <label>
                     <i className="fas fa-user"></i>
-                    Фамилиясы
+                    {t('lastName')}
                   </label>
                   <input
                     type="text"
@@ -281,7 +281,7 @@ const Profile = () => {
               <div className="form-group">
                 <label>
                   <i className="fas fa-phone"></i>
-                  Телефон номери
+                  {t('phoneNumber')}
                 </label>
                 <input
                   type="text"
@@ -295,7 +295,7 @@ const Profile = () => {
               <div className="form-group">
                 <label>
                   <i className="fas fa-map-marker-alt"></i>
-                  Дареги
+                  {t('address')}
                 </label>
                 <input
                   type="text"
@@ -309,7 +309,7 @@ const Profile = () => {
               <div className="form-group">
                 <label>
                   <i className="fas fa-user-shield"></i>
-                  Өзгөчө кырдаалдагы байланыш (Аты)
+                  {t('emergencyContactName')}
                 </label>
                 <input
                   type="text"
@@ -323,7 +323,7 @@ const Profile = () => {
               <div className="form-group">
                 <label>
                   <i className="fas fa-phone-alt"></i>
-                  Өзгөчө кырдаалдагы телефон
+                  {t('emergencyContactPhone')}
                 </label>
                 <input
                   type="text"
@@ -342,7 +342,7 @@ const Profile = () => {
                   disabled={loading}
                 >
                   <i className="fas fa-times"></i>
-                  Жокко чыгаруу
+                  {t('cancel')}
                 </button>
                 <button
                   type="submit"
@@ -352,12 +352,12 @@ const Profile = () => {
                   {loading ? (
                     <>
                       <i className="fas fa-spinner fa-spin"></i>
-                      Сакталууда...
+                      {t('loading')}
                     </>
                   ) : (
                     <>
                       <i className="fas fa-save"></i>
-                      Сактоо
+                      {t('save')}
                     </>
                   )}
                 </button>
@@ -368,7 +368,7 @@ const Profile = () => {
               <div className="detail-row">
                 <span className="detail-label">
                   <i className="fas fa-phone"></i>
-                  Телефон:
+                  {t('phoneNumber')}:
                 </span>
                 <span className="detail-value">{user?.phone_number || '—'}</span>
               </div>
@@ -376,7 +376,7 @@ const Profile = () => {
               <div className="detail-row">
                 <span className="detail-label">
                   <i className="fas fa-map-marker-alt"></i>
-                  Дареги:
+                  {t('address')}:
                 </span>
                 <span className="detail-value">{user?.address || '—'}</span>
               </div>
@@ -384,7 +384,7 @@ const Profile = () => {
               <div className="detail-row">
                 <span className="detail-label">
                   <i className="fas fa-user-shield"></i>
-                  Өзгөчө кырдаал (Аты):
+                  {t('emergencyContactName')}:
                 </span>
                 <span className="detail-value">{user?.emergency_contact_name || '—'}</span>
               </div>
@@ -392,7 +392,7 @@ const Profile = () => {
               <div className="detail-row">
                 <span className="detail-label">
                   <i className="fas fa-phone-alt"></i>
-                  Өзгөчө кырдаал (Телефон):
+                  {t('emergencyContactPhone')}:
                 </span>
                 <span className="detail-value">{user?.emergency_contact_phone || '—'}</span>
               </div>
@@ -402,7 +402,7 @@ const Profile = () => {
                   <div className="detail-row">
                     <span className="detail-label">
                       <i className="fas fa-users"></i>
-                      Группа:
+                      {t('group')}:
                     </span>
                     <span className="detail-value">{user?.group?.name || '—'}</span>
                   </div>
@@ -410,7 +410,7 @@ const Profile = () => {
                   <div className="detail-row">
                     <span className="detail-label">
                       <i className="fas fa-book"></i>
-                      Курс:
+                      {t('course')}:
                     </span>
                     <span className="detail-value">{user?.group?.course?.name || '—'}</span>
                   </div>
@@ -421,7 +421,7 @@ const Profile = () => {
                 <div className="detail-row">
                   <span className="detail-label">
                     <i className="fas fa-book-open"></i>
-                    Предметтер:
+                    {t('subjects')}:
                   </span>
                   <span className="detail-value">
                     {user?.subjects?.map(s => s.name).join(', ') || '—'}
@@ -433,7 +433,7 @@ const Profile = () => {
               <div className="security-actions">
                 <h4>
                   <i className="fas fa-shield-alt"></i>
-                  Коопсуздук
+                  {t('security')}
                 </h4>
                 <div className="security-buttons">
                   <button
@@ -441,14 +441,14 @@ const Profile = () => {
                     onClick={() => setShowUsernameModal(true)}
                   >
                     <i className="fas fa-user-edit"></i>
-                    Логинди өзгөртүү
+                    {t('changeUsername')}
                   </button>
                   <button
                     className="btn btn-warning"
                     onClick={() => setShowPasswordModal(true)}
                   >
                     <i className="fas fa-key"></i>
-                    Паролду өзгөртүү
+                    {t('changePassword')}
                   </button>
                 </div>
               </div>
@@ -464,7 +464,7 @@ const Profile = () => {
             <div className="modal-header">
               <h3>
                 <i className="fas fa-key"></i>
-                Паролду өзгөртүү
+                {t('changePassword')}
               </h3>
               <button
                 className="modal-close"
@@ -478,7 +478,7 @@ const Profile = () => {
                 <div className="form-group">
                   <label>
                     <i className="fas fa-lock"></i>
-                    Учурдагы пароль
+                    {t('currentPassword')}
                   </label>
                   <input
                     type="password"
@@ -494,7 +494,7 @@ const Profile = () => {
                 <div className="form-group">
                   <label>
                     <i className="fas fa-key"></i>
-                    Жаңы пароль
+                    {t('newPassword')}
                   </label>
                   <input
                     type="password"
@@ -511,7 +511,7 @@ const Profile = () => {
                 <div className="form-group">
                   <label>
                     <i className="fas fa-check-circle"></i>
-                    Паролду тастыктоо
+                    {t('confirmPassword')}
                   </label>
                   <input
                     type="password"
@@ -532,7 +532,7 @@ const Profile = () => {
                   className="btn btn-secondary"
                   onClick={() => setShowPasswordModal(false)}
                 >
-                  Жокко чыгаруу
+                  {t('cancel')}
                 </button>
                 <button
                   type="submit"
@@ -542,12 +542,12 @@ const Profile = () => {
                   {loading ? (
                     <>
                       <i className="fas fa-spinner fa-spin"></i>
-                      Өзгөртүлүүдө...
+                      {t('loading')}
                     </>
                   ) : (
                     <>
                       <i className="fas fa-save"></i>
-                      Сактоо
+                      {t('save')}
                     </>
                   )}
                 </button>
@@ -564,7 +564,7 @@ const Profile = () => {
             <div className="modal-header">
               <h3>
                 <i className="fas fa-user-edit"></i>
-                Логинди өзгөртүү
+                {t('changeUsername')}
               </h3>
               <button
                 className="modal-close"
@@ -577,12 +577,12 @@ const Profile = () => {
               <div className="modal-body">
                 <div className="info-box">
                   <i className="fas fa-info-circle"></i>
-                  <p>Учурдагы логин: <strong>{user?.username}</strong></p>
+                  <p>{t('currentUsername')}: <strong>{user?.username}</strong></p>
                 </div>
                 <div className="form-group">
                   <label>
                     <i className="fas fa-user"></i>
-                    Жаңы логин
+                    {t('newUsername')}
                   </label>
                   <input
                     type="text"
@@ -594,13 +594,13 @@ const Profile = () => {
                     })}
                     required
                     minLength="3"
-                    placeholder="Жаңы логинди жазыңыз"
+                    placeholder={t('newUsername')}
                   />
                 </div>
                 <div className="form-group">
                   <label>
                     <i className="fas fa-lock"></i>
-                    Паролуңуз (тастыктоо үчүн)
+                    {t('password')} ({t('confirmPassword')})
                   </label>
                   <input
                     type="password"
@@ -611,7 +611,7 @@ const Profile = () => {
                       password: e.target.value
                     })}
                     required
-                    placeholder="Паролуңузду жазыңыз"
+                    placeholder={t('password')}
                   />
                 </div>
               </div>
@@ -621,7 +621,7 @@ const Profile = () => {
                   className="btn btn-secondary"
                   onClick={() => setShowUsernameModal(false)}
                 >
-                  Жокко чыгаруу
+                  {t('cancel')}
                 </button>
                 <button
                   type="submit"
@@ -631,12 +631,12 @@ const Profile = () => {
                   {loading ? (
                     <>
                       <i className="fas fa-spinner fa-spin"></i>
-                      Өзгөртүлүүдө...
+                      {t('loading')}
                     </>
                   ) : (
                     <>
                       <i className="fas fa-save"></i>
-                      Сактоо
+                      {t('save')}
                     </>
                   )}
                 </button>
