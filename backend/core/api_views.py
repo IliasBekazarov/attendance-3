@@ -207,6 +207,9 @@ class AttendanceViewSet(viewsets.ModelViewSet):
                     # Эгерде бар болсо, жаңылайбыз
                     existing.status = record.get('status', 'Present')
                     existing.created_by = request.user
+                    # schedule_id дагы жаңылайбыз
+                    if record.get('schedule_id'):
+                        existing.schedule_id = record.get('schedule_id')
                     existing.save()
                     updated_records.append(existing)
                 else:
@@ -216,6 +219,7 @@ class AttendanceViewSet(viewsets.ModelViewSet):
                         date=record.get('date'),
                         subject_id=record.get('subject_id'),
                         time_slot_id=record.get('time_slot_id'),
+                        schedule_id=record.get('schedule_id'),  # schedule_id кошулду
                         status=record.get('status', 'Present'),
                         created_by=request.user
                     )
