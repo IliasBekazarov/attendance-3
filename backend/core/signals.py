@@ -85,13 +85,14 @@ def create_absent_notification(sender, instance, created, **kwargs):
                 student=instance.student
             )
 
-@receiver(post_save, sender=LeaveRequest)
-def handle_leave_request_approval(sender, instance, **kwargs):
-    """
-    Leave Request APPROVED болгондо автоматтык Excused attendance түзүү
-    """
-    # Эгер approved болсо жана мурда attendance түзүлбөгөн болсо
-    if instance.status == 'APPROVED':
+# АЗЫРЫНЧА КОМЕНТТЕ: Leave Request менен Attendance байланышы
+# @receiver(post_save, sender=LeaveRequest)
+# def handle_leave_request_approval(sender, instance, **kwargs):
+#     """
+#     Leave Request APPROVED болгондо автоматтык Excused attendance түзүү
+#     """
+#     # Эгер approved болсо жана мурда attendance түзүлбөгөн болсо
+    if False:  # Бул функция азырынча өчүрүлгөн
         from .models import Schedule
         
         # Start date дан end date га чейинки бардык күндөр
