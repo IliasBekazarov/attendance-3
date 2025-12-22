@@ -145,7 +145,7 @@ const MarkAttendance = () => {
   return (
     <div className="mark-attendance-page">
       <div className="page-header">
-        <h1>📝 Катышуу белгилөө</h1>
+        <h1>Катышуу белгилөө</h1>
         <p className="subtitle">Бүгүнкү күндүн сабактары - {new Date().toLocaleDateString('ru-RU')}</p>
       </div>
 
