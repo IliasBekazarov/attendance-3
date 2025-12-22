@@ -100,7 +100,10 @@ const Layout = ({ children }) => {
   const menuItems = [
     { path: '/dashboard', icon: 'fa-home', label: t('dashboard') },
     { path: '/schedule', icon: 'fa-calendar-alt', label: t('schedule') },
-    ...(user?.role === 'TEACHER' ? [{ path: '/mark-attendance', icon: 'fa-user-check', label: t('markAttendance') }] : []),
+    ...(user?.role === 'TEACHER' ? [
+      { path: '/mark-attendance', icon: 'fa-user-check', label: t('markAttendance') },
+      { path: '/attendance-calendar', icon: 'fa-calendar-check', label: t('attendanceCalendar') }
+    ] : []),
     ...(user?.role === 'ADMIN' || user?.role === 'MANAGER' ? [{ path: '/reports', icon: 'fa-chart-bar', label: t('reports') }] : []),
     { path: '/notifications', icon: 'fa-bell', label: t('notifications') },
     { path: '/leave-requests', icon: 'fa-file-alt', label: t('leaveRequests') },
@@ -218,8 +221,8 @@ const Layout = ({ children }) => {
               </Link>
             </div>
 
-            {/* User Info with Dropdown */}
-            <div className="user-info">
+            {/* User Info - Profile бетине өтүү */}
+            <Link to="/profile" className="user-info" style={{ textDecoration: 'none', color: 'inherit' }}>
               <Avatar 
                 src={user?.profile_photo}
                 alt={user?.first_name || user?.username}
@@ -230,7 +233,7 @@ const Layout = ({ children }) => {
                 <span className="user-name">{user?.first_name || user?.username}</span>
                 <span className="user-role">{user?.role}</span>
               </div>
-            </div>
+            </Link>
           </div>
         </header>
 
@@ -407,16 +410,31 @@ const Layout = ({ children }) => {
 
       {/* Mobile Bottom Navigation */}
       <nav className="mobile-bottom-nav">
-        {menuItems.map((item) => (
-          <Link
-            key={item.path}
-            to={item.path}
-            className={`mobile-nav-item ${location.pathname === item.path ? 'active' : ''}`}
-          >
-            <i className={`fas ${item.icon}`}></i>
-            <span>{item.label}</span>
-          </Link>
-        ))}
+        {menuItems
+          .filter(item => item.path !== '/notifications' && item.path !== '/profile')
+          .map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`mobile-nav-item ${location.pathname === item.path ? 'active' : ''}`}
+            >
+              <i className={`fas ${item.icon}`}></i>
+              <span>{item.label}</span>
+            </Link>
+          ))}
+
+        {/* Комментарийде: Notifications жана Profile баскычтары
+        Profile бетине өтүү үчүн navbar'дагы user-info блогун басыңыз
+        
+        <a className="mobile-nav-item active" href="/notifications">
+          <i className="fas fa-bell"></i>
+          <span>Notifications</span>
+        </a>
+        <a className="mobile-nav-item" href="/profile">
+          <i className="fas fa-user"></i>
+          <span>Profile</span>
+        </a>
+        */}
       </nav>
     </div>
   )

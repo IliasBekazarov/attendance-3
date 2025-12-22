@@ -71,6 +71,9 @@ const Schedule = () => {
       fetchTeacherId()
     }
     
+    // TEACHER ролу болсо - бардык сабактарды көрүү үчүн эч нерсе жүктөбөйбүз
+    // Курс жана группа тандоодо көрсөтүлөт
+    
     // Эгер студент болсо, анын группасын автоматтык жүктөө
     if (user?.role === 'STUDENT') {
       loadStudentSchedule()
@@ -452,7 +455,8 @@ const Schedule = () => {
     setLoading(true)
     try {
       console.log('📡 Loading schedule for group:', groupId)
-      const response = await api.get(`/v1/schedules/?group=${groupId}`)
+      // Schedule бетинен баардык сабактарды көрүү үчүн show_all=true
+      const response = await api.get(`/v1/schedules/?group=${groupId}&show_all=true`)
       const data = response.data
       console.log('📊 Raw API response:', data)
       
@@ -930,19 +934,13 @@ const Schedule = () => {
                           >🗑️</button>
                         </>
                       )}
-                      {user?.role === 'TEACHER' && isTeacherTodayLesson({...lesson, day: dayKey}) && (
-                        <button
-                          className="action-btn attendance-btn"
-                          onClick={() => openAttendanceModal(lesson.id, {...lesson, day: dayKey})}
-                          title="Жоктоо белгилөө (бүгүнкү сабак)"
-                        >📋</button>
-                      )}
+                      {/* Attendance баскычын Calendar бетине көчүрдүк, Schedule бетинде жок */}
                       <div className="lesson-title">{lesson.subject}</div>
                       {lesson.group && user?.role === 'TEACHER' && (
                         <div className="lesson-group">👥 {lesson.group}</div>
                       )}
                       {lesson.teacher && user?.role !== 'TEACHER' && (
-                        <div className="lesson-teacher">👨‍🏫 {lesson.teacher}</div>
+                        <div className="lesson-teacher">{lesson.teacher}</div>
                       )}
                       <div className="lesson-room">📍 {lesson.room || t('notSpecified')}</div>
                       

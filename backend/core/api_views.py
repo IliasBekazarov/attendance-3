@@ -460,23 +460,52 @@ class ScheduleViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated, RoleBasedPermission]
     
     def get_queryset(self):
-        """Фильтрлөө"""
-        queryset = Schedule.objects.all()
+        """
+        Фильтрлөө логикасы:
+        1. Schedule бетинде (show_all=true) - БААРДЫК сабактар
+        2. Calendar бетинде (show_all жок) - текущий мугалимдин өзүнүн гана сабактары
+        """
+        user = self.request.user
+        
+        # Schedule бетинен show_all parameter барбы текшерүү
+        show_all = self.request.query_params.get('show_all', '').lower() == 'true'
+        teacher_id = self.request.query_params.get('teacher')
+        
+        print(f"🔍 ScheduleViewSet.get_queryset() - user: {user}, show_all: {show_all}, teacher_id: {teacher_id}")
+        
+        if show_all:
+            # Schedule бети: БААРДЫК сабактарды көрсөт
+            queryset = Schedule.objects.all()
+            print(f"📋 Schedule бети: баардык {queryset.count()} сабак")
+        elif teacher_id:
+            # Specific teacher ID боюнча фильтрлөө
+            queryset = Schedule.objects.filter(teacher_id=teacher_id)
+            print(f"✅ Teacher ID={teacher_id} боюнча {queryset.count()} сабак табылды")
+        elif hasattr(user, 'userprofile') and user.userprofile.role == 'TEACHER':
+            # Calendar бети: мугалимдин өзүнүн гана сабактарын көрсөт
+            try:
+                teacher = Teacher.objects.get(user=user)
+                queryset = Schedule.objects.filter(teacher=teacher)
+                print(f"📅 Calendar бети: текущий мугалим {teacher.id} үчүн {queryset.count()} сабак")
+            except Teacher.DoesNotExist:
+                queryset = Schedule.objects.none()
+                print(f"❌ Teacher профили табылган жок!")
+        else:
+            # Башка роллор үчүн бардык расписаниени көрсөт
+            queryset = Schedule.objects.all()
+            print(f"👥 Башка роль: бардык {queryset.count()} сабак")
         
         # Day боюнча фильтр (Monday, Tuesday, ...)
         day = self.request.query_params.get('day')
         if day:
             queryset = queryset.filter(day=day)
+            print(f"📆 Day фильтри: {day}, калды {queryset.count()} сабак")
         
         # Group боюнча фильтр
         group_id = self.request.query_params.get('group')
         if group_id:
             queryset = queryset.filter(group_id=group_id)
-        
-        # Teacher боюнча фильтр
-        teacher_id = self.request.query_params.get('teacher')
-        if teacher_id:
-            queryset = queryset.filter(teacher_id=teacher_id)
+            print(f"👥 Group фильтри: {group_id}, калды {queryset.count()} сабак")
         
         return queryset.select_related('subject', 'teacher', 'group', 'group__course', 'time_slot')
     

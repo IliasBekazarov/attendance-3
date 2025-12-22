@@ -141,9 +141,7 @@ const translations = {
     todaySchedules: 'Сиздин бүгүнкү сабактарыңыз',
     noLessonsToday: 'Бүгүн сабактар жок',
     noLessonsTodayDesc: 'Силердин бүгүнкү расписаниеде сабактар жок',
-    selectLesson: 'Тандоо',
     back: 'Артка',
-    room: 'Бөлмө',
     students: 'студент',
     studentsList: 'Студенттердин тизмеси',
     present: 'Келди',
@@ -164,6 +162,22 @@ const translations = {
     attendanceOnlyForTeachers: 'Катышууну белгилөө мугалимдер үчүн гана',
     onlyTodayLessons: 'Сиз өзүңүздүн бүгүнкү сабагыңызга гана жоктоо белгилей аласыз',
     studentsLoadError: 'Студенттерди жүктөөдө ката чыкты',
+    
+    // Attendance Calendar/Manager
+    attendanceCalendar: 'Катышуу календары',
+    attendanceManager: 'Катышууну башкаруу',
+    selectDate: 'Күн тандоо',
+    calendarSelectGroup: 'Группа тандоо',
+    selectSubject: 'Сабак тандоо',
+    allSubjects: 'Бардык сабактар',
+    viewEdit: 'Көрүү/Өзгөртүү',
+    markNow: 'Азыр белгилөө',
+    editAttendance: 'Катышууну өзгөртүү',
+    markedBy: 'Белгилеген',
+    markedAt: 'Белгиленген убакыт',
+    notMarkedForDate: 'Бул күнгө белгилене элек',
+    loadingLessons: 'Сабактар жүктөлүүдө',
+    noLessonsForDate: 'Тандалган күндө сабактар жок',
     
     // Leave Requests
     leaveRequestsTitle: 'Өтүнмөлөр',
@@ -209,8 +223,6 @@ const translations = {
     group: 'Топ',
     studentName: 'Студенттин аты',
     noData: 'Маалымат табылган жок',
-    markedBy: 'Белгилеген',
-    markedAt: 'Белгиленген убакыт',
     
     // Messages
     success: 'Ийгиликтүү!',
@@ -380,6 +392,22 @@ const translations = {
     onlyTodayLessons: 'Вы можете отметить посещаемость только для своих сегодняшних занятий',
     studentsLoadError: 'Ошибка при загрузке студентов',
     
+    // Attendance Calendar/Manager
+    attendanceCalendar: 'Календарь посещаемости',
+    attendanceManager: 'Управление посещаемостью',
+    selectDate: 'Выбрать дату',
+    calendarSelectGroup: 'Выбрать группу',
+    selectSubject: 'Выбрать предмет',
+    allSubjects: 'Все предметы',
+    viewEdit: 'Просмотр/Редактирование',
+    markNow: 'Отметить сейчас',
+    editAttendance: 'Редактировать посещаемость',
+    markedBy: 'Отметил',
+    markedAt: 'Время отметки',
+    notMarkedForDate: 'Не отмечено на эту дату',
+    loadingLessons: 'Загрузка занятий',
+    noLessonsForDate: 'Нет занятий на выбранную дату',
+    
     // Leave Requests
     leaveRequestsTitle: 'Заявки на отсутствие',
     newRequest: 'Новая заявка',
@@ -424,8 +452,6 @@ const translations = {
     group: 'Группа',
     studentName: 'Имя студента',
     noData: 'Данные не найдены',
-    markedBy: 'Отметил',
-    markedAt: 'Время отметки',
     
     // Messages
     success: 'Успешно!',
@@ -595,6 +621,22 @@ const translations = {
     onlyTodayLessons: 'You can only mark attendance for your today\'s lessons',
     studentsLoadError: 'Error loading students',
     
+    // Attendance Calendar/Manager
+    attendanceCalendar: 'Attendance Calendar',
+    attendanceManager: 'Attendance Manager',
+    selectDate: 'Select Date',
+    calendarSelectGroup: 'Select Group',
+    selectSubject: 'Select Subject',
+    allSubjects: 'All Subjects',
+    viewEdit: 'View/Edit',
+    markNow: 'Mark Now',
+    editAttendance: 'Edit Attendance',
+    markedBy: 'Marked By',
+    markedAt: 'Marked At',
+    notMarkedForDate: 'Not marked for this date',
+    loadingLessons: 'Loading lessons',
+    noLessonsForDate: 'No lessons for selected date',
+    
     // Leave Requests
     leaveRequestsTitle: 'Leave Requests',
     newRequest: 'New Request',
@@ -639,8 +681,6 @@ const translations = {
     group: 'Group',
     studentName: 'Student Name',
     noData: 'No data found',
-    markedBy: 'Marked By',
-    markedAt: 'Marked At',
     
     // Messages
     success: 'Success!',

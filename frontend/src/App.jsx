@@ -8,6 +8,7 @@ import Profile from './pages/Profile'
 import Notifications from './pages/Notifications'
 import LeaveRequests from './pages/LeaveRequests'
 import MarkAttendance from './pages/MarkAttendance'
+import AttendanceCalendar from './pages/AttendanceCalendar'
 import ReportsPage from './pages/ReportsPage'
 import PrivateRoute from './components/PrivateRoute'
 import RoleRoute from './components/RoleRoute'
@@ -34,6 +35,7 @@ function App() {
               <Route path="/notifications" element={<Notifications />} />
               <Route path="/leave-requests" element={<LeaveRequests />} />
               <Route path="/mark-attendance" element={<MarkAttendance />} />
+              <Route path="/attendance-calendar" element={<AttendanceCalendar />} />
               
               {/* Admin/Manager Only Routes */}
               <Route 

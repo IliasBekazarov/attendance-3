@@ -160,7 +160,7 @@ const MarkAttendance = () => {
       {/* Бүгүнкү сабактар */}
       {!selectedSchedule && (
         <div className="schedules-section">
-          <h2>📚 {t('todaySchedules')}</h2>
+          <h2>{t('todaySchedules')}</h2>
           
           {loading ? (
             <div className="loading">

@@ -676,6 +676,9 @@ body {
 
   .header {
     padding: 12px 16px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
   }
 
   .search-form {
@@ -706,7 +709,7 @@ body {
   }
 
   .header-right {
-    gap: 12px;
+    gap: 30px;
   }
 
   .page-content {
@@ -2563,7 +2566,8 @@ textarea.form-control {
 }
 
 @media (max-width: 480px) {
-  .user-info {
+  /* Кичүү экранда: header-left жашынат, user-info көрүнөт */
+  .header-left {
     display: none;
   }
 
