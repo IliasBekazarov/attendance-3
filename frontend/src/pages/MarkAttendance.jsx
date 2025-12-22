@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
+import { useLanguage } from '../context/LanguageContext'
 import api from '../services/api'
 
 const MarkAttendance = () => {
   const { user } = useAuth()
+  const { t } = useLanguage()
   const [loading, setLoading] = useState(false)
   const [todaySchedules, setTodaySchedules] = useState([])
   const [selectedSchedule, setSelectedSchedule] = useState(null)
@@ -119,7 +121,7 @@ const MarkAttendance = () => {
         attendance_records: attendanceRecords
       })
 
-      setMessage('✅ Катышуу ийгиликтүү сакталды!')
+      setMessage('✅ ' + t('attendanceSaved'))
       
       // 2 секундтан кийин тизмени тазалоо
       setTimeout(() => {
@@ -130,8 +132,8 @@ const MarkAttendance = () => {
       }, 2000)
       
     } catch (error) {
-      console.error('Катышууну сактоодо ката:', error)
-      setMessage('❌ Ката чыкты: ' + (error.response?.data?.error || error.message))
+      console.error('Error saving attendance:', error)
+      setMessage('❌ ' + t('error') + ': ' + (error.response?.data?.error || error.message))
     } finally {
       setSaving(false)
     }
@@ -145,8 +147,8 @@ const MarkAttendance = () => {
   return (
     <div className="mark-attendance-page">
       <div className="page-header">
-        <h1>📝 Катышуу белгилөө</h1>
-        <p className="subtitle">Бүгүнкү күндүн сабактары - {new Date().toLocaleDateString('ru-RU')}</p>
+        <h1>{t('markAttendanceTitle')}</h1>
+        <p className="subtitle">{t('todayLessons')} - {new Date().toLocaleDateString('ru-RU')}</p>
       </div>
 
       {message && (
@@ -158,18 +160,18 @@ const MarkAttendance = () => {
       {/* Бүгүнкү сабактар */}
       {!selectedSchedule && (
         <div className="schedules-section">
-          <h2>� Сиздин бүгүнкү сабактарыңыз</h2>
+          <h2>📚 {t('todaySchedules')}</h2>
           
           {loading ? (
             <div className="loading">
               <div className="spinner"></div>
-              <p>Жүктөлүүдө...</p>
+              <p>{t('loading')}...</p>
             </div>
           ) : todaySchedules.length === 0 ? (
             <div className="empty-state">
               <i className="fas fa-calendar-times"></i>
-              <h3>Бүгүн сабактар жок</h3>
-              <p>Силердин бүгүнкү расписаниеде сабактар жок</p>
+              <h3>{t('noLessonsToday')}</h3>
+              <p>{t('noLessonsTodayDesc')}</p>
             </div>
           ) : (
             <div className="schedules-grid">
@@ -196,14 +198,14 @@ const MarkAttendance = () => {
                     {schedule.room && (
                       <p className="room">
                         <i className="fas fa-door-open"></i>
-                        Бөлмө: {schedule.room}
+                        {t('room')}: {schedule.room}
                       </p>
                     )}
                   </div>
                   
                   <div className="schedule-action">
                     <button className="btn-select">
-                      Тандоо <i className="fas fa-arrow-right"></i>
+                      {t('selectLesson')} <i className="fas fa-arrow-right"></i>
                     </button>
                   </div>
                 </div>
@@ -226,24 +228,24 @@ const MarkAttendance = () => {
                   setAttendance({})
                 }}
               >
-                <i className="fas fa-arrow-left"></i> Артка
+                <i className="fas fa-arrow-left"></i> {t('back')}
               </button>
               <h2>{selectedSchedule.subject?.subject_name}</h2>
               <p className="class-info">
                 {selectedSchedule.group?.name} • {selectedSchedule.time_slot?.name} • 
-                {students.length} студент
+                {students.length} {t('students')}
               </p>
             </div>
             
             <div className="quick-actions">
               <button className="btn btn-success" onClick={() => markAll('Present')}>
-                ✅ Баарын бар
+                ✅ {t('markAllPresent')}
               </button>
               <button className="btn btn-warning" onClick={() => markAll('Late')}>
-                ⏰ Баарын кеч
+                ⏰ {t('markAllLate')}
               </button>
               <button className="btn btn-danger" onClick={() => markAll('Absent')}>
-                ❌ Баарын жок
+                ❌ {t('markAllAbsent')}
               </button>
             </div>
           </div>
@@ -251,7 +253,7 @@ const MarkAttendance = () => {
           {loading ? (
             <div className="loading">
               <div className="spinner"></div>
-              <p>Студенттер жүктөлүүдө...</p>
+              <p>{t('loadingStudents')}...</p>
             </div>
           ) : (
             <>
@@ -281,21 +283,21 @@ const MarkAttendance = () => {
                         onClick={() => handleAttendanceChange(student.id, 'Present')}
                       >
                         <i className="fas fa-check"></i>
-                        Бар
+                        {t('present')}
                       </button>
                       <button
                         className={`btn-attendance late ${attendance[student.id] === 'Late' ? 'active' : ''}`}
                         onClick={() => handleAttendanceChange(student.id, 'Late')}
                       >
                         <i className="fas fa-clock"></i>
-                        Кеч
+                        {t('late')}
                       </button>
                       <button
                         className={`btn-attendance absent ${attendance[student.id] === 'Absent' ? 'active' : ''}`}
                         onClick={() => handleAttendanceChange(student.id, 'Absent')}
                       >
                         <i className="fas fa-times"></i>
-                        Жок
+                        {t('absent')}
                       </button>
                     </div>
                   </div>
@@ -306,15 +308,15 @@ const MarkAttendance = () => {
               <div className="attendance-summary">
                 <div className="summary-item success">
                   <i className="fas fa-check-circle"></i>
-                  Бар: {Object.values(attendance).filter(s => s === 'Present').length}
+                  {t('present')}: {Object.values(attendance).filter(s => s === 'Present').length}
                 </div>
                 <div className="summary-item warning">
                   <i className="fas fa-clock"></i>
-                  Кеч: {Object.values(attendance).filter(s => s === 'Late').length}
+                  {t('late')}: {Object.values(attendance).filter(s => s === 'Late').length}
                 </div>
                 <div className="summary-item danger">
                   <i className="fas fa-times-circle"></i>
-                  Жок: {Object.values(attendance).filter(s => s === 'Absent').length}
+                  {t('absent')}: {Object.values(attendance).filter(s => s === 'Absent').length}
                 </div>
               </div>
 
@@ -328,12 +330,12 @@ const MarkAttendance = () => {
                   {saving ? (
                     <>
                       <i className="fas fa-spinner fa-spin"></i>
-                      Сакталууда...
+                      {t('saving')}...
                     </>
                   ) : (
                     <>
                       <i className="fas fa-save"></i>
-                      Катышууну сактоо
+                      {t('saveAttendance')}
                     </>
                   )}
                 </button>
